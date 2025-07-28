@@ -1,7 +1,7 @@
 # FIT2107 Repository - Semester 2, 2025
 
-Student name:
+Student name: Kayden Nguyen
 
-Student ID:
+Student ID: 33878935
 
-Class:
+Class: Monday 6pm-8pm
