@@ -1,0 +1,5 @@
+Age Range: <18, 18-89, >= 90
+Item: Book, Gardening Tool, Carpentry Tool
+Loan Length: Short, Medium, Long
+Oustanding Fees: True, False
+Training: No Training, Gardening Training, Carpentry Training, Both Training
