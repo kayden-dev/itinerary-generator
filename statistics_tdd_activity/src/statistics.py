@@ -19,4 +19,7 @@ def minimum(data):
   return cur_min
 
 def maximum(data):
-  return
+  cur_max = data[0]
+  for num in data:
+    if num > cur_max: cur_max = num
+  return cur_max
