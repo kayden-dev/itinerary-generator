@@ -47,3 +47,19 @@ class TestStatistics(unittest.TestCase):
         expected = -4
         actual = minimum([1,-2,3,-4,5,6])
         self.assertEqual(expected, actual, "Min of [1,-2,3,-4,5,6] should equal -4")
+
+    def test_maximum_positives(self):
+        expected = 6
+        actual = maximum([1,2,3,4,5,6])
+        self.assertEqual(expected, actual, "Max of 1-6 should equal 6")
+
+    def test_maximum_negatives(self):
+        expected = -1
+        actual = maximum([-1,-2,-3,-4,-5,-6])
+        self.assertEqual(expected, actual, "Max of -1 to -6 should equal -1")
+
+    def test_maximum_mixed(self):
+        expected = 6
+        actual = maximum([1,-2,3,-4,5,6])
+        self.assertEqual(expected, actual, "Max of [1,-2,3,-4,5,6] should equal 6")
+
