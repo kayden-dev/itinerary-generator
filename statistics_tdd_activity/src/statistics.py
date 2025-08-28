@@ -13,4 +13,7 @@ def mean(data):
   return total/count
 
 def minimum(data):
-  return
+  cur_min = data[0]
+  for num in data:
+    if num < cur_min: cur_min = num
+  return cur_min
