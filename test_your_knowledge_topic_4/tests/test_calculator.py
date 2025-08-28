@@ -19,3 +19,10 @@ class TestCalculator(unittest.TestCase):
         c.add(5)
         actual = c.get_answer()
         self.assertEqual(expected, actual, "Adding 5 to 0 should equal 5")
+
+    def test_subtract(self):
+        expected = -3
+        c = Calculator()
+        c.subtract(3)
+        actual = c.get_answer()
+        self.assertEqual(expected, actual, "Subtracting 3 from 0 should equal -3")
