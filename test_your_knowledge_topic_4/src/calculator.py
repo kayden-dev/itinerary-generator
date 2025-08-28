@@ -23,3 +23,6 @@ class Calculator(object):
     def power(self,num):
         self.answer **= num
         return self
+
+    def reset(self):
+        return
