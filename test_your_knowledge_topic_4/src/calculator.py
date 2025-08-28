@@ -15,4 +15,4 @@ class Calculator(object):
         self.answer -= num
 
     def multiply(self,num):
-        return
+        self.answer *= num
