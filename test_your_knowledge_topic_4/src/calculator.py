@@ -25,4 +25,5 @@ class Calculator(object):
         return self
 
     def reset(self):
-        return
+        self.answer = 0
+        return self
