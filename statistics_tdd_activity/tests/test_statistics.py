@@ -32,3 +32,18 @@ class TestStatistics(unittest.TestCase):
         expected = 1.5
         actual = mean([1,-2,3,-4,5,6])
         self.assertEqual(expected, actual, "Mean of [1,-2,3,-4,5,6] should equal 1.5")
+
+    def test_minimum_positives(self):
+        expected = 1
+        actual = minimum([1,2,3,4,5,6])
+        self.assertEqual(expected, actual, "Min of 1-6 should equal 1")
+
+    def test_minimum_negatives(self):
+        expected = -6
+        actual = minimum([-1,-2,-3,-4,-5,-6])
+        self.assertEqual(expected, actual, "Min of -1 to -6 should equal -6")
+
+    def test_minimum_mixed(self):
+        expected = -4
+        actual = minimum([1,-2,3,-4,5,6])
+        self.assertEqual(expected, actual, "Min of [1,-2,3,-4,5,6] should equal -4")
