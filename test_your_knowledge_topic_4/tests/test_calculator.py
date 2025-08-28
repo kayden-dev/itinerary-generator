@@ -33,3 +33,10 @@ class TestCalculator(unittest.TestCase):
         c.multiply(10)
         actual = c.get_answer()
         self.assertEqual(expected, actual, "Multiplying 0 by 10 should equal 0")
+
+    def test_power(self):
+        expected = 16
+        c = Calculator()
+        c.add(2).power(4)  # (0+2)^4
+        actual = c.get_answer()
+        self.assertEqual(expected, actual, "2 raised to the power of 4 should equal 16")        
