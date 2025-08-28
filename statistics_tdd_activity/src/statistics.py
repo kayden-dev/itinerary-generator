@@ -17,3 +17,6 @@ def minimum(data):
   for num in data:
     if num < cur_min: cur_min = num
   return cur_min
+
+def maximum(data):
+  return
