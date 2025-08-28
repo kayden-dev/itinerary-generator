@@ -47,4 +47,11 @@ class TestCalculator(unittest.TestCase):
         c.add(5).multiply(10).reset()
         actual = c.get_answer()
         self.assertEqual(expected, actual, "Reset should bring answer back to 0")
+
+    def test_chaining(self):
+        expected = 15
+        c = Calculator()
+        c.add(5).multiply(2).subtract(5).add(10)  # ((0+5)*2)-5 + 10 = 15
+        actual =  c.get_answer()
+        self.assertEqual(expected, actual, "Chained operations should evaluate correctly")
         
