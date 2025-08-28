@@ -12,4 +12,4 @@ class Calculator(object):
         self.answer += num
 
     def subtract(self,num):
-        return
+        self.answer -= num
