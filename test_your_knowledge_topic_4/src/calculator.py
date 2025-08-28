@@ -10,12 +10,16 @@ class Calculator(object):
     
     def add(self,num):
         self.answer += num
+        return self
 
     def subtract(self,num):
         self.answer -= num
+        return self
 
     def multiply(self,num):
         self.answer *= num
+        return self
 
     def power(self,num):
-        return
+        self.answer **= num
+        return self
