@@ -39,4 +39,11 @@ class TestCalculator(unittest.TestCase):
         c = Calculator()
         c.add(2).power(4)  # (0+2)^4
         actual = c.get_answer()
-        self.assertEqual(expected, actual, "2 raised to the power of 4 should equal 16")        
+        self.assertEqual(expected, actual, "2 raised to the power of 4 should equal 16")
+
+    def test_reset(self):
+        expected = 0
+        self.c.add(5).multiply(10).reset()
+        actual = self.c.get_answer()
+        self.assertEqual(expected, actual, "Reset should bring answer back to 0")
+        
