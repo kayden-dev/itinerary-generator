@@ -43,7 +43,8 @@ class TestCalculator(unittest.TestCase):
 
     def test_reset(self):
         expected = 0
-        self.c.add(5).multiply(10).reset()
-        actual = self.c.get_answer()
+        c = Calculator()
+        c.add(5).multiply(10).reset()
+        actual = c.get_answer()
         self.assertEqual(expected, actual, "Reset should bring answer back to 0")
         
