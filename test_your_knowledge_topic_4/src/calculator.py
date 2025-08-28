@@ -13,3 +13,6 @@ class Calculator(object):
 
     def subtract(self,num):
         self.answer -= num
+
+    def multiply(self,num):
+        return
