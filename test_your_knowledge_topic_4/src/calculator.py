@@ -3,4 +3,4 @@
 
 class Calculator(object):
     def get_answer(self):
-        return self.answer
+        return
