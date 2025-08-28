@@ -11,3 +11,6 @@ def mean(data):
     total += num
     count += 1
   return total/count
+
+def minimum(data):
+  return
