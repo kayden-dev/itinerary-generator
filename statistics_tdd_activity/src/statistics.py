@@ -3,3 +3,6 @@ def sum(data):
   for num in data:
     total += num
   return total
+
+def mean(data):
+  return
