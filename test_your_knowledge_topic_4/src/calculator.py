@@ -16,3 +16,6 @@ class Calculator(object):
 
     def multiply(self,num):
         self.answer *= num
+
+    def power(self,num):
+        return
