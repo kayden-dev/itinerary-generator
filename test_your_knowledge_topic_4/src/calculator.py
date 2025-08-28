@@ -10,3 +10,6 @@ class Calculator(object):
     
     def add(self,num):
         self.answer += num
+
+    def subtract(self,num):
+        return
