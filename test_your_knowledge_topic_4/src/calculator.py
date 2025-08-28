@@ -8,5 +8,5 @@ class Calculator(object):
     def get_answer(self):
         return self.answer
     
-    def add(self):
-        return
+    def add(self,num):
+        self.answer += num
