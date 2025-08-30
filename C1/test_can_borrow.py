@@ -15,6 +15,145 @@ so you can call "can_borrow" directly.
 
 Author: Kayden Nguyen
 Student ID: 33878935
+
+-----------------------------------
+Test Case Summary:
+
+1.
+  item_type="book"
+  patron_age=50
+  length_of_loan=2
+  outstanding_fees=10.32
+  gardening_training=True
+  carpentry_training=True
+  → expected = False
+
+2.
+  item_type="carpentry"
+  patron_age=50
+  length_of_loan=14
+  outstanding_fees=0.00
+  gardening_training=False
+  carpentry_training=False
+  → expected = False
+
+3.
+  item_type="gardening"
+  patron_age=17
+  length_of_loan=7
+  outstanding_fees=10.32
+  gardening_training=False
+  carpentry_training=False
+  → expected = False
+
+4.
+  item_type="gardening"
+  patron_age=17
+  length_of_loan=2
+  outstanding_fees=0.00
+  gardening_training=True
+  carpentry_training=False
+  → expected = True
+
+5.
+  item_type="carpentry"
+  patron_age=92
+  length_of_loan=7
+  outstanding_fees=10.32
+  gardening_training=True
+  carpentry_training=False
+  → expected = False
+
+6.
+  item_type="book"
+  patron_age=92
+  length_of_loan=2
+  outstanding_fees=0.00
+  gardening_training=False
+  carpentry_training=True
+  → expected = True
+
+7.
+  item_type="gardening"
+  patron_age=17
+  length_of_loan=14
+  outstanding_fees=10.32
+  gardening_training=False
+  carpentry_training=True
+  → expected = False
+
+8.
+  item_type="book"
+  patron_age=50
+  length_of_loan=7
+  outstanding_fees=0.00
+  gardening_training=False
+  carpentry_training=True
+  → expected = True
+
+9.
+  item_type="gardening"
+  patron_age=92
+  length_of_loan=14
+  outstanding_fees=0.00
+  gardening_training=True
+  carpentry_training=True
+  → expected = True
+
+10.
+  item_type="book"
+  patron_age=50
+  length_of_loan=14
+  outstanding_fees=0.00
+  gardening_training=True
+  carpentry_training=False
+  → expected = True
+
+11.
+  item_type="carpentry"
+  patron_age=17
+  length_of_loan=2
+  outstanding_fees=10.32
+  gardening_training=False
+  carpentry_training=True
+  → expected = False
+
+12.
+  item_type="book"
+  patron_age=92
+  length_of_loan=2
+  outstanding_fees=0.00
+  gardening_training=False
+  carpentry_training=False
+  → expected = True
+
+13.
+  item_type="book"
+  patron_age=17
+  length_of_loan=7
+  outstanding_fees=0.00
+  gardening_training=True
+  carpentry_training=True
+  → expected = True
+
+14.
+  item_type="gardening"
+  patron_age=50
+  length_of_loan=2
+  outstanding_fees=10.32
+  gardening_training=True
+  carpentry_training=True
+  → expected = False
+
+15.
+  item_type="carpentry"
+  patron_age=17
+  length_of_loan=2
+  outstanding_fees=10.32
+  gardening_training=True
+  carpentry_training=True
+  → expected = False
+-----------------------------------
 '''
 
 import unittest

@@ -10,6 +10,23 @@ so you can call "calculate_discount" directly.
 
 Author: Kayden Nguyen
 Student ID: 33878935
+
+-----------------------------------
+Test Case Summary:
+1.  age = 25  → expected = 0
+2.  age = 49  → expected = 0
+3.  age = 50  → expected = 0
+4.  age = 51  → expected = 10
+5.  age = 55  → expected = 10
+6.  age = 64  → expected = 10
+7.  age = 65  → expected = 15
+8.  age = 66  → expected = 15
+9.  age = 80  → expected = 15
+10. age = 89  → expected = 15
+11. age = 90  → expected = 100
+12. age = 91  → expected = 100
+13. age = 100 → expected = 100
+-----------------------------------
 '''
 
 import unittest
