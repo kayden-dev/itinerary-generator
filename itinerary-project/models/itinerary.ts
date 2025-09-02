@@ -3,6 +3,7 @@ export type Itinerary = {
   tripName: string;
   timezone: string;
   dates: { start: string; end: string };
+  unscheduled: UnscheduledItem[];          // ← add this
   days: ItineraryDay[];
   meta: {
     generatedBy: "rule-engine" | "hybrid";
@@ -71,6 +72,18 @@ export type MealBlock = BaseBlock & {
   type: "meal";
   meal: "Lunch" | "Dinner";
 };
+
+export type UnscheduledItem = {
+  /** Which place we failed to schedule */
+  placeId: string;
+  /** Canonical explainability code */
+  reason: UnscheduledReason;
+};
+
+export type UnscheduledReason =
+  | "CLOSED"               // outside trip dates or opening hours
+  | "TRANSIT_INFEASIBLE"   // can't reach in time for chosen mode/pace
+  | "FIXED_CONFLICT";      // overlaps another fixed-time block
 
 export type Diagnostic = {
   level: "info" | "warn" | "error";
