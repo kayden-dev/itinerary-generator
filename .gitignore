@@ -1,6 +1,27 @@
-.DS_Store
+# --- Node / Deno ---
+node_modules/
+deno_dir/
+dist/
+build/
 
+# --- Supabase ---
+.supabase/
+.temp/
+.env
+.env.local
+itinerary-project/supabase/.branches/
+itinerary-project/supabase/.temp/
+
+# --- Python (unit activities) ---
 __pycache__/
-*$py.class
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.env/
 
-venv/
+# --- Editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
