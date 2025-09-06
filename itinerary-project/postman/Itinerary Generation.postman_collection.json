@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "c737d4ae-2c95-4ca8-a953-126024636936",
+		"name": "Itinerary Generation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36471677"
+	},
+	"item": [
+		{
+			"name": "00 - contract-shape",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"HTTP 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const res = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Has required top-level fields\", () => {\r",
+							"  pm.expect(res).to.have.property(\"id\");\r",
+							"  pm.expect(res).to.have.property(\"tripName\");\r",
+							"  pm.expect(res).to.have.property(\"timezone\");\r",
+							"  pm.expect(res).to.have.property(\"dates\");\r",
+							"  pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
+							"  pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
+							"  pm.expect(res).to.have.property(\"meta\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"dates has start/end\", () => {\r",
+							"  pm.expect(res.dates).to.have.property(\"start\");\r",
+							"  pm.expect(res.dates).to.have.property(\"end\");\r",
+							"  pm.expect(res.dates.start).to.be.a(\"string\");\r",
+							"  pm.expect(res.dates.end).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"// 3) Meta has required fields\r",
+							"pm.test(\"meta has generatedBy/version/createdAt\", () => {\r",
+							"  pm.expect(res.meta).to.have.property(\"generatedBy\");\r",
+							"  pm.expect([\"rule-engine\",\"hybrid\"]).to.include(res.meta.generatedBy);\r",
+							"  pm.expect(res.meta).to.have.property(\"version\").that.is.a(\"string\");\r",
+							"  pm.expect(res.meta).to.have.property(\"createdAt\").that.is.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test Trip\",\r\n    \"dates\": {\r\n        \"start\": \"2025-10-01\",\r\n        \"end\": \"2025-10-03\"\r\n    },\r\n    \"preferences\": {\r\n        \"pace\": \"Balanced\"\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"id\": \"d1\",\r\n            \"placeId\": \"city-1\",\r\n            \"name\": \"City One\",\r\n            \"places\": []\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/generate"
+			},
+			"response": []
+		}
+	]
+}
