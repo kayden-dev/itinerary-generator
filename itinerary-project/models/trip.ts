@@ -1,6 +1,6 @@
 export type Trip = {
   name: string;
-  dates?: { start: string; end: string }; // ISO string, "YYYY-MM-DD"
+  dates: { start: string; end: string }; // ISO string, "YYYY-MM-DD"
   timezone?: string; // timezone of the user inputting, to avoid bugs eg Australia/Melbourne
   // if timezone is missing, then default
   preferences: Preferences;
