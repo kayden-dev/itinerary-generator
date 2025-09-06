@@ -7,6 +7,82 @@
 	},
 	"item": [
 		{
+			"name": "1-11 Invalid-Missing Fields Tests",
+			"item": [
+				{
+					"name": "1 - invalid-missing-fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP 400 for invalid input\", () => {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const res = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Errors array present\", () => {\r",
+									"  pm.expect(res).to.have.property(\"errors\").that.is.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"First error has stable shape\", () => {\r",
+									"  const first = res.errors[0];\r",
+									"  pm.expect(first).to.have.property(\"code\");\r",
+									"  pm.expect(first.code).to.be.a(\"string\");\r",
+									"  pm.expect(first).to.have.property(\"message\");\r",
+									"  pm.expect(first.message).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Includes MISSING_NAME code\", () => {\r",
+									"  const codes = res.errors.map(e => e.code);\r",
+									"  pm.expect(codes).to.include(\"MISSING_NAME\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Includes MISSING_STARTDATE code\", () => {\r",
+									"  const codes = res.errors.map(e => e.code);\r",
+									"  pm.expect(codes).to.include(\"MISSING_STARTDATE\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Includes MISSING_PACE code\", () => {\r",
+									"  const codes = res.errors.map(e => e.code);\r",
+									"  pm.expect(codes).to.include(\"MISSING_PACE\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{anonKey}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dates\": {\r\n        \"end\": \"2025-10-03\"\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"placeId\": \"city-1\",\r\n            \"name\": \"City One\",\r\n            \"places\": []\r\n        }\r\n    ]\r\n}"
+						},
+						"url": "{{baseUrl}}/generate"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "0 - contract-shape",
 			"event": [
 				{
