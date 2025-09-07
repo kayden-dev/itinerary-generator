@@ -22,5 +22,5 @@ class Calculator(object):
         return self
     
     def power(self, num):
-        self._answer ** num
+        self._answer **= num
         return self
