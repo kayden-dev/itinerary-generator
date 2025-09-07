@@ -25,5 +25,5 @@ class TestStatistics(unittest.TestCase):
 
     def test_maximum_positives(self):
         expected = 6
-        actual = maximum([1,2,3,4,5,6])
+        actual = maximum([1,2,1,4,5,6])
         self.assertEqual(expected, actual, "Max of 1-6 should equal 6")
