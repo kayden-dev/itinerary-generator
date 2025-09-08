@@ -1,0 +1,58 @@
+[
+    {
+        "item_id": 1,
+        "item_name": "The Hitchiker's Guide to the Galaxy by Douglas Adams",
+        "item_type": "Book",
+        "year": 1979,
+        "number_owned": 7,
+        "on_loan": 1
+    },
+    {
+        "item_id": 2,
+        "item_name": "The Lord of the Rings by J.R.R. Tolkien",
+        "item_type": "Book",
+        "year": 1954,
+        "number_owned": 4,
+        "on_loan": 0
+    },
+    {
+        "item_id": 3,
+        "item_name": "A Game of Thrones by George R.R. Martin",
+        "item_type": "Book",
+        "year": 1996,
+        "number_owned": 6,
+        "on_loan": 1
+    },
+    {
+        "item_id": 4,
+        "item_name": "Shovel",
+        "item_type": "Gardening tool",
+        "year": 2018,
+        "number_owned": 10,
+        "on_loan": 0
+    },
+    {
+        "item_id": 5,
+        "item_name": "Pruning Shears",
+        "item_type": "Gardening tool",
+        "year": 2020,
+        "number_owned": 8,
+        "on_loan": 0
+    },
+    {
+        "item_id": 6,
+        "item_name": "Screwdriver Set",
+        "item_type": "Carpentry tool",
+        "year": 2017,
+        "number_owned": 12,
+        "on_loan": 0
+    },
+    {
+        "item_id": 7,
+        "item_name": "Saw",
+        "item_type": "Carpentry tool",
+        "year": 2014,
+        "number_owned": 4,
+        "on_loan": 0
+    }
+]
