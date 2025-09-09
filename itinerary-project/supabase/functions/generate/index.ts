@@ -1,15 +1,23 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts"
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { Trip, TripSchema } from "./utils/trip.ts";
+import { parseJsonWith } from "./utils/validate.ts";
 
 Deno.serve(async (req) => {
-  const trip = await req.json()
+  const parsed = await parseJsonWith(req,TripSchema);
+
+  if (!parsed.ok) {
+    return new Response(JSON.stringify({errors:parsed.errors}),{
+      status: 400,
+      headers: {"content-type":"application/json"},
+    })
+  }
+
+  const trip : Trip = parsed.data;
   const body = {
     id: crypto.randomUUID(),
-    tripName: String(trip.name ?? ""),
-    timezone: "Australia/Melbourne",
-    dates: {
-      start: String(trip.dates?.start ?? ""),
-      end: String(trip.dates?.end ?? ""),
-    },
+    tripName: trip.name,
+    timezone: trip.timezone ?? "Australia/Melbourne",
+    dates: trip.dates,
     days: [],
     unscheduled: [],
     meta: {

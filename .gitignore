@@ -12,6 +12,10 @@ build/
 itinerary-project/supabase/.branches/
 itinerary-project/supabase/.temp/
 
+# Deno
+.deno/
+deno.lock
+
 # --- Python (unit activities) ---
 __pycache__/
 *.pyc
