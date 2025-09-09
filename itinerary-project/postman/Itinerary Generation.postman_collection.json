@@ -7,117 +7,98 @@
 	},
 	"item": [
 		{
-			"name": "1-11 Invalid-Missing Fields Tests",
-			"item": [
-				{
-					"name": "1 - invalid-missing-fields",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"HTTP 400 for invalid input\", () => {\r",
-									"  pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"const res = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Errors array present\", () => {\r",
-									"  pm.expect(res).to.have.property(\"errors\").that.is.an(\"array\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"First error has stable shape\", () => {\r",
-									"  const first = res.errors[0];\r",
-									"  pm.expect(first).to.have.property(\"code\");\r",
-									"  pm.expect(first.code).to.be.a(\"string\");\r",
-									"  pm.expect(first).to.have.property(\"message\");\r",
-									"  pm.expect(first.message).to.be.a(\"string\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Includes MISSING_NAME code\", () => {\r",
-									"  const codes = res.errors.map(e => e.code);\r",
-									"  pm.expect(codes).to.include(\"MISSING_NAME\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Includes MISSING_STARTDATE code\", () => {\r",
-									"  const codes = res.errors.map(e => e.code);\r",
-									"  pm.expect(codes).to.include(\"MISSING_STARTDATE\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Includes MISSING_PACE code\", () => {\r",
-									"  const codes = res.errors.map(e => e.code);\r",
-									"  pm.expect(codes).to.include(\"MISSING_PACE\");\r",
-									"});\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{anonKey}}"
-							}
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"dates\": {\r\n        \"end\": \"2025-10-03\"\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"placeId\": \"city-1\",\r\n            \"name\": \"City One\",\r\n            \"places\": []\r\n        }\r\n    ]\r\n}"
-						},
-						"url": "{{baseUrl}}/generate"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "0 - contract-shape",
+			"name": "[IV-00 to IV-11]",
 			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function buildName(state) {\r",
+							"    if (state===\"missing\") return;\r",
+							"    return \"Test Trip\";\r",
+							"}\r",
+							"\r",
+							"function buildDates(state) {\r",
+							"    if (state===\"missing\") return;\r",
+							"    if (state===\"start_only\") return { start:\"2025-10-01\"};\r",
+							"    if (state===\"end_only\") return {end:\"2025-10-03\"};\r",
+							"    return {start: \"2025-10-01\",end:\"2025-10-03\" };\r",
+							"}\r",
+							"function buildPreference(state) {\r",
+							"    if (state===\"missing\") return;\r",
+							"    if (state===\"incorrect\") return {pace: \"Turbo\"};\r",
+							"    return {pace: \"Balanced\"};\r",
+							"}\r",
+							"\r",
+							"const body = {\r",
+							"    name: buildName(pm.iterationData.get(\"name_state\")),\r",
+							"    dates: buildDates(pm.iterationData.get(\"dates_state\")),\r",
+							"    preferences: buildPreference(pm.iterationData.get(\"preference_state\")),\r",
+							"    destinations: [{id:\"1\",placeId:\"city-1\",name:\"City One\",places:[]}]\r",
+							"}\r",
+							"\r",
+							"Object.keys(body).forEach(k => body[k]===undefined && delete body[k]);\r",
+							"pm.variables.set(\"requestBody\",JSON.stringify(body));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"HTTP 200\", () => {\r",
-							"  pm.response.to.have.status(200);\r",
-							"});\r",
+							"// Check that the correct HTTP status has been sent\r",
+							"const expected = Number(pm.iterationData.get(\"Expected Status\"));\r",
+							"pm.test(`HTTP ${expected}`, () => pm.response.to.have.status(expected));\r",
 							"\r",
 							"const res = pm.response.json();\r",
 							"\r",
-							"pm.test(\"Has required top-level fields\", () => {\r",
-							"  pm.expect(res).to.have.property(\"id\");\r",
-							"  pm.expect(res).to.have.property(\"tripName\");\r",
-							"  pm.expect(res).to.have.property(\"timezone\");\r",
-							"  pm.expect(res).to.have.property(\"dates\");\r",
-							"  pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
-							"  pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
-							"  pm.expect(res).to.have.property(\"meta\");\r",
-							"});\r",
+							"if (expected === 200) {\r",
+							"    pm.test(\"Has required top-level fields\", () => {\r",
+							"        pm.expect(res).to.have.property(\"id\");\r",
+							"        pm.expect(res).to.have.property(\"tripName\");\r",
+							"        pm.expect(res).to.have.property(\"timezone\");\r",
+							"        pm.expect(res).to.have.property(\"dates\");\r",
+							"        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
+							"        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
+							"        pm.expect(res).to.have.property(\"meta\");\r",
+							"    });\r",
 							"\r",
-							"pm.test(\"dates has start/end\", () => {\r",
-							"  pm.expect(res.dates).to.have.property(\"start\");\r",
-							"  pm.expect(res.dates).to.have.property(\"end\");\r",
-							"  pm.expect(res.dates.start).to.be.a(\"string\");\r",
-							"  pm.expect(res.dates.end).to.be.a(\"string\");\r",
-							"});\r",
+							"    pm.test(\"dates has start/end\", () => {\r",
+							"        pm.expect(res.dates).to.have.property(\"start\").that.is.a(\"string\");\r",
+							"        pm.expect(res.dates).to.have.property(\"end\").that.is.a(\"string\");\r",
+							"    });\r",
 							"\r",
-							"pm.test(\"meta has generatedBy/version/createdAt\", () => {\r",
-							"  pm.expect(res.meta).to.have.property(\"generatedBy\");\r",
-							"  pm.expect([\"rule-engine\",\"hybrid\"]).to.include(res.meta.generatedBy);\r",
-							"  pm.expect(res.meta).to.have.property(\"version\").that.is.a(\"string\");\r",
-							"  pm.expect(res.meta).to.have.property(\"createdAt\").that.is.a(\"string\");\r",
-							"});"
+							"    pm.test(\"meta has generatedBy/version/createdAt\", () => {\r",
+							"        pm.expect(res.meta).to.have.property(\"generatedBy\").that.is.a(\"string\");\r",
+							"        pm.expect([\"rule-engine\", \"hybrid\"]).to.include(res.meta.generatedBy);\r",
+							"        pm.expect(res.meta).to.have.property(\"version\").that.is.a(\"string\");\r",
+							"        pm.expect(res.meta).to.have.property(\"createdAt\").that.is.a(\"string\");\r",
+							"    });\r",
+							"} else {\r",
+							"    // Check that the error array exists\r",
+							"    pm.test(\"Error array exists\", () => {\r",
+							"        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
+							"    });\r",
+							"\r",
+							"    // If it does, then check that the appropriate fields exist\r",
+							"    const errorFields = (pm.iterationData.get(\"expected_error_fields\") || \"\").split(\";\").map(s => s.trim()).filter(Boolean);\r",
+							"    const errorCodes = (pm.iterationData.get(\"expected_error_codes\") || \"\").split(\";\").map(s => s.trim()).filter(Boolean);\r",
+							"\r",
+							"    if (errorFields.length) {\r",
+							"        pm.test(\"Contains expected error fields\", () => {\r",
+							"            const got = res.errors.map(e => e.field);\r",
+							"            errorFields.forEach(f => pm.expect(got).to.include(f));\r",
+							"        });\r",
+							"    }\r",
+							"    if (errorCodes.length) {\r",
+							"        pm.test(\"Contains expected error codes\", () => {\r",
+							"            const got = res.errors.map(e => e.code);\r",
+							"            errorCodes.forEach(f => pm.expect(got).to.include(c));\r",
+							"        });\r",
+							"    }\r",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -125,23 +106,11 @@
 				}
 			],
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{anonKey}}"
-					}
-				},
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Test Trip\",\r\n    \"dates\": {\r\n        \"start\": \"2025-10-01\",\r\n        \"end\": \"2025-10-03\"\r\n    },\r\n    \"preferences\": {\r\n        \"pace\": \"Balanced\"\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"id\": \"d1\",\r\n            \"placeId\": \"city-1\",\r\n            \"name\": \"City One\",\r\n            \"places\": []\r\n        }\r\n    ]\r\n}",
+					"raw": "{{requestBody}}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,77 +120,34 @@
 				"url": "{{baseUrl}}/generate"
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{anonKey}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "1 - invalid-missing-fields",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"HTTP 400 for invalid input\", () => {\r",
-							"  pm.response.to.have.status(400);\r",
-							"});\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Errors array present\", () => {\r",
-							"  pm.expect(res).to.have.property(\"errors\").that.is.an(\"array\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"First error has stable shape\", () => {\r",
-							"  const first = res.errors[0];\r",
-							"  pm.expect(first).to.have.property(\"code\");\r",
-							"  pm.expect(first.code).to.be.a(\"string\");\r",
-							"  pm.expect(first).to.have.property(\"message\");\r",
-							"  pm.expect(first.message).to.be.a(\"string\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Includes MISSING_NAME code\", () => {\r",
-							"  const codes = res.errors.map(e => e.code);\r",
-							"  pm.expect(codes).to.include(\"MISSING_NAME\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Includes MISSING_STARTDATE code\", () => {\r",
-							"  const codes = res.errors.map(e => e.code);\r",
-							"  pm.expect(codes).to.include(\"MISSING_STARTDATE\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Includes MISSING_PACE code\", () => {\r",
-							"  const codes = res.errors.map(e => e.code);\r",
-							"  pm.expect(codes).to.include(\"MISSING_PACE\");\r",
-							"});\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{anonKey}}"
-					}
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"dates\": {\r\n        \"end\": \"2025-10-03\"\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"placeId\": \"city-1\",\r\n            \"name\": \"City One\",\r\n            \"places\": []\r\n        }\r\n    ]\r\n}"
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
