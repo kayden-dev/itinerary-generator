@@ -1,0 +1,25 @@
+ID,Suite,Title,Endpoint,expected_status,Technique,Notes,name_state,dates_state,preferences_state,expected_error_fields,expected_error_codes
+IV-00,input-validation,valid everything (baseline),"POST
+/generate",200,Baseline,sanity,included,included,included,,
+IV-01,input-validation,Testing combinations of missing/incorrect required fields against the baseline,"POST
+/generate",400,Pairwise,,missing,end_only,missing,name;dates;preferences,MISSING_NAME;PARTIAL_DATES;MISSING_PACE
+IV-02,input-validation,,"POST
+/generate",400,Pairwise,,missing,start_only,included,name;dates,MISSING_NAME;PARTIAL_DATES 
+IV-03,input-validation,,"POST
+/generate",400,Pairwise,,included,end_only,incorrect,dates;preferences,PARTIAL_DATES;INCORRECT_PACE
+IV-04,input-validation,,"POST
+/generate",400,Pairwise,,included,end_only,included,dates; ,PARTIAL_DATES
+IV-05,input-validation,,"POST
+/generate",400,Pairwise,,missing,included,incorrect,name;preferences,"MISSING_NAME,INCORRECT_PACE"
+IV-06,input-validation,,"POST
+/generate",400,Pairwise,,included,missing,incorrect,dates;preferences,MISSING_DATES;INCORRECT_PACE
+IV-07,input-validation,,"POST
+/generate",400,Pairwise,,included,included,missing,preferences,MISSING_PACE
+IV-08,input-validation,,"POST
+/generate",400,Pairwise,,included,start_only,missing,dates;preferences,PARTIAL_DATES;MISSING_PACE
+IV-09,input-validation,,"POST
+/generate",400,Pairwise,,missing,missing,included,name;dates,MISSING_NAME;MISSING_DATES
+IV-10,input-validation,,"POST
+/generate",400,Pairwise,,included,start_only,incorrect,dates;preferences,PARTIAL_DATES;INCORRECT_PACE
+IV-11,input-validation,,"POST
+/generate",400,Pairwise,,missing,missing,missing,name;dates;preferences,MISSING_NAME;PARTIAL_DATES;MISSING_PACE
