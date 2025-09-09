@@ -1,0 +1,105 @@
+{
+  "title": "Itinerary",
+  "type": "object",
+  "required": ["id", "tripName", "timezone", "dates", "days", "unscheduled", "meta"],
+  "properties": {
+    "id": { "type": "string" },
+    "tripName": { "type": "string" },
+    "timezone": { "type": "string" },
+
+    "dates": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string" },
+        "end":   { "type": "string" }
+      }
+    },
+
+    "days": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "destinationId", "blocks"],
+        "properties": {
+          "date": { "type": "string" },
+          "destinationId": { "type": "string" },
+          "summary": { "type": "string" },
+
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "id", "start", "end"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["visit", "transit", "check-in", "check-out", "meal"]
+                },
+                "id": { "type": "string" },
+                "start": { "type": "string" },
+                "end": { "type": "string" },
+                "locked": { "type": "boolean" },
+                "notes": { "type": "string" },
+                "diagnostics": { "type": "array" },
+
+                "placeId": { "type": "string" },
+                "placeRef": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "address": { "type": "string" },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "lat": { "type": "number" },
+                        "lng": { "type": "number" }
+                      }
+                    }
+                  }
+                },
+                "source": { "type": "string" },
+                "estimatedDurationMins": { "type": "number" },
+
+                "mode": { "type": "string" },
+                "from": { "type": "object", "properties": { "placeId": { "type": "string" } } },
+                "to":   { "type": "object", "properties": { "placeId": { "type": "string" } } },
+                "distanceMeters": { "type": "number" },
+                "durationMinutes": { "type": "number" },
+                "polyline": { "type": "string" },
+
+                "meal": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "unscheduled": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["placeId", "reason"],
+        "properties": {
+          "placeId": { "type": "string" },
+          "reason": {
+            "type": "string",
+            "enum": ["CLOSED", "TRANSIT_INFEASIBLE", "FIXED_CONFLICT"]
+          }
+        }
+      }
+    },
+
+    "meta": {
+      "type": "object",
+      "required": ["generatedBy", "version", "createdAt"],
+      "properties": {
+        "generatedBy": { "type": "string" },
+        "version": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    }
+  }
+}
