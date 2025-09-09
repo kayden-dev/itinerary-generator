@@ -1,4 +1,4 @@
-ID,Suite,Title,Endpoint,expected_status,Technique,Notes,name_state,dates_state,preferences_state,expected_error_fields,expected_error_codes
+ID,Suite,Title,Endpoint,Expected Status,Technique,Notes,name_state,dates_state,preferences_state,expected_error_fields,expected_error_codes
 IV-00,input-validation,valid everything (baseline),"POST
 /generate",200,Baseline,sanity,included,included,included,,
 IV-01,input-validation,Testing combinations of missing/incorrect required fields against the baseline,"POST
