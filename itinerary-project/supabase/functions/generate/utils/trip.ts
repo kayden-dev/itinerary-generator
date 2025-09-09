@@ -64,7 +64,7 @@ export const TripSchema = z.object({
       createdAt: z.iso.datetime().optional(),
     })
     .optional(),
-});
+}).strict();
 
 export type Preferences = z.infer<typeof PreferencesSchema>;
 export type Accommodation = z.infer<typeof AccommodationSchema>;
