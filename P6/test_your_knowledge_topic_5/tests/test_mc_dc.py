@@ -34,7 +34,7 @@ class TestCanBorrowCartpentryTool(unittest.TestCase):
   # 1: A=F, B=F, C=F  -> True
   # fees_owed == 0, 19<=age<=89
   def test_1(self):
-      self.assertFalse(can_borrow_carpentry_tool(30, 7, 0.0, True))
+      self.assertTrue(can_borrow_carpentry_tool(30, 7, 0.0, True))
 
   # 2: A=F, B=F, C=T  -> False (age >= 90)
   def test_2(self):
