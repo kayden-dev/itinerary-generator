@@ -8,10 +8,29 @@ export type Issue = {
 
 export function formatError(error: z.ZodError): Issue[] {
   return error.issues.map(i => ({
-    code: i.code,
-    field: i.path.join("."),
+    code: mapIssueCode(i),
+    field: String(i.path[0]),
     message: i.message,
   }));
+}
+
+function mapIssueCode(i: z.core.$ZodIssue) : string {
+  switch (`${i.code}:${i.path.join(".")}`) {
+    case "invalid_type:name":
+      return "MISSING_NAME";
+    case "invalid_type:preferences":
+      return "MISSING_PACE";
+    case "invalid_type:dates":
+      return "MISSING_DATES";
+    case "invalid_type:dates.start":
+      return "PARTIAL_DATES";
+    case "invalid_type:dates.end":
+      return "PARTIAL_DATES";
+    case "invalid_value:preferences.pace":
+      return "INCORRECT_PACE";
+    default:
+      return i.code
+  }
 }
 
 export async function parseJsonWith<T extends z.ZodTypeAny>(

@@ -1,4 +1,3 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
