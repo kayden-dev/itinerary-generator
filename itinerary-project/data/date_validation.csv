@@ -10,8 +10,8 @@ DV-04,date-validation,Testing start is a day sometime before end date,"POST
 DV-05,date-validation,Testing start is a day sometime after end date,"POST
 /generate",400,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-09-23,dates,END_BEFORE_START
 DV-06,date-validation,Testing invalid date format with slash,"POST
-/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025/10/01,2025/10/01,dates.start;dates.end,INVALID_DATE_FORMAT
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025/10/01,2025/10/01,dates.start;dates.end,invalid_format
 DV-07,date-validation,Testing invalid date format which is empty,"POST
-/generate",400,Category Partioning,variant of IV-00 with dates fields changed,,,dates.start;dates.end,INVALID_DATE_FORMAT
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,,,dates.start;dates.end,invalid_format
 DV-08,date-validation,Testing invalid date which doesn't exist,"POST
-/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025-02-30,2025-03-01,dates.start ,INVALID_DATE_FORMAT
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025-02-30,2025-03-01,dates.start ,invalid_format
