@@ -7,11 +7,14 @@ export type Issue = {
 }
 
 export function formatError(error: z.ZodError): Issue[] {
-  return error.issues.map(i => ({
-    code: i.code,
-    field: i.path.join("."),
-    message: i.message,
-  }));
+  return error.issues.map(i => {
+    const params = (i as z.core.$ZodIssue & { params?: Record<string, unknown> }).params;
+    return {
+      code: (params?.code as string) ?? i.code,
+      field: i.path.join("."),
+      message: i.message,
+    }
+  });
 }
 
 export async function parseJsonWith<T extends z.ZodTypeAny>(

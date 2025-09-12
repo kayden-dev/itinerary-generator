@@ -67,7 +67,8 @@ export const TripSchema = z.object({
 })
 .refine((data) => data.dates.start <= data.dates.end, {
   message: "Start date must be equal or before end date",
-  path: ["dates"]
+  path: ["dates"],
+  params: {code: "end_before_start"}
 })
 .strict();
 
