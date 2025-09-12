@@ -21,7 +21,7 @@ IV-05,input-validation,,"POST
 IV-06,input-validation,,"POST
 /generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,missing,incorrect,dates;preferences.pace,invalid_type;invalid_value,
 IV-07,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,included,missing,preferences.pace,invalid_type,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,included,missing,preferences,invalid_type,
 IV-08,input-validation,,"POST
 /generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,start_only,missing,dates.end;preferences,invalid_type;invalid_type,
 IV-09,input-validation,,"POST
