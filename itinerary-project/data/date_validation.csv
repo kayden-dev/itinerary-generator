@@ -1,0 +1,17 @@
+ID,Suite,Title,Endpoint,Expected Status,Technique,Notes,start_val,end_val,expected_error_codes
+DV-01,date-validation,Testing start and end date equal,"POST
+/generate",200,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-10-01,
+DV-02,date-validation,Testing start is day before end date,"POST
+/generate",200,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-10-02,
+DV-03,date-validation,Testing start is day after end date,"POST
+/generate",400,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-09-30,END_BEFORE_START
+DV-04,date-validation,Testing start is a day sometime before end date,"POST
+/generate",200,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-10-10,
+DV-05,date-validation,Testing start is a day sometime after end date,"POST
+/generate",400,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-09-23,END_BEFORE_START
+DV-06,date-validation,Testing invalid date format with slash,"POST
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025/10/01,2025/10/01,INVALID_DATE_FORMAT
+DV-07,date-validation,Testing invalid date format which is empty,"POST
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,,,INVALID_DATE_FORMAT
+DV-08,date-validation,Testing invalid date which doesn't exist,"POST
+/generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025-02-30,2025-03-01,INVALID_DATE_FORMAT
