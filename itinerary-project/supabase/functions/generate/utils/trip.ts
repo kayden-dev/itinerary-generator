@@ -64,7 +64,12 @@ export const TripSchema = z.object({
       createdAt: z.iso.datetime().optional(),
     })
     .optional(),
-}).strict();
+})
+.refine((data) => data.dates.start <= data.dates.end, {
+  message: "Start date must be equal or before end date",
+  path: ["dates"]
+})
+.strict();
 
 export type Preferences = z.infer<typeof PreferencesSchema>;
 export type Accommodation = z.infer<typeof AccommodationSchema>;
