@@ -4,11 +4,11 @@ DV-01,date-validation,Testing start and end date equal,"POST
 DV-02,date-validation,Testing start is day before end date,"POST
 /generate",200,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-10-02,,
 DV-03,date-validation,Testing start is day after end date,"POST
-/generate",400,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-09-30,dates,END_BEFORE_START
+/generate",400,Boundary Value Analysis,variant of IV-00 with dates fields changed,2025-10-01,2025-09-30,dates,end_before_start
 DV-04,date-validation,Testing start is a day sometime before end date,"POST
 /generate",200,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-10-10,,
 DV-05,date-validation,Testing start is a day sometime after end date,"POST
-/generate",400,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-09-23,dates,END_BEFORE_START
+/generate",400,Equivalence Partitioning,variant of IV-00 with dates fields changed,2025-10-01,2025-09-23,dates,end_before_start
 DV-06,date-validation,Testing invalid date format with slash,"POST
 /generate",400,Category Partioning,variant of IV-00 with dates fields changed,2025/10/01,2025/10/01,dates.start;dates.end,invalid_format
 DV-07,date-validation,Testing invalid date format which is empty,"POST
