@@ -9,7 +9,7 @@ export type Issue = {
 export function formatError(error: z.ZodError): Issue[] {
   return error.issues.map(i => ({
     code: mapIssueCode(i),
-    field: String(i.path[0]),
+    field: i.path.join("."),
     message: i.message,
   }));
 }

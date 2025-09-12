@@ -1,5 +1,5 @@
 ID,Suite,Title,Endpoint,Expected Status,Technique,Notes,name_state,dates_state,preferences_state,expected_error_fields,expected_error_codes,baseline_JSON
-IV-00,input-validation,valid everything (baseline),"POST
+IV-00,input-validation,Valid everything (baseline),"POST
 /generate",200,Baseline,sanity,included,included,included,,,"{
   ""name"": ""Test Trip"",
   ""dates"": { ""start"": ""2025-10-01"", ""end"": ""2025-10-03"" },
@@ -9,24 +9,24 @@ IV-00,input-validation,valid everything (baseline),"POST
   ]
 }"
 IV-01,input-validation,Testing combinations of missing/incorrect required fields against the baseline,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,end_only,missing,name;dates;preferences,MISSING_NAME;PARTIAL_DATES;MISSING_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,end_only,missing,name;dates.start;preferences.pace,MISSING_NAME;PARTIAL_DATES;MISSING_PACE,
 IV-02,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,start_only,included,name;dates,MISSING_NAME;PARTIAL_DATES ,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,start_only,included,name;dates.end,MISSING_NAME;PARTIAL_DATES ,
 IV-03,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,end_only,incorrect,dates;preferences,PARTIAL_DATES;INCORRECT_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,end_only,incorrect,dates.start;preferences.pace,PARTIAL_DATES;INCORRECT_PACE,
 IV-04,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,end_only,included,dates; ,PARTIAL_DATES,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,end_only,included,dates.start; ,PARTIAL_DATES,
 IV-05,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,included,incorrect,name;preferences,MISSING_NAME;INCORRECT_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,included,incorrect,name;preferences.pace,MISSING_NAME;INCORRECT_PACE,
 IV-06,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,missing,incorrect,dates;preferences,MISSING_DATES;INCORRECT_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,missing,incorrect,dates;preferences.pace,MISSING_DATES;INCORRECT_PACE,
 IV-07,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,included,missing,preferences,MISSING_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,included,missing,preferences.pace,MISSING_PACE,
 IV-08,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,start_only,missing,dates;preferences,PARTIAL_DATES;MISSING_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,start_only,missing,dates.end;preferences.pace,PARTIAL_DATES;MISSING_PACE,
 IV-09,input-validation,,"POST
 /generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,missing,included,name;dates,MISSING_NAME;MISSING_DATES,
 IV-10,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,start_only,incorrect,dates;preferences,PARTIAL_DATES;INCORRECT_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,included,start_only,incorrect,dates.end;preferences.pace,PARTIAL_DATES;INCORRECT_PACE,
 IV-11,input-validation,,"POST
-/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,missing,missing,name;dates;preferences,MISSING_NAME;MISSING_DATES;MISSING_PACE,
+/generate",400,Pairwise,variant of IV-00 with fields missing/incorrect,missing,missing,missing,name;dates;preferences.pace,MISSING_NAME;MISSING_DATES;MISSING_PACE,
