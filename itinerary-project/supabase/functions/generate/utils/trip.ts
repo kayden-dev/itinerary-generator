@@ -35,8 +35,7 @@ export const DestinationSchema = z.object({
     .object({
       start: z.iso.date(),
       end: z.iso.date(),
-    })
-    .optional(),
+    }),
   accommodation: AccommodationSchema.optional(),
   places: z.array(PlaceSchema),
 })
