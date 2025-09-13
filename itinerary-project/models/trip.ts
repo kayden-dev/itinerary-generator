@@ -16,7 +16,7 @@ export type Destination = {
   id: string;
   placeId: string;
   name: string;
-  dates?: { start: string; end: string }; // "YYYY-MM-DD"
+  dates: { start: string; end: string }; // "YYYY-MM-DD"
   accommodation?: Accomodation;
   places: Place[];
 };
