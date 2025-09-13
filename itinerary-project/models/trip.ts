@@ -14,7 +14,6 @@ export type Preferences = {
 
 export type Destination = {
   id: string;
-  placeId: string;
   name: string;
   dates: { start: string; end: string }; // "YYYY-MM-DD"
   accommodation?: Accomodation;
@@ -23,7 +22,6 @@ export type Destination = {
 
 export type Accomodation = {
   id: string;
-  placeId: string;
   name: string;
   address: string;
   location: { lat: number; lng: number }
@@ -33,7 +31,6 @@ export type Accomodation = {
 
 export type Place = {
   id: string;
-  placeId: string;
   name: string;
   address: string;
   location: { lat: number; lng: number }

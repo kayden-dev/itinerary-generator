@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const PlaceSchema = z.object({
   id: z.string(),
-  placeId: z.string(),
   name: z.string(),
   address: z.string(),
   location: z.object({
@@ -19,7 +18,6 @@ export const PlaceSchema = z.object({
 
 export const AccommodationSchema = z.object({
   id: z.string(),
-  placeId: z.string(),
   name: z.string(),
   address: z.string(),
   location:  z.object({
@@ -32,7 +30,6 @@ export const AccommodationSchema = z.object({
 
 export const DestinationSchema = z.object({
   id: z.string(),
-  placeId: z.string(),
   name: z.string(),
   dates: z
     .object({
