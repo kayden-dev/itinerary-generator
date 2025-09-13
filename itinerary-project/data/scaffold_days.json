@@ -1,0 +1,48 @@
+[
+  {
+    "name":"SD-01",
+    "body":{
+      "name":"Test Trip",
+      "dates": {
+        "start":"2025-10-01",
+        "end":"2025-10-03"
+      },
+      "preferences": {
+        "pace":"Balanced"
+      },
+      "destinations":[
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates":{
+            "start":"2025-10-01",
+            "end":"2025-10-03"
+          },
+          "places":[]          
+        }
+      ]
+    },
+    "expected":{
+      "id": "insert",
+      "tripName": "Test Trip",
+      "timezone": "insert",
+      "dates": {
+        "start":"2025-10-01",
+        "end":"2025-10-03"
+      },
+      "unscheduled":[],
+      "days": [
+        {
+          "date": "2025-10-01",
+          "destinationId":"d1",
+          "blocks":[]
+        }
+      ],
+      "meta": {
+        "generatedBy":"rule-engine",
+        "version":"insert",
+        "createdAt":"insert"
+      }
+    }
+  }
+]
