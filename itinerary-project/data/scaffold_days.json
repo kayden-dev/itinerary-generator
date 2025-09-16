@@ -8,6 +8,7 @@
       "destinations":[{"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-03"},"places":[]}]
     },
     "expected":{
+      "expectedStatus": 200,
       "id": "<insert>",
       "tripName": "Test Trip",
       "timezone": "<insert>",
@@ -20,6 +21,229 @@
       ],
       "meta": {"generatedBy":"rule-engine","version":"<insert>","createdAt":"<insert>"
       }
+    }
+  },
+    {
+    "name":"SD-02",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-03"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[{"id": "d1","name": "City A","dates":{"start":"2025-09-30","end":"2025-10-02"},"places":[]}]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "city_outside_trip",
+          "field": "destinations[0].dates"
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-03",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-03"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[{"id": "d1","name": "City A","dates":{"start":"2025-10-02","end":"2025-10-04"},"places":[]}]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "city_outside_trip",
+          "field": "destinations[0].dates"
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-04",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-02"},"places":[]},
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-03","end":"2025-10-04"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 200,
+      "id": "<insert>",
+      "tripName": "Test Trip",
+      "timezone": "<insert>",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "unscheduled":[],
+      "days": [
+        {"date": "2025-10-01","destinationId":"d1","blocks":[]},
+        {"date": "2025-10-02","destinationId":"d1","blocks":[]},
+        {"date": "2025-10-03","destinationId":"d2","blocks":[]},
+        {"date": "2025-10-04","destinationId":"d2","blocks":[]}
+      ],
+      "meta": {"generatedBy":"rule-engine","version":"<insert>","createdAt":"<insert>"
+      }
+    }
+  },
+  {
+    "name":"SD-05",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-03"},"places":[]},
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-03","end":"2025-10-04"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "overlap_between_cities",
+          "field": "destinations",
+          "at": {"leftIndex": 0, "rightIndex":1}
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-06",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-05"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-02"},"places":[]},
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-04","end":"2025-10-05"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "gap_between_cities",
+          "field": "destinations",
+          "at": {"leftIndex": 0, "rightIndex":1}
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-07",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-03","end":"2025-10-04"},"places":[]},
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-02"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 200,
+      "id": "<insert>",
+      "tripName": "Test Trip",
+      "timezone": "<insert>",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "unscheduled":[],
+      "days": [
+        {"date": "2025-10-01","destinationId":"d1","blocks":[]},
+        {"date": "2025-10-02","destinationId":"d1","blocks":[]},
+        {"date": "2025-10-03","destinationId":"d2","blocks":[]},
+        {"date": "2025-10-04","destinationId":"d2","blocks":[]}
+      ],
+      "meta": {"generatedBy":"rule-engine","version":"<insert>","createdAt":"<insert>"
+      }
+    }
+  },
+  {
+    "name":"SD-08",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-02"},"places":[]},
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-03","end":"2025-10-04"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "duplicate_destination_id",
+          "field": "destinations[1].id"
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-09",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-01"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[{"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-01"},"places":[]}]
+    },
+    "expected":{
+      "expectedStatus": 200,
+      "id": "<insert>",
+      "tripName": "Test Trip",
+      "timezone": "<insert>",
+      "dates": {"start":"2025-10-01","end":"2025-10-01"},
+      "unscheduled":[],
+      "days": [
+        {"date": "2025-10-01","destinationId":"d1","blocks":[]}
+      ],
+      "meta": {"generatedBy":"rule-engine","version":"<insert>","createdAt":"<insert>"
+      }
+    }
+  },
+  {
+    "name":"SD-10",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-04"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-03"},"places":[]},
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-02","end":"2025-10-04"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "overlap_between_cities",
+          "field": "destinations",
+          "at": {"leftIndex": 0, "rightIndex":1}
+        }
+      ]
+    }
+  },
+  {
+    "name":"SD-11",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-06"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[
+        {"id": "d1","name": "City A","dates":{"start":"2025-10-01","end":"2025-10-02"},"places":[]},
+        {"id": "d2","name": "City B","dates":{"start":"2025-10-05","end":"2025-10-06"},"places":[]}
+      ]
+    },
+    "expected":{
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "code": "gap_between_cities",
+          "field": "destinations",
+          "at": {"leftIndex": 0, "rightIndex":1}
+        }
+      ]
     }
   }
 ]
