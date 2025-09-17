@@ -1,3 +1,4 @@
+import { buildDays } from "./utils/build.ts";
 import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
@@ -12,6 +13,9 @@ Deno.serve(async (req) => {
   }
 
   const trip : Trip = parsed.data;
+
+  buildDays(trip.destinations,trip.dates);
+
   const body = {
     id: crypto.randomUUID(),
     tripName: trip.name,
