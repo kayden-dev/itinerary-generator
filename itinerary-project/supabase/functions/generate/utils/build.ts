@@ -81,6 +81,8 @@ export function buildDays (
 
   // if all of these hold, then the days is verified, and can hence proceed with creating the scaffold days
 
+  // TODO: check each city to see if that cities dates are outside of the trip dates, not just the last one or first one
+
   console.log(destinations);
 
   return {
