@@ -37,6 +37,7 @@ export function buildDays (
   const tripStart = toUtcMidnight(tripDates.start);
   const tripEnd = toUtcMidnight(tripDates.end);
   let pointer = new Date(tripStart);
+  const days: Day[] = [];
 
   // check if there are no destinations, which is only valid if the trip start and end is the same
   if (sortedDestinations.length === 0) {
@@ -117,6 +118,16 @@ export function buildDays (
       };
     }
 
+    let currentPointer = currentStart;
+    while (currentPointer <= currentEnd) {
+      days.push({
+        date: currentPointer.toISOString().split('T')[0],
+        destinationId: destination.id,
+        blocks: []
+      });
+      currentPointer = addOneDayUtc(currentPointer);
+    }
+
     // increment the counter
     pointer = addOneDayUtc(currentEnd);
   }
@@ -136,23 +147,6 @@ export function buildDays (
     };
   }
 
-  // Generate the Day[] scaffold once validation passes
-  const days: Day[] = [];
-
-  for (const destination of sortedDestinations) {
-    let pointer = toUtcMidnight(destination.dates.start);
-    const end = toUtcMidnight(destination.dates.end);
-
-    while (pointer <= end) {
-      days.push({
-        date: pointer.toISOString().split('T')[0],
-        destinationId: destination.id,
-        blocks: []
-      });
-
-      pointer = addOneDayUtc(pointer);
-    } 
-  }   
   return {
     ok: true,
     data: days
