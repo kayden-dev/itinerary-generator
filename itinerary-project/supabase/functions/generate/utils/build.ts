@@ -87,11 +87,7 @@ export function buildDays (
       };
     }
 
-    // check for overlaps or gaps
-    const pointerTime = pointer.getTime();
-    const currentStartTime = currentStart.getTime();
-
-    if (currentStartTime < pointerTime) {
+    if (currentStart < pointer) {
       return {
         ok: false,
         error: {
@@ -103,7 +99,7 @@ export function buildDays (
       };
     }
 
-    if (currentStartTime > pointerTime) {
+    if (currentStart > pointer) {
       const leftIndex = index - 1;
       const at = leftIndex >= 0 ? { leftIndex, rightIndex: index } : undefined;
 
@@ -133,8 +129,8 @@ export function buildDays (
   }
 
   // by the end, check if there is still another gap
-  const endBoundary = addOneDayUtc(tripEnd).getTime();
-  const pointerTime = pointer.getTime();
+  const endBoundary = addOneDayUtc(tripEnd);
+  const pointerTime = pointer;
 
   if (pointerTime < endBoundary) {
     return {
