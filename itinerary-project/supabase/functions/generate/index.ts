@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
     name: trip.name,
     timezone: trip.timezone ?? "Australia/Melbourne",
     dates: trip.dates,
-    days: [],
+    days: days.data,
     unscheduled: [],
     meta: {
       generatedBy: "rule-engine",

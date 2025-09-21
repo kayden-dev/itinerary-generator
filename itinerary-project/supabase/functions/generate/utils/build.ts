@@ -136,9 +136,25 @@ export function buildDays (
     };
   }
 
-  // TODO: Generate the Day[] scaffold once validation passes
+  // Generate the Day[] scaffold once validation passes
+  const days: Day[] = [];
+
+  for (const destination of sortedDestinations) {
+    let pointer = toUtcMidnight(destination.dates.start);
+    const end = toUtcMidnight(destination.dates.end);
+
+    while (pointer <= end) {
+      days.push({
+        date: pointer.toISOString().split('T')[0],
+        destinationId: destination.id,
+        blocks: []
+      });
+
+      pointer = addOneDayUtc(pointer);
+    } 
+  }   
   return {
     ok: true,
-    data: []
+    data: days
   };
 }
