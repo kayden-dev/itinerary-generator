@@ -10,7 +10,7 @@
     "expected":{
       "expectedStatus": 200,
       "id": "<insert>",
-      "tripName": "Test Trip",
+      "name": "Test Trip",
       "timezone": "<insert>",
       "dates": {"start":"2025-10-01","end":"2025-10-03"},
       "unscheduled":[],
@@ -73,7 +73,7 @@
     "expected":{
       "expectedStatus": 200,
       "id": "<insert>",
-      "tripName": "Test Trip",
+      "name": "Test Trip",
       "timezone": "<insert>",
       "dates": {"start":"2025-10-01","end":"2025-10-04"},
       "unscheduled":[],
@@ -145,7 +145,7 @@
     "expected":{
       "expectedStatus": 200,
       "id": "<insert>",
-      "tripName": "Test Trip",
+      "name": "Test Trip",
       "timezone": "<insert>",
       "dates": {"start":"2025-10-01","end":"2025-10-04"},
       "unscheduled":[],
@@ -191,7 +191,7 @@
     "expected":{
       "expectedStatus": 200,
       "id": "<insert>",
-      "tripName": "Test Trip",
+      "name": "Test Trip",
       "timezone": "<insert>",
       "dates": {"start":"2025-10-01","end":"2025-10-01"},
       "unscheduled":[],

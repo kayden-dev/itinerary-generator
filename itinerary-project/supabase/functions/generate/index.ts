@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
   }
   const body = {
     id: crypto.randomUUID(),
-    tripName: trip.name,
+    name: trip.name,
     timezone: trip.timezone ?? "Australia/Melbourne",
     dates: trip.dates,
     days: [],
