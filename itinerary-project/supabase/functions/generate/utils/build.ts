@@ -11,82 +11,111 @@ export type Issue = {
   message: string;
 }
 
+const toUtcMidnight = (isoDate: string) => {
+  const date = new Date(isoDate);
+  date.setUTCHours(0, 0, 0, 0);
+  return date;
+};
+
+const addOneDayUtc = (date: Date) => {
+  const next = new Date(date);
+  next.setUTCDate(next.getUTCDate() + 1);
+  return next;
+};
+
 export function buildDays (
   destinations: Destination[], 
   tripDates: Trip["dates"]
 ): {ok: true;data: Day[]} | {ok: false;error: Issue}{
-  // sort the destination by start date
-  destinations.sort((a,b) => {
-    return Date.parse(a.dates.start) - Date.parse(b.dates.start)
-  });
+  const sortedDestinations = [...destinations].sort((a, b) => (
+    Date.parse(a.dates.start) - Date.parse(b.dates.start)
+  ));
 
-  // set the trip start and end boundaries
-  const start = new Date(tripDates.start);
-  start.setHours(0,0,0,0);
+  const tripStart = toUtcMidnight(tripDates.start);
+  const tripEnd = toUtcMidnight(tripDates.end);
+  let pointer = new Date(tripStart);
 
-  const end = new Date(tripDates.end);
-  end.setHours(0,0,0,0);
+  if (sortedDestinations.length === 0) {
+    if (tripStart.getTime() === tripEnd.getTime()) {
+      // Trip is a single day with no destinations; caller can decide how to handle
+      return { ok: true, data: [] };
+    }
 
-  // set the initial ptr at the trip dates start
-  let leading = new Date(tripDates.start);
-  leading.setHours(0,0,0,0);
-
-  // then iterate through each sorted destination
-  for (const [index, destination] of destinations.entries()) {
-    const currentStart = new Date(destination.dates.start);
-    currentStart.setHours(0,0,0,0);
-
-    if (currentStart < leading) {
-      // if the start is before leading, either overlap OR outside of trip dates
-      if (leading === start) {
-        return {
-          ok: false,
-          error: {
-            code: "city_outside_trip",
-            field: `destinations[${index}].dates`,
-            message: "City dates are outside of the trip"
-          }
-        }
-      } else {
-        return {
-          ok: false,
-          error: {
-            code: "overlap_between_cities",
-            field: "destinations",
-            at: {leftIndex: index - 1, rightIndex: index},
-            message: "The dates of two cities are overlapping"
-          } 
-        }
+    return {
+      ok: false,
+      error: {
+        code: "no_destinations",
+        field: "destinations",
+        message: "Trip dates are defined but no destinations cover them"
       }
-    } else if (currentStart > leading) {
-      // if the start is after leading, then there is a gap between cities or after the trip dates
+    };
+  }
+
+  for (const [index, destination] of sortedDestinations.entries()) {
+    const currentStart = toUtcMidnight(destination.dates.start);
+    const currentEnd = toUtcMidnight(destination.dates.end);
+
+    if (currentStart < tripStart || currentEnd > tripEnd) {
+      return {
+        ok: false,
+        error: {
+          code: "city_outside_trip",
+          field: `destinations[${index}].dates`,
+          message: "City dates are outside of the trip"
+        }
+      };
+    }
+
+    const pointerTime = pointer.getTime();
+    const currentStartTime = currentStart.getTime();
+
+    if (currentStartTime < pointerTime) {
+      return {
+        ok: false,
+        error: {
+          code: "overlap_between_cities",
+          field: "destinations",
+          at: { leftIndex: index - 1, rightIndex: index },
+          message: "The dates of two cities are overlapping"
+        }
+      };
+    }
+
+    if (currentStartTime > pointerTime) {
       return {
         ok: false,
         error: {
           code: "gap_between_cities",
           field: "destinations",
-          at: {leftIndex: index - 1, rightIndex: index},
+          at: { leftIndex: index - 1, rightIndex: index },
           message: "Gap between cities or before/after cities"
         }
-      }
+      };
     }
+
+    pointer = addOneDayUtc(currentEnd);
   }
-    // check that the start = ptr
 
-    // if yes, move the ptr to end + 1
+  const endBoundary = addOneDayUtc(tripEnd).getTime();
+  const pointerTime = pointer.getTime();
 
-  // keep repeating, if ever the condition breaks, that must mean there is either an overlap or gap
+  if (pointerTime !== endBoundary) {
+    const pointerPastEnd = pointerTime > endBoundary;
+    return {
+      ok: false,
+      error: {
+        code: pointerPastEnd ? "city_outside_trip" : "gap_between_cities",
+        field: "destinations",
+        message: pointerPastEnd
+          ? "Destinations extend beyond the trip dates"
+          : "Destinations do not cover the full trip dates"
+      }
+    };
+  }
 
-  // at the end, terminating cond check that ptr = end - 1
-
-  // if all of these hold, then the days is verified, and can hence proceed with creating the scaffold days
-
-  // TODO: check each city to see if that cities dates are outside of the trip dates, not just the last one or first one
-
-  console.log(destinations);
-
+  // TODO: Generate the Day[] scaffold once validation passes
   return {
-    ok: false,
-    errors: []
-  }
+    ok: true,
+    data: []
+  };
 }
