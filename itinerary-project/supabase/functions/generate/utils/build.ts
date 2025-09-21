@@ -103,13 +103,16 @@ export function buildDays (
     }
 
     if (currentStartTime > pointerTime) {
+      const leftIndex = index - 1;
+      const at = leftIndex >= 0 ? { leftIndex, rightIndex: index } : undefined;
+
       return {
         ok: false,
         error: {
           code: "gap_between_cities",
           field: "destinations",
-          at: { leftIndex: index - 1, rightIndex: index },
-          message: "Gap between cities or before/after cities"
+          ...(at && { at }),
+          message: at ? "Gap between cities or before/after cities" : "Destinations do not cover the full trip dates"
         }
       };
     }
