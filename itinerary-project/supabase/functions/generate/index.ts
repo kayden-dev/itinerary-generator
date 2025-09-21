@@ -14,8 +14,14 @@ Deno.serve(async (req) => {
 
   const trip : Trip = parsed.data;
 
-  buildDays(trip.destinations,trip.dates);
+  const days = buildDays(trip.destinations,trip.dates);
 
+  if (!days.ok) {
+    return new Response(JSON.stringify({errors:[days.error]}),{
+      status: 400,
+      headers: {"content-type":"application/json"}
+    })
+  }
   const body = {
     id: crypto.randomUUID(),
     tripName: trip.name,

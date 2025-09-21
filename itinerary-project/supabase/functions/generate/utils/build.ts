@@ -51,7 +51,21 @@ export function buildDays (
     };
   }
 
+  const seenDestinationIds = new Set<string>();
+
   for (const [index, destination] of sortedDestinations.entries()) {
+    // check if the destination id has already been seen
+    if (seenDestinationIds.has(destination.id)) {
+      return {
+        ok: false,
+        error: {
+          code: "duplicate_destination_id",
+          field: `destinations[${index}].id`,
+          message: "Each destination must have a unique id"
+        }  
+      }
+    }
+    seenDestinationIds.add(destination.id);
     const currentStart = toUtcMidnight(destination.dates.start);
     const currentEnd = toUtcMidnight(destination.dates.end);
 
