@@ -22,7 +22,7 @@ export const PlaceSchema = z.object({
   }, {
   message: "Start time must be equal or before end time",
   path: ["fixed"],
-  params: {code: "endtime_before_starttime"}
+  params: {code: "place_end_before_start"}
 });
 
 export const AccommodationSchema = z.object({
