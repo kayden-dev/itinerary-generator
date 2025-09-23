@@ -3,8 +3,8 @@ import { PlaceSchema } from "./trip.ts";
 
 export const BaseBlockSchema = z.object({
   id: z.string(),
-  start: z.iso.datetime({offset: true}),
-  end: z.iso.datetime({offset: true}),
+  start: z.iso.datetime(),
+  end: z.iso.datetime(),
   locked: z.boolean().optional(),
   notes: z.string().optional(),
 })
@@ -16,7 +16,6 @@ export const BaseBlockSchema = z.object({
 
 export const VisitBlockSchema = BaseBlockSchema.extend({
   type: z.literal("visit"),
-  placeId: z.string(),
   placeRef: PlaceSchema.omit({fixed: true}),
   source: z.enum(["fixed","scheduled"])
 });
@@ -31,7 +30,6 @@ export const TransitBlockSchema = BaseBlockSchema.extend({
 
 export const CheckInOutBlockSchema = BaseBlockSchema.extend({
   type: z.enum(["check-in","check-out"]),
-  placeId: z.string(),
   placeRef: PlaceSchema.omit({fixed: true}),
 });
 

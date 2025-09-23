@@ -10,8 +10,8 @@ export const PlaceSchema = z.object({
   }),
   fixed: z
     .object({
-      start: z.iso.datetime({offset:true}),
-      end: z.iso.datetime({offset:true}).optional(),
+      start: z.iso.datetime(),
+      end: z.iso.datetime().optional(),
     })
     .optional(),
 })

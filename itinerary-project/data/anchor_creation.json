@@ -1,0 +1,61 @@
+[
+  {
+    "name":"AC-01",
+    "body":{
+      "name":"Test Trip",
+      "dates": {"start":"2025-10-01","end":"2025-10-03"},
+      "preferences": {"pace":"Balanced"},
+      "destinations":[{
+        "id": "d1",
+        "name": "City A",
+        "dates":{"start":"2025-10-01","end":"2025-10-03"},
+        "places":[],
+        "accommodation": {
+          "id":"a1",
+          "name":"Test Accomodation",
+          "address":"123 street street",
+          "location": {"lat":34.0522,"lng":-118.2437}
+        }
+        }]
+    },
+    "expected":{
+      "expectedStatus": 200,
+      "id": "<insert>",
+      "name": "Test Trip",
+      "timezone": "<insert>",
+      "dates": {"start":"2025-10-01","end":"2025-10-03"},
+      "unscheduled":[],
+      "days": [
+        {"date": "2025-10-01","destinationId":"d1","blocks":[{
+          "id":"<insert>",
+          "start":"2025-10-01T15:00:00",
+          "end":"2025-10-01T15:30:00",
+          "locked":true,
+          "type":"check-in",
+          "placeRef":{
+            "id":"a1",
+            "name":"Test Accomodation",
+            "address":"123 street street",
+            "location": {"lat":34.0522,"lng":-118.2437}
+          }
+        }]},
+        {"date": "2025-10-02","destinationId":"d1","blocks":[]},
+        {"date": "2025-10-03","destinationId":"d1","blocks":[{
+          "id":"<insert>",
+          "start":"2025-10-03T10:00:00",
+          "end":"2025-10-03T10:30:00",
+          "locked":true,
+          "type":"check-out",
+          "placeRef":{
+            "id":"a1",
+            "name":"Test Accomodation",
+            "address":"123 street street",
+            "location": {"lat":34.0522,"lng":-118.2437}
+          }
+        }]}
+      ],
+      "meta": {"generatedBy":"rule-engine","version":"<insert>","createdAt":"<insert>"
+      }
+    }
+  }
+]
