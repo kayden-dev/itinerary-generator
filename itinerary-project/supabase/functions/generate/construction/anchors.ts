@@ -69,7 +69,7 @@ export function insertAnchors (
   // here, implement some sort of sorting algorithm and the implementation of the fixed
   const sortedAnchors = [...anchors];
 
-  const anchorDays = [...days];
+  const anchorDays = [...days]; // TODO: deep copy not shallow copy
   let dayIndex = 0; // keep track of which day of the itinerary we are currently on
 
   for (const anchor of sortedAnchors) {
@@ -87,6 +87,8 @@ export function insertAnchors (
       // if not, move the dayIndex day to the day of the anchor
       dayIndex++;
     }
+
+    // TODO: need to do case when none of the dates match the anchor days: meaning that anchor is outside of dates
     
     // then insert the anchor into the day
     anchorDays[dayIndex].blocks.push(anchor);
