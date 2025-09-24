@@ -11,19 +11,12 @@ export function formatError(error: z.ZodError): Issue[] {
     const params = (i as z.core.$ZodIssue & { params?: Record<string, unknown> }).params;
     return {
       code: (params?.code as string) ?? i.code,
-      field: i.path.map((num, index) => {
-        let output = ""
-        if (typeof num === "number") {
-          output += `[${num}]`
-        } else {
-          if (index !== 0) {
-            output += "."
-          }
-          output += String(num)
+      field: i.path.reduce<string>((acc, segment) => {
+        if (typeof segment === "number") {
+          return `${acc}[${segment}]`
         }
-        return output
-      })
-      .join(""),
+        return acc ? `${acc}.${String(segment)}` : String(segment)
+      }, ""),
       message: i.message,
     }
   });
