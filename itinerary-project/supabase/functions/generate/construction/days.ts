@@ -1,5 +1,5 @@
-import { Day } from "./itinerary.ts";
-import { Destination, Trip } from "./trip.ts";
+import { Day } from "../utils/itinerary.ts";
+import { Destination, Trip } from "../utils/trip.ts";
 
 export type Issue = {
   code: string;

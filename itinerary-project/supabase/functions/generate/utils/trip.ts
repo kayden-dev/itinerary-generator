@@ -10,8 +10,8 @@ export const PlaceSchema = z.object({
   }),
   fixed: z
     .object({
-      start: z.iso.datetime(),
-      end: z.iso.datetime().optional(),
+      start: z.iso.datetime({ local: true }),
+      end: z.iso.datetime({ local: true }).optional(),
     })
     .optional(),
 })
@@ -71,7 +71,7 @@ export const TripSchema = z.object({
     .object({
       version: z.string().optional(),
       source: z.enum(["app", "import"]).optional(),
-      createdAt: z.iso.datetime().optional(),
+      createdAt: z.iso.datetime({ offset: true }).optional(),
     })
     .optional(),
 })

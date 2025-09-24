@@ -3,8 +3,8 @@ import { PlaceSchema } from "./trip.ts";
 
 export const BaseBlockSchema = z.object({
   id: z.string(),
-  start: z.iso.datetime(),
-  end: z.iso.datetime(),
+  start: z.iso.datetime({ local: true }),
+  end: z.iso.datetime({ local: true }),
   locked: z.boolean().optional(),
   notes: z.string().optional(),
 })
@@ -70,7 +70,7 @@ export const ItinerarySchema = z.object({
   meta: z.object({
     generatedBy: z.enum(["rule-engine","hybrid"]),
     version: z.string(),
-    createdAt: z.iso.datetime()
+    createdAt: z.iso.datetime({ offset: true })
   })
 })
 .refine((data) => data.dates.start <= data.dates.end, {

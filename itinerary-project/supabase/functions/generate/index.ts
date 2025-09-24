@@ -1,4 +1,5 @@
-import { buildDays } from "./utils/build.ts";
+import { insertAnchors } from "./construction/anchors.ts";
+import { buildDays } from "./construction/days.ts";
 import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
@@ -15,6 +16,8 @@ Deno.serve(async (req) => {
   const trip : Trip = parsed.data;
 
   const days = buildDays(trip.destinations,trip.dates);
+
+  if (days.ok) insertAnchors(trip,days.data);
 
   if (!days.ok) {
     return new Response(JSON.stringify({errors:[days.error]}),{
