@@ -17,20 +17,28 @@ Deno.serve(async (req) => {
 
   const days = buildDays(trip.destinations,trip.dates);
 
-  if (days.ok) insertAnchors(trip,days.data);
-
   if (!days.ok) {
     return new Response(JSON.stringify({errors:[days.error]}),{
       status: 400,
       headers: {"content-type":"application/json"}
     })
   }
+
+  const days_anchors = insertAnchors(trip,days.data);
+
+  if (!days_anchors.ok) {
+    return new Response(JSON.stringify({errors:[days_anchors.error]}),{
+      status: 400,
+      headers: {"content-type":"application/json"}
+    })
+  }
+
   const body = {
     id: crypto.randomUUID(),
     name: trip.name,
     timezone: trip.timezone ?? "Australia/Melbourne",
     dates: trip.dates,
-    days: days.data,
+    days: days_anchors.data,
     unscheduled: [],
     meta: {
       generatedBy: "rule-engine",

@@ -1,4 +1,4 @@
-﻿import { Day, CheckInOutBlock, VisitBlock } from "../utils/itinerary.ts";
+import { Day, CheckInOutBlock, VisitBlock } from "../utils/itinerary.ts";
 import { Trip } from "../utils/trip.ts";
 
 export type Issue = {
@@ -22,7 +22,7 @@ export function insertAnchors (
   // anchors => checkin/checkout and fixed
 
   // create each anchor
-  const anchorBlocks: (CheckInOutBlock | VisitBlock)[] = [];
+  const anchors: (CheckInOutBlock | VisitBlock)[] = [];
 
   // first, create the checkinout anchors, which is only IF the destination has 
   for (const destination of sortedDestinations) {
@@ -41,7 +41,7 @@ export function insertAnchors (
       endCheckOutObject.setTime(endCheckOutObject.getTime() + checkInOutDuration);
 
       const endCheckIn = endCheckInObject.toISOString().slice(0,-5);
-      const endCheckOut = endCheckOutObject.toISOString().slice(0,-5); // remove the z from the string
+      const endCheckOut = endCheckOutObject.toISOString().slice(0,-5); // remove the z from the string and the milliseconds
  
       const checkInBlock: CheckInOutBlock = {
         type: "check-in",
@@ -60,11 +60,41 @@ export function insertAnchors (
         end: endCheckOut,
         locked: true
       };
+
+      anchors.push(checkInBlock);
+      anchors.push(checkOutBlock);
     }
   }
+
+  // here, implement some sort of sorting algorithm and the implementation of the fixed
+  const sortedAnchors = [...anchors];
+
+  const anchorDays = [...days];
+  let dayIndex = 0; // keep track of which day of the itinerary we are currently on
+
+  for (const anchor of sortedAnchors) {
+    // first, do a check with this anchor and the previous anchor to ensure there is sufficient min gap
+
+    // if good, then proceed to insertion
+
+    // INSERTION ++++
+
+    const anchorDate = anchor.start.split("T")[0];
+
+    // check that the day of anchor is equal to the dayIndex day
+    // day is a date, start is a datetime, use the split to compare
+    while (dayIndex < anchorDays.length && anchorDays[dayIndex].date !== anchorDate) {
+      // if not, move the dayIndex day to the day of the anchor
+      dayIndex++;
+    }
+    
+    // then insert the anchor into the day
+    anchorDays[dayIndex].blocks.push(anchor);
+  }
+
   return {
     ok: true,
-    data:[]
+    data: anchorDays
   }
 }
 
