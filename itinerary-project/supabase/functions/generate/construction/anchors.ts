@@ -87,7 +87,7 @@ export function insertAnchors (
   }
 
   const sortedAnchors = [...anchors].sort((a,b) => (
-    Date.parse(a.start) - Date.parse(b.end)
+    Date.parse(a.start) - Date.parse(b.start)
   ));
 
   const anchorDays = JSON.parse(JSON.stringify(days)); // TODO: deep copy not shallow copy

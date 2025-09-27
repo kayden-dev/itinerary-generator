@@ -11,6 +11,6 @@ export function calculateTimeOffset(start: BaseBlock["start"], offset: number) :
     const endObject = new Date(start);
     const offsetMilliseconds = offset * 60 * 1000; // convert the time in minutes to milliseconds
     endObject.setTime(endObject.getTime() + offsetMilliseconds);
-    const end = endObject.toISOString().slice(0,-5); // remove the z from the string and the milliseconds
+    const end = endObject.toISOString().split(".")[0];// remove the z from the string and the milliseconds
     return end;
 }
