@@ -29,12 +29,13 @@ export function insertAnchors (
   // anchors => checkin/checkout and fixed
 
   // create each anchor
-  const anchors: (CheckInOutBlock | VisitBlock)[] = [];
+  const anchors: {block: CheckInOutBlock | VisitBlock; index?: {destination: number; place: number}}[] = [];
 
-  for (const destination of sortedDestinations) {
+  for (const [destinationIndex,destination] of sortedDestinations.entries()) {
     // create the checkin/checkout anchors, which is only IF the destination has 
     if (destination.accommodation !== undefined) {
       // extract the information about the place, except the checkin/checkout times
+      // deno-lint-ignore no-unused-vars
       const placeRef = (({ checkInTime, checkOutTime, ...rest }) => rest)(destination.accommodation);
       
       // construct the start of the checkin/checkout blocks, falling back to defaults if not provided
@@ -58,12 +59,12 @@ export function insertAnchors (
         end: calculateTimeOffset(startCheckOut,30),
         locked: true
       };
-      anchors.push(checkInBlock);
-      anchors.push(checkOutBlock);
+      anchors.push({block:checkInBlock});
+      anchors.push({block:checkOutBlock});
     }
     
     // create the fixed appointment blocks
-    for (const place of destination.places) {
+    for (const [placeindex,place] of destination.places.entries()) {
       // for it to be a fixed place, it must have a fixed defined
       if (place.fixed !== undefined) {
         // if so, then start the creation of the block
@@ -75,6 +76,7 @@ export function insertAnchors (
         // input is duration in minutes
 
         // once created, just add to the anchors array
+        // deno-lint-ignore no-unused-vars
         const placeRef = (({ fixed, ...rest }) => rest)(place);
         const fixedPlaceBlock: VisitBlock = {
           type: "visit",
@@ -85,7 +87,7 @@ export function insertAnchors (
           locked: true,
           source: "fixed"
         }
-        anchors.push(fixedPlaceBlock);
+        anchors.push({block:fixedPlaceBlock,index:{destination:destinationIndex,place:placeindex}});
       }
     }
 
@@ -93,7 +95,7 @@ export function insertAnchors (
   }
 
   const sortedAnchors = [...anchors].sort((a,b) => (
-    Date.parse(a.start) - Date.parse(b.start)
+    Date.parse(a.block.start) - Date.parse(b.block.start)
   ));
 
   const anchorDays = JSON.parse(JSON.stringify(days)); // TODO: deep copy not shallow copy
@@ -106,7 +108,7 @@ export function insertAnchors (
 
     // INSERTION ++++
 
-    const anchorDate = anchor.start.split("T")[0];
+    const anchorDate = anchor.block.start.split("T")[0];
 
     // check that the day of anchor is equal to the dayIndex day
     // day is a date, start is a datetime, use the split to compare
@@ -115,10 +117,19 @@ export function insertAnchors (
       dayIndex++;
     }
 
-    // TODO: need to do case when none of the dates match the anchor days: meaning that anchor is outside of dates
-    
+    // if none of the dates match the anchor days, then the anchor is outside of the trip dates
+    if (dayIndex >= anchorDays.length) {
+      return {
+        ok: false,
+        error: {
+          code: "place_outside_trip",
+          field: `destinations[${anchor.index?.destination}].places[${anchor.index?.destination}].fixed`,
+          message: ""
+        }
+      }
+    }
     // then insert the anchor into the day
-    anchorDays[dayIndex].blocks.push(anchor);
+    anchorDays[dayIndex].blocks.push(anchor.block);
   }
 
   return {
