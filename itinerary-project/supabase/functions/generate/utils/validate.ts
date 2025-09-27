@@ -4,7 +4,7 @@ export type Issue = {
   code: string;
   field: string;
   message: string;
-}
+};
 
 /**
  * Formats a list of zod errors to match the issues shape
@@ -12,18 +12,18 @@ export type Issue = {
  * @returns A list of formatted issues
  */
 export function formatError(error: z.ZodError): Issue[] {
-  return error.issues.map(i => {
+  return error.issues.map((i) => {
     const params = (i as z.core.$ZodIssue & { params?: Record<string, unknown> }).params;
     return {
       code: (params?.code as string) ?? i.code,
       field: i.path.reduce<string>((acc, segment) => {
         if (typeof segment === "number") {
-          return `${acc}[${segment}]`
+          return `${acc}[${segment}]`;
         }
-        return acc ? `${acc}.${String(segment)}` : String(segment)
+        return acc ? `${acc}.${String(segment)}` : String(segment);
       }, ""),
       message: i.message,
-    }
+    };
   });
 }
 
@@ -36,10 +36,8 @@ export function formatError(error: z.ZodError): Issue[] {
 export async function parseJsonWith<T extends z.ZodTypeAny>(
   req: Request,
   schema: T
-) : Promise<{ok: true; data: z.infer<T>} | {ok:false;errors:Issue[]}> {
+): Promise<{ ok: true; data: z.infer<T> } | { ok: false; errors: Issue[] }> {
   const json = await req.json().catch(() => ({}));
   const parsed = schema.safeParse(json);
-  return parsed.success
-    ? {ok: true, data: parsed.data}
-    : {ok: false, errors: formatError(parsed.error)};
+  return parsed.success ? { ok: true, data: parsed.data } : { ok: false, errors: formatError(parsed.error) };
 }

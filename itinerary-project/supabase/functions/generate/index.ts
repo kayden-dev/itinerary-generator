@@ -4,33 +4,33 @@ import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
 Deno.serve(async (req) => {
-  const parsed = await parseJsonWith(req,TripSchema);
+  const parsed = await parseJsonWith(req, TripSchema);
 
   if (!parsed.ok) {
-    return new Response(JSON.stringify({errors:parsed.errors}),{
+    return new Response(JSON.stringify({ errors: parsed.errors }), {
       status: 400,
-      headers: {"content-type":"application/json"},
-    })
+      headers: { "content-type": "application/json" },
+    });
   }
 
-  const trip : Trip = parsed.data;
+  const trip: Trip = parsed.data;
 
-  const days = buildDays(trip.destinations,trip.dates);
+  const days = buildDays(trip.destinations, trip.dates);
 
   if (!days.ok) {
-    return new Response(JSON.stringify({errors:[days.error]}),{
+    return new Response(JSON.stringify({ errors: [days.error] }), {
       status: 400,
-      headers: {"content-type":"application/json"}
-    })
+      headers: { "content-type": "application/json" },
+    });
   }
 
-  const days_anchors = insertAnchors(trip,days.data);
+  const days_anchors = insertAnchors(trip, days.data);
 
   if (!days_anchors.ok) {
-    return new Response(JSON.stringify({errors:[days_anchors.error]}),{
+    return new Response(JSON.stringify({ errors: [days_anchors.error] }), {
       status: 400,
-      headers: {"content-type":"application/json"}
-    })
+      headers: { "content-type": "application/json" },
+    });
   }
 
   const body = {
@@ -43,12 +43,9 @@ Deno.serve(async (req) => {
     meta: {
       generatedBy: "rule-engine",
       version: "1.0.0",
-      createdAt: new Date().toISOString()
-    }
-  }
+      createdAt: new Date().toISOString(),
+    },
+  };
 
-  return new Response(
-    JSON.stringify(body),
-    { headers: { "Content-Type": "application/json" } },
-  )
-})
+  return new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json" } });
+});

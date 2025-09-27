@@ -5,11 +5,11 @@ export type Issue = {
   code: string;
   field: string;
   at?: {
-    leftIndex: number,
-    rightIndex: number
-  }
+    leftIndex: number;
+    rightIndex: number;
+  };
   message: string;
-}
+};
 
 /**
  * Normalises the ISO date to midnight
@@ -39,14 +39,12 @@ const addOneDayUtc = (date: Date) => {
  * @param tripDates The start and end date of the trip
  * @returns An empty scaffold of days mapped out of the trip, or an error if there are issues
  */
-export function buildDays (
-  destinations: Destination[], 
+export function buildDays(
+  destinations: Destination[],
   tripDates: Trip["dates"]
-): {ok: true;data: Day[]} | {ok: false;error: Issue}{
+): { ok: true; data: Day[] } | { ok: false; error: Issue } {
   // create a copy and sort the destinations by their start date
-  const sortedDestinations = [...destinations].sort((a, b) => (
-    Date.parse(a.dates.start) - Date.parse(b.dates.start)
-  ));
+  const sortedDestinations = [...destinations].sort((a, b) => a.dates.start.localeCompare(b.dates.start));
 
   // normalise the trip start and end dates, and initialise the pointer
   const tripStart = toUtcMidnight(tripDates.start);
@@ -66,8 +64,8 @@ export function buildDays (
       error: {
         code: "no_destinations",
         field: "destinations",
-        message: "Trip dates are defined but no destinations cover them"
-      }
+        message: "Trip dates are defined but no destinations cover them",
+      },
     };
   }
 
@@ -81,9 +79,9 @@ export function buildDays (
         error: {
           code: "duplicate_destination_id",
           field: `destinations[${index}].id`,
-          message: "Each destination must have a unique id"
-        }  
-      }
+          message: "Each destination must have a unique id",
+        },
+      };
     }
     seenDestinationIds.add(destination.id);
 
@@ -97,8 +95,8 @@ export function buildDays (
         error: {
           code: "city_outside_trip",
           field: `destinations[${index}].dates`,
-          message: "City dates are outside of the trip"
-        }
+          message: "City dates are outside of the trip",
+        },
       };
     }
 
@@ -109,8 +107,8 @@ export function buildDays (
           code: "overlap_between_cities",
           field: "destinations",
           at: { leftIndex: index - 1, rightIndex: index },
-          message: "The dates of two cities are overlapping"
-        }
+          message: "The dates of two cities are overlapping",
+        },
       };
     }
 
@@ -124,17 +122,17 @@ export function buildDays (
           code: "gap_between_cities",
           field: "destinations",
           ...(at && { at }),
-          message: at ? "Gap between cities or before/after cities" : "Destinations do not cover the full trip dates"
-        }
+          message: at ? "Gap between cities or before/after cities" : "Destinations do not cover the full trip dates",
+        },
       };
     }
 
     let currentPointer = currentStart;
     while (currentPointer <= currentEnd) {
       days.push({
-        date: currentPointer.toISOString().split('T')[0],
+        date: currentPointer.toISOString().split("T")[0],
         destinationId: destination.id,
-        blocks: []
+        blocks: [],
       });
       currentPointer = addOneDayUtc(currentPointer);
     }
@@ -153,13 +151,13 @@ export function buildDays (
       error: {
         code: "gap_between_cities",
         field: "destinations",
-        message: "Destinations do not cover the full trip dates"
-      }
+        message: "Destinations do not cover the full trip dates",
+      },
     };
   }
 
   return {
     ok: true,
-    data: days
+    data: days,
   };
 }
