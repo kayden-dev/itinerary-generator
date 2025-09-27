@@ -1,0 +1,16 @@
+import { BaseBlock } from "../../utils/itinerary.ts";
+
+/**
+ * Calculates the end datetime given the start datetime and an offset (in minutes)
+ * 
+ * @param start - The start datetime in local time
+ * @param offset - The offset (in minutes) from the start datetime
+ * @returns The end datetiome in local time
+ */
+export function calculateTimeOffset(start: BaseBlock["start"], offset: number) : BaseBlock["end"] {
+    const endObject = new Date(start);
+    const offsetMilliseconds = offset * 60 * 1000; // convert the time in minutes to milliseconds
+    endObject.setTime(endObject.getTime() + offsetMilliseconds);
+    const end = endObject.toISOString().slice(0,-5); // remove the z from the string and the milliseconds
+    return end;
+}

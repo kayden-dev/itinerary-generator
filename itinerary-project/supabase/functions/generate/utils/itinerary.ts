@@ -80,6 +80,7 @@ export const ItinerarySchema = z.object({
 })
 .strict();
 
+export type BaseBlock = z.infer<typeof BaseBlockSchema>;
 export type VisitBlock = z.infer<typeof VisitBlockSchema>;
 export type TransitBlock = z.infer<typeof TransitBlockSchema>;
 export type CheckInOutBlock = z.infer<typeof CheckInOutBlockSchema>;

@@ -1,5 +1,6 @@
 import { Day, CheckInOutBlock, VisitBlock } from "../utils/itinerary.ts";
 import { Trip } from "../utils/trip.ts";
+import { calculateTimeOffset } from "./utils/blocks.ts";
 
 export type Issue = {
   code: string;
@@ -24,56 +25,76 @@ export function insertAnchors (
   // create each anchor
   const anchors: (CheckInOutBlock | VisitBlock)[] = [];
 
-  // first, create the checkinout anchors, which is only IF the destination has 
   for (const destination of sortedDestinations) {
+    // create the checkin/checkout anchors, which is only IF the destination has 
     if (destination.accommodation !== undefined) {
+      // extract the information about the place, except the checkin/checkout times
       const placeRef = (({ checkInTime, checkOutTime, ...rest }) => rest)(destination.accommodation);
       
+      // construct the start of the checkin/checkout blocks, falling back to defaults if not provided
       const startCheckIn = `${destination.dates.start}T${destination.accommodation.checkInTime ?? "15:00:00"}`;
       const startCheckOut = `${destination.dates.end}T${destination.accommodation.checkOutTime ?? "10:00:00"}`;
-
-      const endCheckInObject = new Date(startCheckIn);
-      const endCheckOutObject = new Date(startCheckOut);
-
-      const checkInOutDuration = 30 * 60 * 1000;
-
-      endCheckInObject.setTime(endCheckInObject.getTime() + checkInOutDuration);
-      endCheckOutObject.setTime(endCheckOutObject.getTime() + checkInOutDuration);
-
-      const endCheckIn = endCheckInObject.toISOString().slice(0,-5);
-      const endCheckOut = endCheckOutObject.toISOString().slice(0,-5); // remove the z from the string and the milliseconds
- 
+      
+      // create and add the checkin/checkout blocks to the anchors
       const checkInBlock: CheckInOutBlock = {
         type: "check-in",
         placeRef,
         id: crypto.randomUUID(),
         start: startCheckIn,
-        end: endCheckIn,
+        end: calculateTimeOffset(startCheckIn,30),
         locked: true
       };
-
       const checkOutBlock: CheckInOutBlock = {
         type: "check-out",
         placeRef,
         id: crypto.randomUUID(),
         start: startCheckOut,
-        end: endCheckOut,
+        end: calculateTimeOffset(startCheckOut,30),
         locked: true
       };
-
       anchors.push(checkInBlock);
       anchors.push(checkOutBlock);
     }
+    
+    // create the fixed appointment blocks
+    for (const place of destination.places) {
+      // for it to be a fixed place, it must have a fixed defined
+      if (place.fixed !== undefined) {
+        // if so, then start the creation of the block
+        // if the block doesn't have an end, call a function to determine the default time spent for that type of block
+        // later on: change the place schema to require the type of place it is
+
+        // the function will just return a time, here use the same process as before to calculate the offset time, turn 
+        // it into a function maybe? if need to be reusued, where the input is a dateitme, output is a datetime, and another
+        // input is duration in minutes
+
+        // once created, just add to the anchors array
+        const placeRef = (({ fixed, ...rest }) => rest)(place);
+        const fixedPlaceBlock: VisitBlock = {
+          type: "visit",
+          placeRef,
+          id: crypto.randomUUID(),
+          start: place.fixed.start,
+          end: place.fixed.end ?? calculateTimeOffset(place.fixed.start,60), // TODO: implement proper time estimate function
+          locked: true,
+          source: "fixed"
+        }
+        anchors.push(fixedPlaceBlock);
+      }
+    }
+
+
   }
 
-  // here, implement some sort of sorting algorithm and the implementation of the fixed
-  const sortedAnchors = [...anchors];
+  const sortedAnchors = [...anchors].sort((a,b) => (
+    Date.parse(a.start) - Date.parse(b.end)
+  ));
 
-  const anchorDays = [...days]; // TODO: deep copy not shallow copy
+  const anchorDays = JSON.parse(JSON.stringify(days)); // TODO: deep copy not shallow copy
   let dayIndex = 0; // keep track of which day of the itinerary we are currently on
 
   for (const anchor of sortedAnchors) {
-    // first, do a check with this anchor and the previous anchor to ensure there is sufficient min gap
+    // first, do a check with this anchor and the previous anchor to ensure there is sufficient min gap using another min gap function, default for now
 
     // if good, then proceed to insertion
 
