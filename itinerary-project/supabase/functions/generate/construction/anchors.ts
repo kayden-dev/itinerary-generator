@@ -12,6 +12,12 @@ export type Issue = {
   message: string;
 }
 
+/**
+ * Inserts the anchors (checkin/checkout and fixed appointments) into an empty day scaffold
+ * @param trip - the full trip details
+ * @param days - an empty scaffold of the days of the trip
+ * @returns A copy of the days scaffold with the anchors inserted, or an error message if there are issues
+ */
 export function insertAnchors (
   trip: Trip,
   days: Day[]

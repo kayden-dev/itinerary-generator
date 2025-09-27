@@ -6,6 +6,11 @@ export type Issue = {
   message: string;
 }
 
+/**
+ * Formats a list of zod errors to match the issues shape
+ * @param error - A list of zod errors
+ * @returns A list of formatted issues
+ */
 export function formatError(error: z.ZodError): Issue[] {
   return error.issues.map(i => {
     const params = (i as z.core.$ZodIssue & { params?: Record<string, unknown> }).params;
@@ -22,6 +27,12 @@ export function formatError(error: z.ZodError): Issue[] {
   });
 }
 
+/**
+ * Parses a request through specified zod schema
+ * @param req - JSON request to parse
+ * @param schema - A zod schema
+ * @returns The parsed data if ok, or a formatted list of errors
+ */
 export async function parseJsonWith<T extends z.ZodTypeAny>(
   req: Request,
   schema: T

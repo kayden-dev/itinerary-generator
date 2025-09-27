@@ -11,19 +11,34 @@ export type Issue = {
   message: string;
 }
 
-// helper functions to normalise the ISO dates to UTC midnight and to increment the day
+/**
+ * Normalises the ISO date to midnight
+ * @param isoDate - ISO date to normalise
+ * @returns The normalised ISO date
+ */
 const toUtcMidnight = (isoDate: string) => {
   const date = new Date(isoDate);
   date.setUTCHours(0, 0, 0, 0);
   return date;
 };
 
+/**
+ * Adds one day to the ISO date
+ * @param date - ISO date to add
+ * @returns The incremented ISO date
+ */
 const addOneDayUtc = (date: Date) => {
   const next = new Date(date);
   next.setUTCDate(next.getUTCDate() + 1);
   return next;
 };
 
+/**
+ * Creates an empty scaffold of days given the destinations provided
+ * @param destinations A list of destinations for the trip
+ * @param tripDates The start and end date of the trip
+ * @returns An empty scaffold of days mapped out of the trip, or an error if there are issues
+ */
 export function buildDays (
   destinations: Destination[], 
   tripDates: Trip["dates"]
