@@ -104,31 +104,37 @@ export function insertAnchors (
   for (const anchor of sortedAnchors) {
     // first, do a check with this anchor and the previous anchor to ensure there is sufficient min gap using another min gap function, default for now
 
-    // if good, then proceed to insertion
+    const anchorStart = anchor.block.start.split("T")[0];
+    const anchorEnd = anchor.block.end.split("T")[0];
 
-    // INSERTION ++++
-
-    const anchorDate = anchor.block.start.split("T")[0];
-
-    // check that the day of anchor is equal to the dayIndex day
-    // day is a date, start is a datetime, use the split to compare
-    while (dayIndex < anchorDays.length && anchorDays[dayIndex].date !== anchorDate) {
-      // if not, move the dayIndex day to the day of the anchor
-      dayIndex++;
-    }
-
-    // if none of the dates match the anchor days, then the anchor is outside of the trip dates
-    if (dayIndex >= anchorDays.length) {
+    if (anchorStart < anchorDays[0].date || anchorEnd > anchorDays[anchorDays.length - 1].date) {
       return {
         ok: false,
         error: {
           code: "place_outside_trip",
-          field: `destinations[${anchor.index?.destination}].places[${anchor.index?.destination}].fixed`,
+          field: `destinations[${anchor.index?.destination}].places[${anchor.index?.place}].fixed`,
           message: ""
         }
       }
     }
-    // then insert the anchor into the day
+    // check that the day of anchor is equal to the dayIndex day
+    // day is a date, start is a datetime, use the split to compare
+    while (dayIndex < anchorDays.length && anchorDays[dayIndex].date !== anchorStart) {
+      // if not, move the dayIndex day to the day of the anchor
+      dayIndex++;
+    }
+
+    if (dayIndex >= anchorDays.length || anchorDays[dayIndex].date !== anchorStart) {
+      return {
+        ok: false,
+        error: {
+          code: "place_outside_trip",
+          field: `destinations[${anchor.index?.destination}].places[${anchor.index?.place}].fixed`,
+          message: ""
+        }
+      }
+    }
+
     anchorDays[dayIndex].blocks.push(anchor.block);
   }
 
