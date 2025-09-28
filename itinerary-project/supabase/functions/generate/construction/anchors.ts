@@ -12,6 +12,27 @@ export type Issue = {
   message: string;
 };
 
+type AnchorIndex =
+  | { destination: number; type: "accommodation" }
+  | { destination: number; type: "place"; place: number };
+
+type AnchorEntry = {
+  block: CheckInOutBlock | VisitBlock;
+  index: AnchorIndex;
+};
+
+const resolveField = (index: AnchorIndex): string =>
+  index.type === "place"
+    ? `destinations[${index.destination}].places[${index.place}].fixed`
+    : `destinations[${index.destination}].accommodation`;
+
+const resolveAt = (left?: AnchorIndex, right?: AnchorIndex): Issue["at"] | undefined => {
+  const at: Issue["at"] = {};
+  if (left?.type === "place") at.leftIndex = left.place;
+  if (right?.type === "place") at.rightIndex = right.place;
+  return Object.keys(at).length ? at : undefined;
+};
+
 /**
  * Inserts the anchors (checkin/checkout and fixed appointments) into an empty day scaffold
  * @param trip - the full trip details
@@ -24,19 +45,11 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
 
   const anchorDays = JSON.parse(JSON.stringify(days));
   let dayIndex = 0; // keep track of which day of the itinerary we are currently on
-  let pointer:
-    | {
-        block: CheckInOutBlock | VisitBlock;
-        index?: { destination: number; place: number };
-      }
-    | undefined; // keep track of the last block
+  let pointer: AnchorEntry | undefined; // keep track of the last block
 
   for (const [destinationIndex, destination] of sortedDestinations.entries()) {
     // create each anchor for the destination
-    const anchors: {
-      block: CheckInOutBlock | VisitBlock;
-      index?: { destination: number; place: number };
-    }[] = [];
+    const anchors: AnchorEntry[] = [];
 
     // create the checkin/checkout anchors, which is only IF the destination has an accomodation defined
     if (destination.accommodation !== undefined) {
@@ -65,8 +78,8 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
         end: calculateTimeOffset(startCheckOut, 30),
         locked: true,
       };
-      anchors.push({ block: checkInBlock });
-      anchors.push({ block: checkOutBlock });
+      anchors.push({ block: checkInBlock, index: { destination: destinationIndex, type: "accommodation" } });
+      anchors.push({ block: checkOutBlock, index: { destination: destinationIndex, type: "accommodation" } });
     }
 
     // create the fixed appointment blocks
@@ -86,7 +99,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
         };
         anchors.push({
           block: fixedPlaceBlock,
-          index: { destination: destinationIndex, place: placeindex },
+          index: { destination: destinationIndex, type: "place", place: placeindex },
         });
       }
     }
@@ -102,7 +115,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           ok: false,
           error: {
             code: "place_outside_trip",
-            field: `destinations[${anchor.index?.destination}].places[${anchor.index?.place}].fixed`,
+            field: resolveField(anchor.index),
             message: "a fixed appointment is outside of the dates of the destination",
           },
         };
@@ -120,7 +133,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           ok: false,
           error: {
             code: "place_outside_trip",
-            field: `destinations[${anchor.index?.destination}].places[${anchor.index?.place}].fixed`,
+            field: resolveField(anchor.index),
             message: "a fixed appointment is outside of the dates of the destination",
           },
         };
@@ -128,15 +141,13 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
 
       // check if the anchor overlaps with the previous anchor
       if (pointer !== undefined && anchorStart < pointer.block.end) {
-        const at: Issue["at"] = {};
-        if (pointer?.index?.place !== undefined) at.leftIndex = pointer.index.place;
-        if (anchor.index?.place !== undefined) at.rightIndex = anchor.index.place;
+        const at = resolveAt(pointer.index, anchor.index);
         return {
           ok: false,
           error: {
             code: "anchor_overlap",
-            field: `destinations[${destinationIndex}].places`,
-            ...(Object.keys(at).length ? { at } : {}),
+            field: resolveField(anchor.index),
+            ...(at ? { at } : {}),
             message: "two anchors (fixed appointment or checkin/checkout) have overlapping dates",
           },
         };
@@ -144,22 +155,20 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
 
       // check if the anchor has enough travel time with the previous anchor
       if (pointer !== undefined && calculateTimeOffset(anchorStart, -30) < pointer.block.end) {
-        const at: Issue["at"] = {};
-        if (pointer?.index?.place !== undefined) at.leftIndex = pointer.index.place;
-        if (anchor.index?.place !== undefined) at.rightIndex = anchor.index.place;
+        const at = resolveAt(pointer.index, anchor.index);
         return {
           ok: false,
           error: {
             code: "gap_too_small",
-            field: `destinations[${destinationIndex}].places`,
-            ...(Object.keys(at).length ? { at } : {}),
+            field: resolveField(anchor.index),
+            ...(at ? { at } : {}),
             message:
               "the gap between two anchors (fixed appointment or checkin/checkout) is too small to allow travel time",
           },
         };
       }
 
-      pointer = JSON.parse(JSON.stringify(anchor));
+      pointer = { block: anchor.block, index: anchor.index };
       anchorDays[dayIndex].blocks.push(anchor.block);
     }
   }
