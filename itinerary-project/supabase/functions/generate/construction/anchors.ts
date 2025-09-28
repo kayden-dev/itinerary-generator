@@ -1,4 +1,4 @@
-import { CheckInOutBlock, Day, VisitBlock } from "../utils/itinerary.ts";
+﻿import { CheckInOutBlock, Day, VisitBlock } from "../utils/itinerary.ts";
 import { Trip } from "../utils/trip.ts";
 import { calculateTimeOffset } from "./utils/blocks.ts";
 
@@ -135,7 +135,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           ok: false,
           error: {
             code: "anchor_overlap",
-            field: `destinations[${anchor.index?.destination}].places`,
+            field: `destinations[${destinationIndex}].places`,
             ...(Object.keys(at).length ? { at } : {}),
             message: "two anchors (fixed appointment or checkin/checkout) have overlapping dates",
           },
