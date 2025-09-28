@@ -6,8 +6,8 @@ export type Issue = {
   code: string;
   field: string;
   at?: {
-    leftIndex: number;
-    rightIndex: number;
+    leftIndex?: number;
+    rightIndex?: number;
   };
   message: string;
 };
@@ -24,6 +24,12 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
 
   const anchorDays = JSON.parse(JSON.stringify(days));
   let dayIndex = 0; // keep track of which day of the itinerary we are currently on
+  let pointer:
+    | {
+        block: CheckInOutBlock | VisitBlock;
+        index?: { destination: number; place: number };
+      }
+    | undefined; // keep track of the last block
 
   for (const [destinationIndex, destination] of sortedDestinations.entries()) {
     // create each anchor for the destination
@@ -87,10 +93,11 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
     const sortedAnchors = [...anchors].sort((a, b) => a.block.start.localeCompare(b.block.start));
 
     for (const anchor of sortedAnchors) {
-      const anchorStart = anchor.block.start.split("T")[0];
-      const anchorEnd = anchor.block.end.split("T")[0];
+      const anchorStart = anchor.block.start;
+      const anchorEnd = anchor.block.end;
 
-      if (anchorStart < destination.dates.start || anchorEnd > destination.dates.end) {
+      // check if the anchor lays outside of the dates of the destination
+      if (anchorStart.split("T")[0] < destination.dates.start || anchorEnd.split("T")[0] > destination.dates.end) {
         return {
           ok: false,
           error: {
@@ -100,14 +107,15 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           },
         };
       }
+
       // check that the day of anchor is equal to the dayIndex day
       // day is a date, start is a datetime, use the split to compare
-      while (dayIndex < anchorDays.length && anchorDays[dayIndex].date !== anchorStart) {
+      while (dayIndex < anchorDays.length && anchorDays[dayIndex].date !== anchorStart.split("T")[0]) {
         // if not, move the dayIndex day to the day of the anchor
         dayIndex++;
       }
 
-      if (dayIndex >= anchorDays.length || anchorDays[dayIndex].date !== anchorStart) {
+      if (dayIndex >= anchorDays.length || anchorDays[dayIndex].date !== anchorStart.split("T")[0]) {
         return {
           ok: false,
           error: {
@@ -117,6 +125,41 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           },
         };
       }
+
+      // check if the anchor overlaps with the previous anchor
+      if (pointer !== undefined && anchorStart < pointer.block.end) {
+        const at: Issue["at"] = {};
+        if (pointer?.index?.place !== undefined) at.leftIndex = pointer.index.place;
+        if (anchor.index?.place !== undefined) at.rightIndex = anchor.index.place;
+        return {
+          ok: false,
+          error: {
+            code: "anchor_overlap",
+            field: `destinations[${anchor.index?.destination}].places`,
+            ...(Object.keys(at).length ? { at } : {}),
+            message: "two anchors (fixed appointment or checkin/checkout) have overlapping dates",
+          },
+        };
+      }
+
+      // check if the anchor has enough travel time with the previous anchor
+      if (pointer !== undefined && calculateTimeOffset(anchorStart, -30) < pointer.block.end) {
+        const at: Issue["at"] = {};
+        if (pointer?.index?.place !== undefined) at.leftIndex = pointer.index.place;
+        if (anchor.index?.place !== undefined) at.rightIndex = anchor.index.place;
+        return {
+          ok: false,
+          error: {
+            code: "gap_too_small",
+            field: `destinations[${destinationIndex}].places`,
+            ...(Object.keys(at).length ? { at } : {}),
+            message:
+              "the gap between two anchors (fixed appointment or checkin/checkout) is too small to allow travel time",
+          },
+        };
+      }
+
+      pointer = JSON.parse(JSON.stringify(anchor));
       anchorDays[dayIndex].blocks.push(anchor.block);
     }
   }
