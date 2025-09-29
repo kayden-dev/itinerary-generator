@@ -1,5 +1,30 @@
 import { z } from "zod";
 
+// NOTE: Points, Period and Opening Hours are the schemas provided by Google Places API with some fields omitted
+// OMITTED FIELDS: Secondary Hours Type, Special Days, Next Open Time, Next Close Time, Open Now
+
+export const PointSchema = z.object({
+  date: z.object({
+    year: z.int().gte(0).lte(9999),
+    month: z.int().gte(0).lte(12),
+    date: z.int().gte(0).lte(31),
+  }),
+  truncated: z.boolean(),
+  day: z.int().gte(0).lte(6),
+  hour: z.int().gte(0).lte(23),
+  minute: z.int().gte(0).lte(59),
+});
+
+export const PeriodSchema = z.object({
+  open: PointSchema,
+  close: PointSchema,
+});
+
+export const OpeningHoursSchema = z.object({
+  periods: z.array(PeriodSchema),
+  weekdayDescriptions: z.array(z.string()),
+});
+
 export const PlaceSchema = z
   .object({
     id: z.string(),
@@ -15,6 +40,7 @@ export const PlaceSchema = z
         end: z.iso.datetime({ local: true }).optional(),
       })
       .optional(),
+    openingHours: OpeningHoursSchema.optional(),
   })
   .refine(
     (data) => {
