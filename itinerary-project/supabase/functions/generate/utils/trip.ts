@@ -41,6 +41,7 @@ export const PlaceSchema = z
       })
       .optional(),
     openingHours: OpeningHoursSchema.optional(),
+    type: z.string().optional(),
   })
   .refine(
     (data) => {

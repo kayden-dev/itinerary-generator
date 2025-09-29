@@ -1,6 +1,6 @@
 ﻿import { CheckInOutBlock, Day, VisitBlock } from "../utils/itinerary.ts";
 import { Trip } from "../utils/trip.ts";
-import { calculateTimeOffset } from "./utils/blocks.ts";
+import { calculateDefaultVisitTime, calculateTimeOffset } from "./utils/blocks.ts";
 
 export type Issue = {
   code: string;
@@ -86,6 +86,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
     for (const [placeindex, place] of destination.places.entries()) {
       // for it to be a fixed place, it must have a fixed defined
       if (place.fixed !== undefined) {
+        const defaultVisitTime = calculateDefaultVisitTime(place.type);
         // deno-lint-ignore no-unused-vars
         const placeRef = (({ fixed, ...rest }) => rest)(place);
         const fixedPlaceBlock: VisitBlock = {
@@ -93,7 +94,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
           placeRef,
           id: crypto.randomUUID(),
           start: place.fixed.start,
-          end: place.fixed.end ?? calculateTimeOffset(place.fixed.start, 60), // TODO: implement proper time estimate function
+          end: place.fixed.end ?? calculateTimeOffset(place.fixed.start, defaultVisitTime),
           locked: true,
           source: "fixed",
         };

@@ -15,8 +15,9 @@
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "lat": 34.0522, "lng": -118.2437 }
-          }
+            "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          },
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -42,7 +43,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -62,7 +63,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -87,9 +88,10 @@
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "lat": 34.0522, "lng": -118.2437 },
+            "location": { "latitude": 34.0522, "longitude": -118.2437 },
             "checkOutTime": "11:00:00"
-          }
+          },
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -115,7 +117,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -135,7 +137,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -160,9 +162,10 @@
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "lat": 34.0522, "lng": -118.2437 },
+            "location": { "latitude": 34.0522, "longitude": -118.2437 },
             "checkInTime": "16:00:00"
-          }
+          },
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -188,7 +191,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -208,7 +211,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 34.0522, "lng": -118.2437 }
+                "location": { "latitude": 34.0522, "longitude": -118.2437 }
               }
             }
           ]
@@ -234,14 +237,15 @@
               "name": "Test Place",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -268,8 +272,8 @@
                 "name": "Test Place",
                 "address": "321 street street",
                 "location": {
-                  "lat": -23.847392,
-                  "lng": 113.572891
+                  "latitude": -23.847392,
+                  "longitude": 113.572891
                 }
               },
               "source": "fixed"
@@ -299,15 +303,16 @@
               "name": "Test Place",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
                 "end": "2025-10-01T07:00:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -338,14 +343,15 @@
               "name": "Test Place",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-04T08:00:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -376,11 +382,12 @@
               "name": "Test Place",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -416,8 +423,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -429,15 +436,16 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T10:30:00",
                 "end": "2025-10-01T12:30:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -464,8 +472,8 @@
                 "name": "Place A",
                 "address": "321 street street",
                 "location": {
-                  "lat": -23.847392,
-                  "lng": 113.572891
+                  "latitude": -23.847392,
+                  "longitude": 113.572891
                 }
               },
               "source": "fixed"
@@ -481,8 +489,8 @@
                 "name": "Place B",
                 "address": "123 street street",
                 "location": {
-                  "lat": -30.844392,
-                  "lng": 112.572891
+                  "latitude": -30.844392,
+                  "longitude": 112.572891
                 }
               },
               "source": "fixed"
@@ -512,8 +520,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -525,15 +533,16 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T10:25:00",
                 "end": "2025-10-01T12:15:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -565,8 +574,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -578,15 +587,16 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T10:35:00",
                 "end": "2025-10-01T12:30:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -613,8 +623,8 @@
                 "name": "Place A",
                 "address": "321 street street",
                 "location": {
-                  "lat": -23.847392,
-                  "lng": 113.572891
+                  "latitude": -23.847392,
+                  "longitude": 113.572891
                 }
               },
               "source": "fixed"
@@ -630,8 +640,8 @@
                 "name": "Place B",
                 "address": "123 street street",
                 "location": {
-                  "lat": -30.844392,
-                  "lng": 112.572891
+                  "latitude": -30.844392,
+                  "longitude": 112.572891
                 }
               },
               "source": "fixed"
@@ -661,8 +671,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -674,15 +684,16 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T10:00:00",
                 "end": "2025-10-01T12:15:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -714,8 +725,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -727,15 +738,16 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T09:00:00",
                 "end": "2025-10-01T11:00:00"
               }
             }
-          ]
+          ],
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -767,8 +779,8 @@
               "name": "Place A",
               "address": "321 street street",
               "location": {
-                "lat": -23.847392,
-                "lng": 113.572891
+                "latitude": -23.847392,
+                "longitude": 113.572891
               },
               "fixed": {
                 "start": "2025-10-01T08:00:00",
@@ -780,8 +792,8 @@
               "name": "Place B",
               "address": "123 street street",
               "location": {
-                "lat": -30.844392,
-                "lng": 112.572891
+                "latitude": -30.844392,
+                "longitude": 112.572891
               },
               "fixed": {
                 "start": "2025-10-01T10:30:00",
@@ -793,10 +805,11 @@
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "lat": 35.0522, "lng": -118.2437 },
+            "location": { "latitude": 35.0522, "longitude": -118.2437 },
             "checkInTime": "07:00:00",
             "checkOutTime": "13:00:00"
-          }
+          },
+          "location": { "latitude": 34.0522, "longitude": -118.2437 }
         }
       ]
     },
@@ -822,7 +835,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 35.0522, "lng": -118.2437 }
+                "location": { "latitude": 35.0522, "longitude": -118.2437 }
               }
             },
             {
@@ -836,8 +849,8 @@
                 "name": "Place A",
                 "address": "321 street street",
                 "location": {
-                  "lat": -23.847392,
-                  "lng": 113.572891
+                  "latitude": -23.847392,
+                  "longitude": 113.572891
                 }
               },
               "source": "fixed"
@@ -853,8 +866,8 @@
                 "name": "Place B",
                 "address": "123 street street",
                 "location": {
-                  "lat": -30.844392,
-                  "lng": 112.572891
+                  "latitude": -30.844392,
+                  "longitude": 112.572891
                 }
               },
               "source": "fixed"
@@ -869,7 +882,7 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "lat": 35.0522, "lng": -118.2437 }
+                "location": { "latitude": 35.0522, "longitude": -118.2437 }
               }
             }
           ]
