@@ -31,8 +31,8 @@ export const PlaceSchema = z
     name: z.string(),
     address: z.string(),
     location: z.object({
-      lat: z.number(),
-      lng: z.number(),
+      latitude: z.number(),
+      longitude: z.number(),
     }),
     fixed: z
       .object({
@@ -60,8 +60,8 @@ export const AccommodationSchema = z.object({
   name: z.string(),
   address: z.string(),
   location: z.object({
-    lat: z.number(),
-    lng: z.number(),
+    latitude: z.number(),
+    longitude: z.number(),
   }),
   checkInTime: z.iso.time().optional(),
   checkOutTime: z.iso.time().optional(),
@@ -74,6 +74,10 @@ export const DestinationSchema = z
     dates: z.object({
       start: z.iso.date(),
       end: z.iso.date(),
+    }),
+    location: z.object({
+      latitude: z.number(),
+      longitude: z.number(),
     }),
     accommodation: AccommodationSchema.optional(),
     places: z.array(PlaceSchema),
