@@ -1,6 +1,6 @@
 ﻿import { CheckInOutBlock, Day, VisitBlock } from "../utils/itinerary.ts";
 import { Trip } from "../utils/trip.ts";
-import { calculateDefaultVisitTime, calculateTimeOffset } from "./utils/blocks.ts";
+import { calculateDefaultVisitTime, calculateMinTransitTime, calculateTimeOffset } from "./utils/blocks.ts";
 
 export type Issue = {
   code: string;
@@ -155,20 +155,22 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
       }
 
       // check if the anchor has enough travel time with the previous anchor
-      if (pointer !== undefined && calculateTimeOffset(anchorStart, -30) < pointer.block.end) {
-        const at = resolveAt(pointer.index, anchor.index);
-        return {
-          ok: false,
-          error: {
-            code: "gap_too_small",
-            field: resolveField(anchor.index),
-            ...(at ? { at } : {}),
-            message:
-              "the gap between two anchors (fixed appointment or checkin/checkout) is too small to allow travel time",
-          },
-        };
+      if (pointer !== undefined) {
+        const minTransitTime = calculateMinTransitTime(pointer.block.id, anchor.block.id);
+        if (calculateTimeOffset(anchorStart, -minTransitTime) < pointer.block.end) {
+          const at = resolveAt(pointer.index, anchor.index);
+          return {
+            ok: false,
+            error: {
+              code: "gap_too_small",
+              field: resolveField(anchor.index),
+              ...(at ? { at } : {}),
+              message:
+                "the gap between two anchors (fixed appointment or checkin/checkout) is too small to allow travel time",
+            },
+          };
+        }
       }
-
       pointer = { block: anchor.block, index: anchor.index };
       anchorDays[dayIndex].blocks.push(anchor.block);
     }

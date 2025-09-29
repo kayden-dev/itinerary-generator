@@ -23,3 +23,13 @@ export function calculateTimeOffset(start: BaseBlock["start"], offset: number): 
 export function calculateDefaultVisitTime(type?: string): number {
   return 60; // TODO: implement this function
 }
+
+/**
+ * Calculates the minimal time that should be allocated for travel time between place A and B
+ * @param placeA - The placeid (Google Places) of the first place
+ * @param placeB - The placeid (Google Places) of the second place
+ * @returns A time in minutes of the minimum transit time
+ */
+export function calculateMinTransitTime(placeA: string, placeB: string): number {
+  return 30; //TODO: implement this function
+}
