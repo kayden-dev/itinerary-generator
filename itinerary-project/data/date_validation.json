@@ -1,0 +1,288 @@
+[
+  {
+    "name": "DV-01",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-01"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 200
+    }
+  },
+  {
+    "name": "DV-02",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-02"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-02"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 200
+    }
+  },
+  {
+    "name": "DV-03",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-09-30"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-09-30"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "field": "dates",
+          "code": "end_before_start"
+        }
+      ]
+    }
+  },
+  {
+    "name": "DV-04",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-10"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-10"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 200
+    }
+  },
+  {
+    "name": "DV-05",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-09-23"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-09-23"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "field": "dates",
+          "code": "end_before_start"
+        }
+      ]
+    }
+  },
+  {
+    "name": "DV-06",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025/10/01",
+        "end": "2025/10/01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025/10/01",
+            "end": "2025/10/01"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "field": "dates.start",
+          "code": "invalid_format"
+        },
+        {
+          "field": "dates.end",
+          "code": "invalid_format"
+        }
+      ]
+    }
+  },
+  {
+    "name": "DV-07",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "",
+        "end": ""
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "",
+            "end": ""
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "field": "dates.start",
+          "code": "invalid_format"
+        },
+        {
+          "field": "dates.end",
+          "code": "invalid_format"
+        }
+      ]
+    }
+  },
+  {
+    "name": "DV-08",
+    "body": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-02-30",
+        "end": "2025-03-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "City A",
+          "dates": {
+            "start": "2025-02-30",
+            "end": "2025-03-01"
+          },
+          "places": [],
+          "location": {
+            "latitude": 0,
+            "longitude": 0
+          }
+        }
+      ]
+    },
+    "expected": {
+      "expectedStatus": 400,
+      "errors": [
+        {
+          "field": "dates.start",
+          "code": "invalid_format"
+        }
+      ]
+    }
+  }
+]
