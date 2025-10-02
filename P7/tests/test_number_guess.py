@@ -5,8 +5,13 @@ from src.number_guess import *
 class TestNumberGuess(unittest.TestCase):
 
   @mock.patch('builtins.input')
-  def test_get_guess(self,inp):
+  def test_get_guess_invalid(self,inp):
     inp.side_effect  = ['101','50']
+    self.assertEqual(50, get_guess())
+
+  @mock.patch('builtins.input')
+  def test_get_guess_valid(self,inp):
+    inp.return_value  = '50'
     self.assertEqual(50, get_guess())
 
   @mock.patch('random.randint')
