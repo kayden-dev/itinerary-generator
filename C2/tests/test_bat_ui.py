@@ -5,16 +5,7 @@ from src import bat_ui
 from src.borrowable_item import BorrowableItem
 from src.patron import Patron
 from src.loan import Loan
-
-class DM:
-    def __init__(self):
-        self._catalogue_data = []
-        self._patron_data = []
-    def save_patrons(self): pass
-    def save_catalogue(self): pass
-    def register_patron(self, name, age):
-        p = Patron(); p.set_new_patron_data(len(self._patron_data)+1, name, age)
-        self._patron_data.append(p)
+from src import data_mgmt
 
 def item(i, n, t, y=2020, own=2, on=0):
     it = BorrowableItem()
@@ -23,7 +14,7 @@ def item(i, n, t, y=2020, own=2, on=0):
 
 class TestBatUIMock(unittest.TestCase):
     def setUp(self):
-        self.dm = DM()
+        self.dm = data_mgmt.DataManager()
         self.ui = bat_ui.BatUI(self.dm)
 
     @patch("builtins.input")
