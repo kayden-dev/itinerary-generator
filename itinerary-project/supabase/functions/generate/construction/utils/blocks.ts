@@ -1,3 +1,5 @@
+import { Temporal } from "@js-temporal/polyfill";
+
 import { BaseBlock } from "../../utils/itinerary.ts";
 
 /**
@@ -5,14 +7,11 @@ import { BaseBlock } from "../../utils/itinerary.ts";
  *
  * @param start - The start datetime in local time
  * @param offset - The offset (in minutes) from the start datetime
- * @returns The end datetiome in local time
+ * @returns The end datetime in local time
  */
 export function calculateTimeOffset(start: BaseBlock["start"], offset: number): BaseBlock["end"] {
-  const endObject = new Date(start);
-  const offsetMilliseconds = offset * 60 * 1000; // convert the time in minutes to milliseconds
-  endObject.setTime(endObject.getTime() + offsetMilliseconds);
-  const end = endObject.toISOString().split(".")[0]; // remove the z from the string and the milliseconds
-  return end;
+  const dateTime = Temporal.PlainDateTime.from(start);
+  return dateTime.add({ minutes: offset }).toString();
 }
 
 /**
