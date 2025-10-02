@@ -3,7 +3,7 @@ import { buildDays } from "./construction/days.ts";
 import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
-Deno.serve(async (req) => {
+export async function handleGenerate(req: Request): Promise<Response> {
   const parsed = await parseJsonWith(req, TripSchema);
 
   if (!parsed.ok) {
@@ -48,4 +48,6 @@ Deno.serve(async (req) => {
   };
 
   return new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json" } });
-});
+}
+
+Deno.serve((req) => handleGenerate(req));
