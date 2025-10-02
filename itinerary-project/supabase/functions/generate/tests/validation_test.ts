@@ -28,6 +28,7 @@ for (const c of [...required_input_cases, ...date_input_cases]) {
     } else {
       assertEquals(400, c.expected.expectedStatus);
       assertArrayIncludes(
+        // deno-lint-ignore no-unused-vars
         parsed.errors.map(({ message, ...rest }) => rest),
         c.expected.errors
       );

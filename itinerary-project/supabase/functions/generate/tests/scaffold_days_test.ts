@@ -1,17 +1,19 @@
 import { assert, assertEquals } from "@std/assert";
 
-import { buildDays } from "../construction/days.ts";
+import { buildDays, Issue } from "../construction/days.ts";
+import { Destination, Trip } from "../utils/trip.ts";
+import { Itinerary } from "../utils/itinerary.ts";
 
 type Fixture = {
   name: string;
   body: {
-    destinations: unknown[];
-    dates: Record<string, string>;
+    destinations: Trip["destinations"];
+    dates: Trip["dates"];
   };
   expected: {
     expectedStatus: number;
-    days?: unknown[];
-    errors?: unknown[];
+    days?: Itinerary["days"];
+    errors?: Omit<Issue, "message">[];
   };
 };
 
@@ -19,48 +21,20 @@ const cases: Fixture[] = JSON.parse(
   await Deno.readTextFile(new URL("../../../../data/scaffold_days.json", import.meta.url))
 );
 
-function deepAssertEquals(actual: unknown, expected: unknown, path = "value"): void {
-  if (expected === "<insert>") {
-    return;
-  }
-
-  if (Array.isArray(expected)) {
-    assert(Array.isArray(actual), `${path} should be an array`);
-    assertEquals((actual as unknown[]).length, expected.length, `${path} length mismatch`);
-    expected.forEach((item, index) => {
-      deepAssertEquals((actual as unknown[])[index], item, `${path}[${index}]`);
-    });
-    return;
-  }
-
-  if (expected && typeof expected === "object") {
-    assert(actual && typeof actual === "object", `${path} should be an object`);
-    for (const key of Object.keys(expected as Record<string, unknown>)) {
-      deepAssertEquals(
-        (actual as Record<string, unknown>)[key],
-        (expected as Record<string, unknown>)[key],
-        path ? `${path}.${key}` : key
-      );
-    }
-    return;
-  }
-
-  assertEquals(actual, expected, `${path} mismatch`);
-}
-
 for (const c of cases) {
   Deno.test(`Running: ${c.name}`, () => {
-    const result = buildDays(c.body.destinations as never[], c.body.dates as never);
+    const result = buildDays(c.body.destinations as Destination[], c.body.dates as Trip["dates"]);
 
     if (result.ok) {
       assertEquals(c.expected.expectedStatus, 200, `${c.name} status mismatch`);
       assert(c.expected.days, `${c.name} missing expected day fixtures`);
-      deepAssertEquals(result.data, c.expected.days, `${c.name} days`);
+      assertEquals(result.data, c.expected.days, `${c.name} days`);
     } else {
       assertEquals(c.expected.expectedStatus, 400, `${c.name} status mismatch`);
       const expectedError = c.expected.errors?.[0];
       assert(expectedError, `${c.name} missing expected error fixture`);
-      deepAssertEquals(result.error, expectedError, `${c.name} error`);
+      // deno-lint-ignore no-unused-vars
+      assertEquals((({ message, ...rest }) => rest)(result.error), expectedError, `${c.name} error`);
     }
   });
 }
