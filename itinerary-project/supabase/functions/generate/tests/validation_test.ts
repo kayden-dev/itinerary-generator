@@ -1,14 +1,18 @@
 import { assertEquals, assertArrayIncludes } from "@std/assert";
-import { parseJsonWith } from "../utils/validate.ts";
-import { TripSchema } from "../utils/trip.ts";
+import { Issue, parseJsonWith } from "../utils/validate.ts";
+import { Trip, TripSchema } from "../utils/trip.ts";
+
+type Fixture =
+  | { name: string; body: Trip; expected: { expectedStatus: 200; errors?: never } }
+  | { name: string; body: unknown; expected: { expectedStatus: 400; errors: Omit<Issue, "message">[] } };
 
 // test cases from the input_validaton suite, which tests for combinations of required fields missing
-const required_input_cases = JSON.parse(
+const required_input_cases: Fixture[] = JSON.parse(
   await Deno.readTextFile(new URL("../../../../data/input_validation.json", import.meta.url))
 );
 
 // test cases from the date_validation suite, which tests for different date formats
-const date_input_cases = JSON.parse(
+const date_input_cases: Fixture[] = JSON.parse(
   await Deno.readTextFile(new URL("../../../../data/date_validation.json", import.meta.url))
 );
 
@@ -30,7 +34,7 @@ for (const c of [...required_input_cases, ...date_input_cases]) {
       assertArrayIncludes(
         // deno-lint-ignore no-unused-vars
         parsed.errors.map(({ message, ...rest }) => rest),
-        c.expected.errors
+        c.expected.errors!
       );
     }
   });
