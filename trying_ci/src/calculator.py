@@ -1,5 +1,6 @@
 """Module is used for the calculator class and its operations"""
 
+
 class Calculator():
     """Class for performing calculator operations"""
 
