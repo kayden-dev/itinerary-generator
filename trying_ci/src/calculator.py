@@ -1,4 +1,6 @@
-class Calculator(object):
+"""Module is used for the calculator class and its operations"""
+
+class Calculator():
     """Class for performing calculator operations"""
 
     def __init__(self):
@@ -30,5 +32,5 @@ class Calculator(object):
 
     def power(self, num):
         """Raises the calculator to a power"""
-        self._answer ** num
+        self._answer **= num
         return self
