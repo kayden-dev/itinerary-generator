@@ -2,7 +2,7 @@ before_script:
   - /usr/local/bin/python3.12 -m venv venv
   - source venv/bin/activate
   - /usr/local/bin/pip3 install -r requirements.txt
-  - cd ./trying_ci
+  - cd ./test_your_knowledge_topic_6
 
 lint-src:
   tags:
