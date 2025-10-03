@@ -1,6 +1,15 @@
+"""Module used to test the user input methods"""
+
 import unittest
 from unittest import mock
-from src.user_input import read_string, read_float,read_float_range,read_integer,read_integer_range
+from src.user_input import (
+  read_string,
+  read_float,
+  read_float_range,
+  read_integer,
+  read_integer_range
+)
+
 
 class TestUserInput(unittest.TestCase):
     """Class used for testing the user input methods"""
