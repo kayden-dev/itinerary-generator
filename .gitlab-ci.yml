@@ -1,0 +1,5 @@
+test-job:
+  tags:
+    - fit2107
+  script:
+    - echo "This job tests something"
