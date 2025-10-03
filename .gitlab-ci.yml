@@ -1,6 +1,35 @@
-test-job:
+before_script:
+  - /usr/local/bin/python3.12 -m venv venv
+  - source venv/bin/activate
+  - /usr/local/bin/pip3 install -r requirements.txt
+  - cd ./trying_ci
+
+lint-src:
   tags:
     - fit2107
   script:
-    - cd ./trying_ci
+    - /usr/local/bin/python3.12 -m pylint src
+
+lint-tests:
+  tags:
+    - fit2107
+  script:
+    - /usr/local/bin/python3.12 -m pylint tests
+
+style-src:
+  tags:
+    - fit2107
+  script:
+    - /usr/local/bin/python3.12 -m pycodestyle src
+
+style-tests:
+  tags:
+    - fit2107
+  script:
+    - /usr/local/bin/python3.12 -m pycodestyle tests
+
+test:
+  tags:
+    - fit2107
+  script:
     - /usr/local/bin/python3.12 -m unittest -v
