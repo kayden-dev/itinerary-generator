@@ -187,6 +187,10 @@ class BatUI():
                 print(l)
                 loaned_ids.append(l._item._id)
 
+            if len(loaned_ids) == 0:
+                print("No active loans")
+                return self._main_menu
+            
             choice = user_input.read_integer("Enter the ID of the item to return: ")
             while choice not in loaned_ids:
                 print(f"That is not an ID of an item currently loaned by {patron._name}")

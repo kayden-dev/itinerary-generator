@@ -25,3 +25,11 @@ class TestBatBugs(unittest.TestCase):
         updated_item = search.find_item_by_id(item_id, self.dm._catalogue_data)
         self.assertEqual("MAIN MENU", self.ui.get_current_screen())
         self.assertEqual(initial_on_loan - 1, updated_item._on_loan)
+
+    @mock.patch('builtins.input')
+    def test_return_prompt(self,inp):
+        """Verify that if the user has no active loans, the screen should return to menu"""
+        inp.side_effect = ["2","Jane Smith","23"]
+        self.ui.run_current_screen()
+        self.ui.run_current_screen()
+        self.assertEqual("MAIN MENU",self.ui.get_current_screen())
