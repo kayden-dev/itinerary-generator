@@ -199,7 +199,7 @@ def process_return(patron, item_id):
             item_id (int): the ID of the item being returned.
     '''
     to_return = patron.find_loan(item_id)
-    to_return._item._on_loan - 1
+    to_return._item._on_loan -= 1
     patron._loans.remove(to_return)
 
 
