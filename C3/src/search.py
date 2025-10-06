@@ -20,7 +20,7 @@ def find_patron_by_name(name, patron_data):
     found = []
 
     for patron in patron_data:
-        if patron._name == name:
+        if patron._name.lower() == name.lower():
             found.append(patron)
 
     return found

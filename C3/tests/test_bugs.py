@@ -33,3 +33,8 @@ class TestBatBugs(unittest.TestCase):
         self.ui.run_current_screen()
         self.ui.run_current_screen()
         self.assertEqual("MAIN MENU",self.ui.get_current_screen())
+        
+    def test_search_by_name_case_insensitive(self):
+        """Expect name searches to work regardless of letter casing."""
+        patron = search.find_patron_by_name("Jane Smith",self.dm._patron_data)
+        self.assertEqual(patron, search.find_patron_by_name("jane smith",self.dm._patron_data))
