@@ -27,7 +27,13 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name":"Test Trip",
+      "dates":{
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      }
+    }
   },
   {
     "name": "IV-01",
