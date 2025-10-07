@@ -3,30 +3,47 @@
     "name": "AC-01",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [],
           "accommodation": {
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "latitude": 34.0522, "longitude": -118.2437 }
+            "location": {
+              "latitude": 34.0522,
+              "longitude": -118.2437
+            }
           },
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -43,12 +60,19 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
         {
           "date": "2025-10-03",
           "destinationId": "d1",
@@ -63,44 +87,68 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-02",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [],
           "accommodation": {
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "latitude": 34.0522, "longitude": -118.2437 },
+            "location": {
+              "latitude": 34.0522,
+              "longitude": -118.2437
+            },
             "checkOutTime": "11:00:00"
           },
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -117,12 +165,19 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
         {
           "date": "2025-10-03",
           "destinationId": "d1",
@@ -137,44 +192,68 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-03",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [],
           "accommodation": {
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "latitude": 34.0522, "longitude": -118.2437 },
+            "location": {
+              "latitude": 34.0522,
+              "longitude": -118.2437
+            },
             "checkInTime": "16:00:00"
           },
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -191,12 +270,19 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
         {
           "date": "2025-10-03",
           "destinationId": "d1",
@@ -211,26 +297,41 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 34.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 34.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-04",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -245,16 +346,22 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -280,23 +387,43 @@
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
-        { "date": "2025-10-03", "destinationId": "d1", "blocks": [] }
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
+        {
+          "date": "2025-10-03",
+          "destinationId": "d1",
+          "blocks": []
+        }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-05",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -311,12 +438,15 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "place_outside_trip",
@@ -329,13 +459,21 @@
     "name": "AC-06",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -347,36 +485,66 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
-        { "date": "2025-10-01", "destinationId": "d1", "blocks": [] },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
-        { "date": "2025-10-03", "destinationId": "d1", "blocks": [] }
+        {
+          "date": "2025-10-01",
+          "destinationId": "d1",
+          "blocks": []
+        },
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
+        {
+          "date": "2025-10-03",
+          "destinationId": "d1",
+          "blocks": []
+        }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-07",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -405,16 +573,22 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -457,23 +631,43 @@
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
-        { "date": "2025-10-03", "destinationId": "d1", "blocks": [] }
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
+        {
+          "date": "2025-10-03",
+          "destinationId": "d1",
+          "blocks": []
+        }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-08",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -502,17 +696,23 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "gap_too_small",
           "field": "destinations[0].places[1].fixed",
-          "at": { "leftIndex": 0, "rightIndex": 1 }
+          "at": {
+            "leftIndex": 0,
+            "rightIndex": 1
+          }
         }
       ]
     }
@@ -521,13 +721,21 @@
     "name": "AC-09",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -556,16 +764,22 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -608,23 +822,43 @@
             }
           ]
         },
-        { "date": "2025-10-02", "destinationId": "d1", "blocks": [] },
-        { "date": "2025-10-03", "destinationId": "d1", "blocks": [] }
+        {
+          "date": "2025-10-02",
+          "destinationId": "d1",
+          "blocks": []
+        },
+        {
+          "date": "2025-10-03",
+          "destinationId": "d1",
+          "blocks": []
+        }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   },
   {
     "name": "AC-10",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -653,17 +887,23 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "gap_too_small",
           "field": "destinations[0].places[1].fixed",
-          "at": { "leftIndex": 0, "rightIndex": 1 }
+          "at": {
+            "leftIndex": 0,
+            "rightIndex": 1
+          }
         }
       ]
     }
@@ -672,13 +912,21 @@
     "name": "AC-11",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-03" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-03" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-03"
+          },
           "places": [
             {
               "id": "p1",
@@ -707,17 +955,23 @@
               }
             }
           ],
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "anchor_overlap",
           "field": "destinations[0].places[1].fixed",
-          "at": { "leftIndex": 0, "rightIndex": 1 }
+          "at": {
+            "leftIndex": 0,
+            "rightIndex": 1
+          }
         }
       ]
     }
@@ -726,13 +980,21 @@
     "name": "AC-12",
     "body": {
       "name": "Test Trip",
-      "dates": { "start": "2025-10-01", "end": "2025-10-01" },
-      "preferences": { "pace": "Balanced" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
           "name": "City A",
-          "dates": { "start": "2025-10-01", "end": "2025-10-01" },
+          "dates": {
+            "start": "2025-10-01",
+            "end": "2025-10-01"
+          },
           "places": [
             {
               "id": "p1",
@@ -765,20 +1027,29 @@
             "id": "a1",
             "name": "Test Accomodation",
             "address": "123 street street",
-            "location": { "latitude": 35.0522, "longitude": -118.2437 },
+            "location": {
+              "latitude": 35.0522,
+              "longitude": -118.2437
+            },
             "checkInTime": "07:00:00",
             "checkOutTime": "13:00:00"
           },
-          "location": { "latitude": 34.0522, "longitude": -118.2437 }
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ]
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "id": "<insert>",
       "name": "Test Trip",
       "timezone": "<insert>",
-      "dates": { "start": "2025-10-01", "end": "2025-10-01" },
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-01"
+      },
       "unscheduled": [],
       "days": [
         {
@@ -795,7 +1066,10 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 35.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 35.0522,
+                  "longitude": -118.2437
+                }
               }
             },
             {
@@ -842,13 +1116,20 @@
                 "id": "a1",
                 "name": "Test Accomodation",
                 "address": "123 street street",
-                "location": { "latitude": 35.0522, "longitude": -118.2437 }
+                "location": {
+                  "latitude": 35.0522,
+                  "longitude": -118.2437
+                }
               }
             }
           ]
         }
       ],
-      "meta": { "generatedBy": "rule-engine", "version": "<insert>", "createdAt": "<insert>" }
+      "meta": {
+        "generatedBy": "rule-engine",
+        "version": "<insert>",
+        "createdAt": "<insert>"
+      }
     }
   }
 ]

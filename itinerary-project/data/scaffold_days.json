@@ -18,8 +18,8 @@
         "end": "2025-10-03"
       }
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "days": [
         {
           "date": "2025-10-01",
@@ -58,8 +58,8 @@
         "end": "2025-10-03"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "city_outside_trip",
@@ -87,8 +87,8 @@
         "end": "2025-10-03"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "city_outside_trip",
@@ -125,8 +125,8 @@
         "end": "2025-10-04"
       }
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "days": [
         {
           "date": "2025-10-01",
@@ -179,8 +179,8 @@
         "end": "2025-10-04"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "overlap_between_cities",
@@ -221,8 +221,8 @@
         "end": "2025-10-05"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "gap_between_cities",
@@ -263,8 +263,8 @@
         "end": "2025-10-04"
       }
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "days": [
         {
           "date": "2025-10-01",
@@ -317,8 +317,8 @@
         "end": "2025-10-04"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "duplicate_destination_id",
@@ -346,8 +346,8 @@
         "end": "2025-10-01"
       }
     },
+    "expectedStatus": 200,
     "expected": {
-      "expectedStatus": 200,
       "days": [
         {
           "date": "2025-10-01",
@@ -385,8 +385,8 @@
         "end": "2025-10-04"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "overlap_between_cities",
@@ -427,8 +427,8 @@
         "end": "2025-10-06"
       }
     },
+    "expectedStatus": 400,
     "expected": {
-      "expectedStatus": 400,
       "errors": [
         {
           "code": "gap_between_cities",
