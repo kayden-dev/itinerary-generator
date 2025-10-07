@@ -27,7 +27,13 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-01"
+      }
+    }
   },
   {
     "name": "DV-02",
@@ -57,7 +63,13 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-02"
+      }
+    }
   },
   {
     "name": "DV-03",
@@ -124,7 +136,13 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-10"
+      }
+    }
   },
   {
     "name": "DV-05",
