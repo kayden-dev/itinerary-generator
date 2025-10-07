@@ -2,6 +2,10 @@
   {
     "name": "SD-01",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -10,7 +14,11 @@
             "start": "2025-10-01",
             "end": "2025-10-03"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -20,6 +28,11 @@
     },
     "expectedStatus": 200,
     "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-03"
+      },
       "days": [
         {
           "date": "2025-10-01",
@@ -42,6 +55,10 @@
   {
     "name": "SD-02",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -50,7 +67,11 @@
             "start": "2025-09-30",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -71,6 +92,10 @@
   {
     "name": "SD-03",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -79,7 +104,11 @@
             "start": "2025-10-02",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -100,6 +129,10 @@
   {
     "name": "SD-04",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -108,7 +141,11 @@
             "start": "2025-10-01",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d2",
@@ -117,7 +154,11 @@
             "start": "2025-10-03",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -127,6 +168,11 @@
     },
     "expectedStatus": 200,
     "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-04"
+      },
       "days": [
         {
           "date": "2025-10-01",
@@ -154,6 +200,10 @@
   {
     "name": "SD-05",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -162,7 +212,11 @@
             "start": "2025-10-01",
             "end": "2025-10-03"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d2",
@@ -171,7 +225,11 @@
             "start": "2025-10-03",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -196,6 +254,10 @@
   {
     "name": "SD-06",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -204,7 +266,11 @@
             "start": "2025-10-01",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d2",
@@ -213,7 +279,11 @@
             "start": "2025-10-04",
             "end": "2025-10-05"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -238,6 +308,10 @@
   {
     "name": "SD-07",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d2",
@@ -246,7 +320,11 @@
             "start": "2025-10-03",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d1",
@@ -255,7 +333,11 @@
             "start": "2025-10-01",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -265,6 +347,11 @@
     },
     "expectedStatus": 200,
     "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-04"
+      },
       "days": [
         {
           "date": "2025-10-01",
@@ -292,6 +379,10 @@
   {
     "name": "SD-08",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -300,7 +391,11 @@
             "start": "2025-10-01",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d1",
@@ -309,7 +404,11 @@
             "start": "2025-10-03",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -330,6 +429,10 @@
   {
     "name": "SD-09",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -338,7 +441,11 @@
             "start": "2025-10-01",
             "end": "2025-10-01"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -348,6 +455,11 @@
     },
     "expectedStatus": 200,
     "expected": {
+      "name": "Test Trip",
+      "dates": {
+        "start": "2025-10-01",
+        "end": "2025-10-01"
+      },
       "days": [
         {
           "date": "2025-10-01",
@@ -360,6 +472,10 @@
   {
     "name": "SD-10",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -368,7 +484,11 @@
             "start": "2025-10-01",
             "end": "2025-10-03"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d2",
@@ -377,7 +497,11 @@
             "start": "2025-10-02",
             "end": "2025-10-04"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
@@ -402,6 +526,10 @@
   {
     "name": "SD-11",
     "body": {
+      "name": "Test Trip",
+      "preferences": {
+        "pace": "Balanced"
+      },
       "destinations": [
         {
           "id": "d1",
@@ -410,7 +538,11 @@
             "start": "2025-10-01",
             "end": "2025-10-02"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         },
         {
           "id": "d2",
@@ -419,7 +551,11 @@
             "start": "2025-10-05",
             "end": "2025-10-06"
           },
-          "places": []
+          "places": [],
+          "location": {
+            "latitude": 34.0522,
+            "longitude": -118.2437
+          }
         }
       ],
       "dates": {
