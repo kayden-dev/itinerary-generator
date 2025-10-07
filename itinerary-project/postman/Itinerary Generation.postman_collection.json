@@ -7,220 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "[IV-00 to IV-11]",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"function buildName(state) {\r",
-							"    if (state === \"missing\") return;\r",
-							"    return \"Test Trip\";\r",
-							"}\r",
-							"\r",
-							"function buildDates(state) {\r",
-							"    if (state === \"missing\") return;\r",
-							"    if (state === \"start_only\") return { start: \"2025-10-01\" };\r",
-							"    if (state === \"end_only\") return { end: \"2025-10-03\" };\r",
-							"    return { start: \"2025-10-01\", end: \"2025-10-03\" };\r",
-							"}\r",
-							"function buildPreference(state) {\r",
-							"    if (state === \"missing\") return;\r",
-							"    if (state === \"incorrect\") return { pace: \"Turbo\" };\r",
-							"    return { pace: \"Balanced\" };\r",
-							"}\r",
-							"\r",
-							"const body = {\r",
-							"    name: buildName(pm.iterationData.get(\"name_state\")),\r",
-							"    dates: buildDates(pm.iterationData.get(\"dates_state\")),\r",
-							"    preferences: buildPreference(pm.iterationData.get(\"preferences_state\")),\r",
-							"    destinations: [{ id: \"1\", name: \"City One\", dates: {start: \"2025-10-01\",end:\"2025-10-03\"}, places: [] }]\r",
-							"}\r",
-							"\r",
-							"Object.keys(body).forEach(k => body[k] === undefined && delete body[k]);\r",
-							"pm.variables.set(\"requestBody\", JSON.stringify(body));"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Check that the correct HTTP status has been sent\r",
-							"const expected = Number(pm.iterationData.get(\"Expected Status\"));\r",
-							"pm.test(`HTTP ${expected}`, () => pm.response.to.have.status(expected));\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expected === 200) {\r",
-							"    pm.test(\"Has required top-level fields\", () => {\r",
-							"        pm.expect(res).to.have.property(\"id\");\r",
-							"        pm.expect(res).to.have.property(\"name\");\r",
-							"        pm.expect(res).to.have.property(\"timezone\");\r",
-							"        pm.expect(res).to.have.property(\"dates\");\r",
-							"        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
-							"        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
-							"        pm.expect(res).to.have.property(\"meta\");\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"dates has start/end\", () => {\r",
-							"        pm.expect(res.dates).to.have.property(\"start\").that.is.a(\"string\");\r",
-							"        pm.expect(res.dates).to.have.property(\"end\").that.is.a(\"string\");\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"meta has generatedBy/version/createdAt\", () => {\r",
-							"        pm.expect(res.meta).to.have.property(\"generatedBy\").that.is.a(\"string\");\r",
-							"        pm.expect([\"rule-engine\", \"hybrid\"]).to.include(res.meta.generatedBy);\r",
-							"        pm.expect(res.meta).to.have.property(\"version\").that.is.a(\"string\");\r",
-							"        pm.expect(res.meta).to.have.property(\"createdAt\").that.is.a(\"string\");\r",
-							"    });\r",
-							"\r",
-							"    // chceck itinerary against schema\r",
-							"    const schema = JSON.parse(pm.variables.get(\"itinerarySchema\"));\r",
-							"    pm.test(\"Response matches Itinerary schema\", () => {\r",
-							"        pm.expect(res).to.have.jsonSchema(schema);\r",
-							"    });\r",
-							"\r",
-							"} else {\r",
-							"    // Check that the error array exists\r",
-							"    pm.test(\"Error array exists\", () => {\r",
-							"        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
-							"    });\r",
-							"\r",
-							"    const fields = (pm.iterationData.get(\"expected_error_fields\") || \"\")\r",
-							"        .split(\";\")\r",
-							"        .map(s => s.trim())\r",
-							"        .filter(Boolean);\r",
-							"\r",
-							"    const codes = (pm.iterationData.get(\"expected_error_codes\") || \"\")\r",
-							"        .split(\";\")\r",
-							"        .map(s => s.trim())\r",
-							"        .filter(Boolean);\r",
-							"\r",
-							"    pm.test(\"Contains expected field/code pairs\", () => {\r",
-							"        const gotPairs = res.errors.map(e => `${e.field}:${e.code}`);\r",
-							"        fields.forEach((f, i) => {\r",
-							"            const pair = `${f}:${codes[i]}`;\r",
-							"            pm.expect(gotPairs).to.include(pair);\r",
-							"        });\r",
-							"    });\r",
-							"\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{{requestBody}}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		},
-		{
-			"name": "[DV-01 to DV-08]",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Check that the correct HTTP status has been sent\r",
-							"const expected = Number(pm.iterationData.get(\"Expected Status\"));\r",
-							"pm.test(`HTTP ${expected}`, () => pm.response.to.have.status(expected));\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expected === 200) {\r",
-							"    pm.test(\"Has required top-level fields\", () => {\r",
-							"        pm.expect(res).to.have.property(\"id\");\r",
-							"        pm.expect(res).to.have.property(\"name\");\r",
-							"        pm.expect(res).to.have.property(\"timezone\");\r",
-							"        pm.expect(res).to.have.property(\"dates\");\r",
-							"        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
-							"        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
-							"        pm.expect(res).to.have.property(\"meta\");\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"dates has start/end\", () => {\r",
-							"        pm.expect(res.dates).to.have.property(\"start\").that.is.a(\"string\");\r",
-							"        pm.expect(res.dates).to.have.property(\"end\").that.is.a(\"string\");\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"meta has generatedBy/version/createdAt\", () => {\r",
-							"        pm.expect(res.meta).to.have.property(\"generatedBy\").that.is.a(\"string\");\r",
-							"        pm.expect([\"rule-engine\", \"hybrid\"]).to.include(res.meta.generatedBy);\r",
-							"        pm.expect(res.meta).to.have.property(\"version\").that.is.a(\"string\");\r",
-							"        pm.expect(res.meta).to.have.property(\"createdAt\").that.is.a(\"string\");\r",
-							"    });\r",
-							"\r",
-							"    // chceck itinerary against schema\r",
-							"    const schema = JSON.parse(pm.variables.get(\"itinerarySchema\"));\r",
-							"    pm.test(\"Response matches Itinerary schema\", () => {\r",
-							"        pm.expect(res).to.have.jsonSchema(schema);\r",
-							"    });\r",
-							"\r",
-							"} else {\r",
-							"    // Check that the error array exists\r",
-							"    pm.test(\"Error array exists\", () => {\r",
-							"        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
-							"    });\r",
-							"\r",
-							"    // If it does, then check that the appropriate fields exist\r",
-							"    const fields = (pm.iterationData.get(\"expected_error_fields\") || \"\")\r",
-							"        .split(\";\")\r",
-							"        .map(s => s.trim())\r",
-							"        .filter(Boolean);\r",
-							"\r",
-							"    const codes = (pm.iterationData.get(\"expected_error_codes\") || \"\")\r",
-							"        .split(\";\")\r",
-							"        .map(s => s.trim())\r",
-							"        .filter(Boolean);\r",
-							"\r",
-							"    pm.test(\"Contains expected field/code pairs\", () => {\r",
-							"        const gotPairs = res.errors.map(e => `${e.field}:${e.code}`);\r",
-							"        fields.forEach((f, i) => {\r",
-							"            const pair = `${f}:${codes[i]}`;\r",
-							"            pm.expect(gotPairs).to.include(pair);\r",
-							"        });\r",
-							"    });\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Test Trip\",\r\n  \"dates\": { \"start\": \"{{start_val}}\", \"end\": \"{{end_val}}\" },\r\n  \"preferences\": { \"pace\": \"Balanced\" },\r\n  \"destinations\": [\r\n    { \"id\": \"1\", \"dates\": {\"start\":\"{{start_val}}\",\"end\":\"{{end_val}}\"}, \"name\": \"City One\", \"places\": [] }\r\n  ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		},
-		{
-			"name": "[SD-01 to SD-11]",
+			"name": "HTTP Status, Required Fields and Errors",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -232,71 +19,72 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"function isObject(v) {return v && typeof v === 'object' && !Array.isArray(v);}\r",
+							"// Check that the correct HTTP status has been sent\r",
+							"const expected = pm.iterationData.get(\"expected\")\r",
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+							"pm.test(`HTTP ${expectedStatus}`, () => pm.response.to.have.status(expectedStatus));\r",
 							"\r",
-							"function compareExpected (exp, act, path = \"\") {\r",
-							"    // case: placeholder => ignore\r",
-							"    if (exp === \"<insert>\") return;\r",
+							"const res = pm.response.json();\r",
 							"\r",
-							"    // case: array\r",
-							"    if (Array.isArray(exp)) {\r",
-							"        pm.expect(act, path + \" should be an array\").to.be.an(\"array\").with.length(exp.length);\r",
-							"        for (let i = 0;i < exp.length; i++) {\r",
-							"            compareExpected(exp[i],act?.[i],`${path}[${i}]`);\r",
-							"        }\r",
-							"        return;\r",
-							"    }\r",
+							"if (expectedStatus === 200) {\r",
+							"    pm.test(\"Response has required fields\", () => {\r",
+							"        // check that the errors array isn't present\r",
+							"        pm.expect(res).to.not.have.property(\"errors\");\r",
 							"\r",
-							"    // case: object\r",
-							"    if (isObject(exp)) {\r",
-							"        pm.expect(act, path + \" should be object\").to.be.an(\"object\");\r",
-							"        for (const k of Object.keys(exp)) {\r",
-							"            compareExpected(exp[k],act?.[k],path ? `${path}.${k}`: k);\r",
-							"        }\r",
-							"        return;\r",
-							"    }\r",
+							"        // check that the top-level fields are present\r",
+							"        pm.expect(res).to.have.property(\"id\").that.is.a(\"string\");\r",
+							"        pm.expect(res).to.have.property(\"name\").that.is.a(\"string\");\r",
+							"        pm.expect(res).to.have.property(\"timezone\").that.is.a(\"string\");\r",
+							"    \r",
+							"        // check the dates object\r",
+							"        pm.expect(res).to.have.property(\"dates\").that.is.a(\"object\").that.has.all.keys(\"start\", \"end\");\r",
+							"        pm.expect(res.dates.start).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"        pm.expect(res.dates.end).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
 							"\r",
-							"    // case: field\r",
-							"    pm.expect(act,path).to.eql(exp);\r",
-							"}\r",
-							"// get the expected output, and extract the status from it\r",
-							"const expectedraw = pm.iterationData.get(\"expected\");\r",
-							"const expectedStatus = Number(expectedraw.expectedStatus);\r",
+							"        // check the arrays\r",
+							"        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
+							"        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
 							"\r",
-							"const expected = JSON.parse(JSON.stringify(expectedraw));\r",
-							"delete expected.expectedStatus;\r",
+							"        // check the meta object\r",
+							"        pm.expect(res).to.have.property(\"meta\").that.is.a(\"object\").that.has.all.keys(\"generatedBy\", \"version\", \"createdAt\");\r",
 							"\r",
-							"const actual = pm.response.json();\r",
-							"\r",
-							"// check the correct status code has been sent\r",
-							"pm.test(`Status code is ${expectedStatus}`, () => {\r",
-							"    pm.response.to.have.status(expectedStatus)\r",
-							"});\r",
-							"\r",
-							"// check the output is correct depending on the status code\r",
-							"if (expectedStatus === 200 ) {\r",
-							"    // check there are no errors\r",
-							"    pm.test(\"No errors\",() => pm.expect(actual.errors).to.be.undefined);\r",
-							"    pm.test(\"Response matches expected JSON\", () => {\r",
-							"        compareExpected(expected,actual);\r",
-							"    });    \r",
-							"} else {\r",
-							"    // check that there are errors\r",
-							"    pm.test(\"Errors array exists\",() => pm.expect(actual.errors).to.be.an(\"array\").that.is.not.empty);\r",
-							"    pm.test(\"Response matches expected JSON\", () => {\r",
-							"        compareExpected(expected,actual);\r",
 							"    });\r",
+							"\r",
+							"    pm.test(\"Response has expected values for required fields\", () => {\r",
+							"        pm.expect(res).to.deep.include({\r",
+							"            name: expected.name,\r",
+							"            dates: expected.dates\r",
+							"        });\r",
+							"    });\r",
+							"\r",
+							"} else {\r",
+							"    // check that the error array exists\r",
+							"    pm.test(\"Response contains the error array\", () => {\r",
+							"        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
+							"    });\r",
+							"\r",
+							"    // check that the correct errors are present\r",
+							"    pm.test(\"Contains expected errors\", () => {\r",
+							"        const expectedErrors = (expected.errors || []).map(({ field, code }) => ({ field, code }));\r",
+							"        const actualErrors = (res.errors || []).map(({ field, code }) => ({ field, code }));\r",
+							"\r",
+							"        pm.expect(actualErrors).to.have.length(expectedErrors.length)\r",
+							"        pm.expect(actualErrors).to.have.deep.members(expectedErrors);\r",
+							"    });\r",
+							"\r",
 							"}"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -317,7 +105,7 @@
 			"response": []
 		},
 		{
-			"name": "[AC-01 to AC-13]",
+			"name": "Day Scaffold",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -329,71 +117,103 @@
 							"}"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"function isObject(v) {return v && typeof v === 'object' && !Array.isArray(v);}\r",
+							"// run checks if the status is 200 and there is an expected days\r",
+							"const expected = pm.iterationData.get(\"expected\")\r",
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
 							"\r",
-							"function compareExpected (exp, act, path = \"\") {\r",
-							"    // case: placeholder => ignore\r",
-							"    if (exp === \"<insert>\") return;\r",
+							"const res = pm.response.json();\r",
 							"\r",
-							"    // case: array\r",
-							"    if (Array.isArray(exp)) {\r",
-							"        pm.expect(act, path + \" should be an array\").to.be.an(\"array\").with.length(exp.length);\r",
-							"        for (let i = 0;i < exp.length; i++) {\r",
-							"            compareExpected(exp[i],act?.[i],`${path}[${i}]`);\r",
-							"        }\r",
-							"        return;\r",
-							"    }\r",
+							"if (expected.days && expectedStatus === 200) {\r",
+							"    pm.test(\"Contains expected day scaffold\", () => {\r",
+							"        const expectedDays = (expected.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
+							"        const actualDays = (res.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
 							"\r",
-							"    // case: object\r",
-							"    if (isObject(exp)) {\r",
-							"        pm.expect(act, path + \" should be object\").to.be.an(\"object\");\r",
-							"        for (const k of Object.keys(exp)) {\r",
-							"            compareExpected(exp[k],act?.[k],path ? `${path}.${k}`: k);\r",
-							"        }\r",
-							"        return;\r",
-							"    }\r",
-							"\r",
-							"    // case: field\r",
-							"    pm.expect(act,path).to.eql(exp);\r",
-							"}\r",
-							"// get the expected output, and extract the status from it\r",
-							"const expectedraw = pm.iterationData.get(\"expected\");\r",
-							"const expectedStatus = Number(expectedraw.expectedStatus);\r",
-							"\r",
-							"const expected = JSON.parse(JSON.stringify(expectedraw));\r",
-							"delete expected.expectedStatus;\r",
-							"\r",
-							"const actual = pm.response.json();\r",
-							"\r",
-							"// check the correct status code has been sent\r",
-							"pm.test(`Status code is ${expectedStatus}`, () => {\r",
-							"    pm.response.to.have.status(expectedStatus)\r",
-							"});\r",
-							"\r",
-							"// check the output is correct depending on the status code\r",
-							"if (expectedStatus === 200 ) {\r",
-							"    // check there are no errors\r",
-							"    pm.test(\"No errors\",() => pm.expect(actual.errors).to.be.undefined);\r",
-							"    pm.test(\"Response matches expected JSON\", () => {\r",
-							"        compareExpected(expected,actual);\r",
-							"    });    \r",
-							"} else {\r",
-							"    // check that there are errors\r",
-							"    pm.test(\"Errors array exists\",() => pm.expect(actual.errors).to.be.an(\"array\").that.is.not.empty);\r",
-							"    pm.test(\"Response matches expected JSON\", () => {\r",
-							"        compareExpected(expected,actual);\r",
+							"        pm.expect(actualDays).to.have.length(expectedDays.length)\r",
+							"        pm.expect(actualDays).to.deep.have.members(expectedDays);\r",
 							"    });\r",
 							"}"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/generate"
+			},
+			"response": []
+		},
+		{
+			"name": "Anchors",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const body = pm.iterationData.get(\"body\");\r",
+							"if (body) {\r",
+							"    pm.request.body.raw = JSON.stringify(body);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// run checks if the status is 200 and there is an expected anchors\r",
+							"const expected = pm.iterationData.get(\"expected\")\r",
+							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+							"\r",
+							"const res = pm.response.json();\r",
+							"\r",
+							"if (expected.days && expectedStatus === 200) {\r",
+							"    expected.days.forEach(expectedDay => {\r",
+							"        pm.test(`Contains expected anchors for ${expectedDay.date}`, () => {\r",
+							"            const resDay = res.days.find(day => day.date === expectedDay.date);\r",
+							"            pm.expect(resDay).to.exist;\r",
+							"            // omit the id out of the res blocks\r",
+							"            const resBlocksNormalised = resDay.blocks.map(b => ({\r",
+							"                type: b.type,\r",
+							"                start: b.start,\r",
+							"                end: b.end,\r",
+							"                locked: b.locked,\r",
+							"                placeRef: b.placeRef,\r",
+							"                ...(b.source ? { source: b.source } : {})\r",
+							"            }));\r",
+							"\r",
+							"            pm.expect(resBlocksNormalised).to.have.length(expectedDay.blocks.length)\r",
+							"            pm.expect(resBlocksNormalised).have.deep.members(expectedDay.blocks);\r",
+							"        });\r",
+							"    })\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
