@@ -1,0 +1,3 @@
+openingStatus: always_open, open, closed
+gapSize: exact_fit,small_slack,large_slack
+distanceToNeighbours: far,near
