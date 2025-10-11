@@ -95,7 +95,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -103,7 +105,87 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T10:00:00",
+              "end": "2025-07-01T10:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-morning",
+                "name": "Morning Briefing",
+                "address": "Morning Briefing",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T12:30:00",
+              "end": "2025-07-01T13:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midday",
+                "name": "Investor Update",
+                "address": "Investor Update",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T20:30:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-02",
@@ -201,7 +283,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:30 AM - 12:30 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:30 AM - 12:30 PM"
+                ]
               }
             }
           ]
@@ -210,7 +294,87 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "reasons": ["gap_too_small"]
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [
+        "gap_too_small"
+      ],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T10:00:00",
+              "end": "2025-07-01T10:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-morning",
+                "name": "Morning Briefing",
+                "address": "Morning Briefing",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T12:20:00",
+              "end": "2025-07-01T12:50:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midday",
+                "name": "Investor Update",
+                "address": "Investor Update",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T20:30:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
     }
   },
   {
@@ -309,7 +473,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -317,7 +483,87 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T10:00:00",
+              "end": "2025-07-01T10:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-morning",
+                "name": "Morning Briefing",
+                "address": "Morning Briefing",
+                "location": {
+                  "latitude": 40.71525,
+                  "longitude": -74.00355
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T12:35:00",
+              "end": "2025-07-01T13:05:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midday",
+                "name": "Investor Update",
+                "address": "Investor Update",
+                "location": {
+                  "latitude": 40.7156,
+                  "longitude": -74.0032
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T20:30:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-04",
@@ -430,7 +676,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -468,7 +716,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -476,7 +726,89 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-opening",
+                "name": "Kickoff Brief",
+                "address": "Kickoff Brief",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T11:30:00",
+              "end": "2025-07-01T12:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midmorning",
+                "name": "Investor Sync",
+                "address": "Investor Sync",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T14:00:00",
+              "end": "2025-07-01T14:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midafternoon",
+                "name": "Afternoon Alignment",
+                "address": "Afternoon Alignment",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T15:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-evening",
+                "name": "Stakeholder Summit",
+                "address": "Stakeholder Summit",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-05",
@@ -591,7 +923,117 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "reasons": ["conflict"]
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "unscheduled": [
+        "conflict"
+      ],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day1-block",
+                "name": "Orientation Day",
+                "address": "Orientation Day",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-02",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-02T09:00:00",
+              "end": "2025-07-02T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-open",
+                "name": "Morning Brief",
+                "address": "Morning Brief",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T11:30:00",
+              "end": "2025-07-02T12:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-close",
+                "name": "Board Update",
+                "address": "Board Update",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T12:30:00",
+              "end": "2025-07-02T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-block",
+                "name": "Strategy Workshop",
+                "address": "Strategy Workshop",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-03",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-03T09:00:00",
+              "end": "2025-07-03T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day3-block",
+                "name": "Departure Day",
+                "address": "Departure Day",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
     }
   },
   {
@@ -706,7 +1148,87 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "reasons": ["conflict"]
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [
+        "conflict"
+      ],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T13:00:00",
+              "end": "2025-07-01T13:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-roomy-start",
+                "name": "Partner Briefing",
+                "address": "Partner Briefing",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T14:00:00",
+              "end": "2025-07-01T18:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-block",
+                "name": "Product Expo",
+                "address": "Product Expo",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T19:30:00",
+              "end": "2025-07-01T20:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
     }
   },
   {
@@ -786,7 +1308,73 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-morning",
+                "name": "Executive Brief",
+                "address": "Executive Brief",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T13:00:00",
+              "end": "2025-07-01T13:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midday",
+                "name": "Vendor Forum",
+                "address": "Vendor Forum",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T14:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-evening",
+                "name": "Evening Summit",
+                "address": "Evening Summit",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-08",
@@ -923,7 +1511,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -931,7 +1521,147 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T10:00:00",
+              "end": "2025-07-01T10:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T11:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day1-block",
+                "name": "Arrival Program",
+                "address": "Arrival Program",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-02",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-02T09:00:00",
+              "end": "2025-07-02T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-morning",
+                "name": "Morning Coordination",
+                "address": "Morning Coordination",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T13:00:00",
+              "end": "2025-07-02T13:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-roomy",
+                "name": "Partner Roundtable",
+                "address": "Partner Roundtable",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T14:00:00",
+              "end": "2025-07-02T20:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-block",
+                "name": "Afternoon Sessions",
+                "address": "Afternoon Sessions",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-03",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-03T09:00:00",
+              "end": "2025-07-03T17:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day3-block",
+                "name": "Departure Support",
+                "address": "Departure Support",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-03T18:00:00",
+              "end": "2025-07-03T18:30:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-09",
@@ -1057,7 +1787,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -1065,7 +1797,117 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day1-block",
+                "name": "Travel Day",
+                "address": "Travel Day",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-02",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-02T09:00:00",
+              "end": "2025-07-02T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-open",
+                "name": "Morning Kickoff",
+                "address": "Morning Kickoff",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T11:30:00",
+              "end": "2025-07-02T12:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-close",
+                "name": "Investor Update",
+                "address": "Investor Update",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T12:30:00",
+              "end": "2025-07-02T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-block",
+                "name": "Workshop Sessions",
+                "address": "Workshop Sessions",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-03",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-03T09:00:00",
+              "end": "2025-07-03T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day3-block",
+                "name": "Wrap Day",
+                "address": "Wrap Day",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-10",
@@ -1215,7 +2057,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 9:30 AM - 12:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 9:30 AM - 12:00 PM"
+                ]
               }
             },
             {
@@ -1253,7 +2097,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 2:00 PM - 6:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 2:00 PM - 6:00 PM"
+                ]
               }
             }
           ]
@@ -1261,7 +2107,163 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T10:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day1-block",
+                "name": "Welcome Sessions",
+                "address": "Welcome Sessions",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-02",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-02T09:00:00",
+              "end": "2025-07-02T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-am",
+                "name": "Morning Briefing",
+                "address": "Morning Briefing",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T13:00:00",
+              "end": "2025-07-02T13:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-mid",
+                "name": "Logistics Check",
+                "address": "Logistics Check",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T17:00:00",
+              "end": "2025-07-02T17:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-pm",
+                "name": "Evening Preparation",
+                "address": "Evening Preparation",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T18:00:00",
+              "end": "2025-07-02T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-night",
+                "name": "Night Summit",
+                "address": "Night Summit",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-03",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-03T09:00:00",
+              "end": "2025-07-03T20:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day3-block",
+                "name": "Departure Support",
+                "address": "Departure Support",
+                "location": {
+                  "latitude": 40.7149,
+                  "longitude": -74.0039
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-03T20:30:00",
+              "end": "2025-07-03T21:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   },
   {
     "name": "PA-11",
@@ -1359,7 +2361,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -1397,7 +2401,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -1406,7 +2412,87 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "reasons": ["conflict"]
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [
+        "conflict"
+      ],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "check-in",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            },
+            {
+              "start": "2025-07-01T13:00:00",
+              "end": "2025-07-01T13:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-roomy",
+                "name": "Client Check",
+                "address": "Client Check",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T14:00:00",
+              "end": "2025-07-01T20:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-block",
+                "name": "Technical Workshop",
+                "address": "Technical Workshop",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T20:30:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "check-out",
+              "placeRef": {
+                "id": "stay-1",
+                "name": "Central Stay Hotel",
+                "address": "100 Central Ave",
+                "location": {
+                  "latitude": 40.7128,
+                  "longitude": -74.006
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
     }
   },
   {
@@ -1533,7 +2619,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -1571,7 +2659,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -1609,7 +2699,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -1647,7 +2739,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             },
             {
@@ -1685,7 +2779,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+                "weekdayDescriptions": [
+                  "Wednesday: 10:00 AM - 5:00 PM"
+                ]
               }
             }
           ]
@@ -1694,7 +2790,117 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "reasons": ["conflict"]
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "unscheduled": [
+        "conflict"
+      ],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day1-block",
+                "name": "Arrival Day",
+                "address": "Arrival Day",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-02",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-02T09:00:00",
+              "end": "2025-07-02T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-open",
+                "name": "Logistics Brief",
+                "address": "Logistics Brief",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T11:30:00",
+              "end": "2025-07-02T12:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-close",
+                "name": "Executive Sync",
+                "address": "Executive Sync",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-02T12:30:00",
+              "end": "2025-07-02T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day2-block",
+                "name": "Partner Workshops",
+                "address": "Partner Workshops",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        },
+        {
+          "date": "2025-07-03",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-03T09:00:00",
+              "end": "2025-07-03T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-day3-block",
+                "name": "Departure",
+                "address": "Departure",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
     }
   },
   {
@@ -1821,7 +3027,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 9:30 AM - 11:30 AM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 9:30 AM - 11:30 AM"
+                ]
               }
             },
             {
@@ -1859,7 +3067,9 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": ["Tuesday: 3:30 PM - 5:30 PM"]
+                "weekdayDescriptions": [
+                  "Tuesday: 3:30 PM - 5:30 PM"
+                ]
               }
             }
           ]
@@ -1867,6 +3077,104 @@
       ]
     },
     "expectedStatus": 200,
-    "expected": {}
+    "expected": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "unscheduled": [],
+      "days": [
+        {
+          "date": "2025-07-01",
+          "destinationId": "d1",
+          "blocks": [
+            {
+              "start": "2025-07-01T09:00:00",
+              "end": "2025-07-01T09:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-morning",
+                "name": "Stand-up",
+                "address": "Stand-up",
+                "location": {
+                  "latitude": 40.71315,
+                  "longitude": -74.00565
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T11:30:00",
+              "end": "2025-07-01T12:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-tight-close",
+                "name": "Board Review",
+                "address": "Board Review",
+                "location": {
+                  "latitude": 40.7135,
+                  "longitude": -74.0053
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T12:30:00",
+              "end": "2025-07-01T15:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-midday-block",
+                "name": "Transit Buffer",
+                "address": "Transit Buffer",
+                "location": {
+                  "latitude": 40.71385,
+                  "longitude": -74.00495
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T17:00:00",
+              "end": "2025-07-01T17:30:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-afternoon",
+                "name": "Investor Meeting",
+                "address": "Investor Meeting",
+                "location": {
+                  "latitude": 40.7142,
+                  "longitude": -74.0046
+                }
+              },
+              "source": "fixed"
+            },
+            {
+              "start": "2025-07-01T18:00:00",
+              "end": "2025-07-01T21:00:00",
+              "locked": true,
+              "type": "visit",
+              "placeRef": {
+                "id": "anchor-evening",
+                "name": "Networking",
+                "address": "Networking",
+                "location": {
+                  "latitude": 40.71455,
+                  "longitude": -74.00425
+                }
+              },
+              "source": "fixed"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "generatedBy": "rule-engine"
+      }
+    }
   }
 ]
