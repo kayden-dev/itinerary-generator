@@ -1,0 +1,1872 @@
+[
+  {
+    "name": "PA-01",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "20:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-morning",
+              "name": "Morning Briefing",
+              "address": "Morning Briefing",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T10:00:00",
+                "end": "2025-07-01T10:30:00"
+              }
+            },
+            {
+              "id": "anchor-midday",
+              "name": "Investor Update",
+              "address": "Investor Update",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T12:30:00",
+                "end": "2025-07-01T13:00:00"
+              }
+            },
+            {
+              "id": "pa01-visit",
+              "name": "Skyline Museum Visit",
+              "address": "Skyline Museum Visit",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-02",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "20:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-morning",
+              "name": "Morning Briefing",
+              "address": "Morning Briefing",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-01T10:00:00",
+                "end": "2025-07-01T10:30:00"
+              }
+            },
+            {
+              "id": "anchor-midday",
+              "name": "Investor Update",
+              "address": "Investor Update",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-01T12:20:00",
+                "end": "2025-07-01T12:50:00"
+              }
+            },
+            {
+              "id": "pa02-visit",
+              "name": "Skyline Museum Visit",
+              "address": "Skyline Museum Visit",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 30,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 12,
+                      "minute": 30,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:30 AM - 12:30 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {
+      "reasons": ["gap_too_small"]
+    }
+  },
+  {
+    "name": "PA-03",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "20:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-morning",
+              "name": "Morning Briefing",
+              "address": "Morning Briefing",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              },
+              "fixed": {
+                "start": "2025-07-01T10:00:00",
+                "end": "2025-07-01T10:30:00"
+              }
+            },
+            {
+              "id": "anchor-midday",
+              "name": "Investor Update",
+              "address": "Investor Update",
+              "location": {
+                "latitude": 40.7156,
+                "longitude": -74.0032
+              },
+              "fixed": {
+                "start": "2025-07-01T12:35:00",
+                "end": "2025-07-01T13:05:00"
+              }
+            },
+            {
+              "id": "pa03-visit",
+              "name": "Skyline Museum Visit",
+              "address": "Skyline Museum Visit",
+              "location": {
+                "latitude": 40.71595,
+                "longitude": -74.00285
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-04",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-opening",
+              "name": "Kickoff Brief",
+              "address": "Kickoff Brief",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-midmorning",
+              "name": "Investor Sync",
+              "address": "Investor Sync",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T11:30:00",
+                "end": "2025-07-01T12:00:00"
+              }
+            },
+            {
+              "id": "anchor-midafternoon",
+              "name": "Afternoon Alignment",
+              "address": "Afternoon Alignment",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-01T14:00:00",
+                "end": "2025-07-01T14:30:00"
+              }
+            },
+            {
+              "id": "anchor-evening",
+              "name": "Stakeholder Summit",
+              "address": "Stakeholder Summit",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-01T15:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "pa04-visit-a",
+              "name": "Historic Library Tour",
+              "address": "Historic Library Tour",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa04-visit-b",
+              "name": "Riverside Gallery",
+              "address": "Riverside Gallery",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-05",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-03"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-day1-block",
+              "name": "Orientation Day",
+              "address": "Orientation Day",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-tight-open",
+              "name": "Morning Brief",
+              "address": "Morning Brief",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-02T09:00:00",
+                "end": "2025-07-02T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-tight-close",
+              "name": "Board Update",
+              "address": "Board Update",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-02T11:30:00",
+                "end": "2025-07-02T12:00:00"
+              }
+            },
+            {
+              "id": "anchor-day2-block",
+              "name": "Strategy Workshop",
+              "address": "Strategy Workshop",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-02T12:30:00",
+                "end": "2025-07-02T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day3-block",
+              "name": "Departure Day",
+              "address": "Departure Day",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-03T09:00:00",
+                "end": "2025-07-03T21:00:00"
+              }
+            },
+            {
+              "id": "pa05-visit-a",
+              "name": "Observation Deck Visit",
+              "address": "Observation Deck Visit",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              }
+            },
+            {
+              "id": "pa05-visit-b",
+              "name": "Skybridge Walk",
+              "address": "Skybridge Walk",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {
+      "reasons": ["conflict"]
+    }
+  },
+  {
+    "name": "PA-06",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "19:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-roomy-start",
+              "name": "Partner Briefing",
+              "address": "Partner Briefing",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T13:00:00",
+                "end": "2025-07-01T13:30:00"
+              }
+            },
+            {
+              "id": "anchor-block",
+              "name": "Product Expo",
+              "address": "Product Expo",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T14:00:00",
+                "end": "2025-07-01T18:00:00"
+              }
+            },
+            {
+              "id": "pa06-visit-a",
+              "name": "Innovation Lab Tour",
+              "address": "Innovation Lab Tour",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              }
+            },
+            {
+              "id": "pa06-visit-b",
+              "name": "Harbor Lunch Cruise",
+              "address": "Harbor Lunch Cruise",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              }
+            },
+            {
+              "id": "pa06-visit-c",
+              "name": "Design District Walk",
+              "address": "Design District Walk",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              }
+            },
+            {
+              "id": "pa06-visit-d",
+              "name": "Botanical Lab Workshop",
+              "address": "Botanical Lab Workshop",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              }
+            },
+            {
+              "id": "pa06-visit-e",
+              "name": "Architecture Insights Tour",
+              "address": "Architecture Insights Tour",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {
+      "reasons": ["conflict"]
+    }
+  },
+  {
+    "name": "PA-07",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-morning",
+              "name": "Executive Brief",
+              "address": "Executive Brief",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-midday",
+              "name": "Vendor Forum",
+              "address": "Vendor Forum",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T13:00:00",
+                "end": "2025-07-01T13:30:00"
+              }
+            },
+            {
+              "id": "anchor-evening",
+              "name": "Evening Summit",
+              "address": "Evening Summit",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-01T14:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "pa07-visit",
+              "name": "Sunrise Terrace Access",
+              "address": "Sunrise Terrace Access",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-08",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-03"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "10:00:00",
+            "checkOutTime": "18:00:00"
+          },
+          "places": [
+            {
+              "id": "anchor-day1-block",
+              "name": "Arrival Program",
+              "address": "Arrival Program",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T11:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day2-morning",
+              "name": "Morning Coordination",
+              "address": "Morning Coordination",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-02T09:00:00",
+                "end": "2025-07-02T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-day2-roomy",
+              "name": "Partner Roundtable",
+              "address": "Partner Roundtable",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-02T13:00:00",
+                "end": "2025-07-02T13:30:00"
+              }
+            },
+            {
+              "id": "anchor-day2-block",
+              "name": "Afternoon Sessions",
+              "address": "Afternoon Sessions",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-02T14:00:00",
+                "end": "2025-07-02T20:00:00"
+              }
+            },
+            {
+              "id": "anchor-day3-block",
+              "name": "Departure Support",
+              "address": "Departure Support",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-03T09:00:00",
+                "end": "2025-07-03T17:30:00"
+              }
+            },
+            {
+              "id": "pa08-visit",
+              "name": "Gallery Day Pass",
+              "address": "Gallery Day Pass",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-09",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-03"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-day1-block",
+              "name": "Travel Day",
+              "address": "Travel Day",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-tight-open",
+              "name": "Morning Kickoff",
+              "address": "Morning Kickoff",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-02T09:00:00",
+                "end": "2025-07-02T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-tight-close",
+              "name": "Investor Update",
+              "address": "Investor Update",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-02T11:30:00",
+                "end": "2025-07-02T12:00:00"
+              }
+            },
+            {
+              "id": "anchor-day2-block",
+              "name": "Workshop Sessions",
+              "address": "Workshop Sessions",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-02T12:30:00",
+                "end": "2025-07-02T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day3-block",
+              "name": "Wrap Day",
+              "address": "Wrap Day",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-03T09:00:00",
+                "end": "2025-07-03T21:00:00"
+              }
+            },
+            {
+              "id": "pa09-visit",
+              "name": "Harbor Outlook",
+              "address": "Harbor Outlook",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-10",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-03"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "20:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-day1-block",
+              "name": "Welcome Sessions",
+              "address": "Welcome Sessions",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T10:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day2-am",
+              "name": "Morning Briefing",
+              "address": "Morning Briefing",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-02T09:00:00",
+                "end": "2025-07-02T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-day2-mid",
+              "name": "Logistics Check",
+              "address": "Logistics Check",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-02T13:00:00",
+                "end": "2025-07-02T13:30:00"
+              }
+            },
+            {
+              "id": "anchor-day2-pm",
+              "name": "Evening Preparation",
+              "address": "Evening Preparation",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-02T17:00:00",
+                "end": "2025-07-02T17:30:00"
+              }
+            },
+            {
+              "id": "anchor-day2-night",
+              "name": "Night Summit",
+              "address": "Night Summit",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-02T18:00:00",
+                "end": "2025-07-02T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day3-block",
+              "name": "Departure Support",
+              "address": "Departure Support",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "fixed": {
+                "start": "2025-07-03T09:00:00",
+                "end": "2025-07-03T20:00:00"
+              }
+            },
+            {
+              "id": "pa10-visit-am",
+              "name": "Harbor Breakfast Cruise",
+              "address": "Harbor Breakfast Cruise",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 9,
+                      "minute": 30,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 12,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 9:30 AM - 12:00 PM"]
+              }
+            },
+            {
+              "id": "pa10-visit-pm",
+              "name": "Twilight River Tour",
+              "address": "Twilight River Tour",
+              "location": {
+                "latitude": 40.7156,
+                "longitude": -74.0032
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 14,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 18,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 2:00 PM - 6:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  },
+  {
+    "name": "PA-11",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "accommodation": {
+            "id": "stay-1",
+            "name": "Central Stay Hotel",
+            "address": "100 Central Ave",
+            "location": {
+              "latitude": 40.7128,
+              "longitude": -74.006
+            },
+            "checkInTime": "09:00:00",
+            "checkOutTime": "20:30:00"
+          },
+          "places": [
+            {
+              "id": "anchor-roomy",
+              "name": "Client Check",
+              "address": "Client Check",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T13:00:00",
+                "end": "2025-07-01T13:30:00"
+              }
+            },
+            {
+              "id": "anchor-block",
+              "name": "Technical Workshop",
+              "address": "Technical Workshop",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T14:00:00",
+                "end": "2025-07-01T20:00:00"
+              }
+            },
+            {
+              "id": "pa11-visit-a",
+              "name": "Science Center Immersion",
+              "address": "Science Center Immersion",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa11-visit-b",
+              "name": "Architecture Walk",
+              "address": "Architecture Walk",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {
+      "reasons": ["conflict"]
+    }
+  },
+  {
+    "name": "PA-12",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-03"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-03"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-day1-block",
+              "name": "Arrival Day",
+              "address": "Arrival Day",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-tight-open",
+              "name": "Logistics Brief",
+              "address": "Logistics Brief",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-02T09:00:00",
+                "end": "2025-07-02T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-tight-close",
+              "name": "Executive Sync",
+              "address": "Executive Sync",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-02T11:30:00",
+                "end": "2025-07-02T12:00:00"
+              }
+            },
+            {
+              "id": "anchor-day2-block",
+              "name": "Partner Workshops",
+              "address": "Partner Workshops",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-02T12:30:00",
+                "end": "2025-07-02T21:00:00"
+              }
+            },
+            {
+              "id": "anchor-day3-block",
+              "name": "Departure",
+              "address": "Departure",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-03T09:00:00",
+                "end": "2025-07-03T21:00:00"
+              }
+            },
+            {
+              "id": "pa12-visit-a",
+              "name": "Innovation Lab Tour",
+              "address": "Innovation Lab Tour",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa12-visit-b",
+              "name": "Harbor Lunch Cruise",
+              "address": "Harbor Lunch Cruise",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa12-visit-c",
+              "name": "Design District Walk",
+              "address": "Design District Walk",
+              "location": {
+                "latitude": 40.7156,
+                "longitude": -74.0032
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa12-visit-d",
+              "name": "Botanical Lab Workshop",
+              "address": "Botanical Lab Workshop",
+              "location": {
+                "latitude": 40.71595,
+                "longitude": -74.00285
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            },
+            {
+              "id": "pa12-visit-e",
+              "name": "Architecture Insights Tour",
+              "address": "Architecture Insights Tour",
+              "location": {
+                "latitude": 40.7163,
+                "longitude": -74.0025
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 10,
+                      "minute": 0,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 2
+                      },
+                      "day": 3,
+                      "hour": 17,
+                      "minute": 0,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {
+      "reasons": ["conflict"]
+    }
+  },
+  {
+    "name": "PA-13",
+    "body": {
+      "name": "Place Assignment Trip",
+      "dates": {
+        "start": "2025-07-01",
+        "end": "2025-07-01"
+      },
+      "preferences": {
+        "pace": "Balanced"
+      },
+      "destinations": [
+        {
+          "id": "d1",
+          "name": "Central City",
+          "dates": {
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          },
+          "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+          },
+          "places": [
+            {
+              "id": "anchor-morning",
+              "name": "Stand-up",
+              "address": "Stand-up",
+              "location": {
+                "latitude": 40.71315,
+                "longitude": -74.00565
+              },
+              "fixed": {
+                "start": "2025-07-01T09:00:00",
+                "end": "2025-07-01T09:30:00"
+              }
+            },
+            {
+              "id": "anchor-tight-close",
+              "name": "Board Review",
+              "address": "Board Review",
+              "location": {
+                "latitude": 40.7135,
+                "longitude": -74.0053
+              },
+              "fixed": {
+                "start": "2025-07-01T11:30:00",
+                "end": "2025-07-01T12:00:00"
+              }
+            },
+            {
+              "id": "anchor-midday-block",
+              "name": "Transit Buffer",
+              "address": "Transit Buffer",
+              "location": {
+                "latitude": 40.71385,
+                "longitude": -74.00495
+              },
+              "fixed": {
+                "start": "2025-07-01T12:30:00",
+                "end": "2025-07-01T15:00:00"
+              }
+            },
+            {
+              "id": "anchor-afternoon",
+              "name": "Investor Meeting",
+              "address": "Investor Meeting",
+              "location": {
+                "latitude": 40.7142,
+                "longitude": -74.0046
+              },
+              "fixed": {
+                "start": "2025-07-01T17:00:00",
+                "end": "2025-07-01T17:30:00"
+              }
+            },
+            {
+              "id": "anchor-evening",
+              "name": "Networking",
+              "address": "Networking",
+              "location": {
+                "latitude": 40.71455,
+                "longitude": -74.00425
+              },
+              "fixed": {
+                "start": "2025-07-01T18:00:00",
+                "end": "2025-07-01T21:00:00"
+              }
+            },
+            {
+              "id": "pa13-visit-am",
+              "name": "Old Town Bites",
+              "address": "Old Town Bites",
+              "location": {
+                "latitude": 40.7149,
+                "longitude": -74.0039
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 9,
+                      "minute": 30,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 11,
+                      "minute": 30,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 9:30 AM - 11:30 AM"]
+              }
+            },
+            {
+              "id": "pa13-visit-pm",
+              "name": "Evening Coffee Roastery",
+              "address": "Evening Coffee Roastery",
+              "location": {
+                "latitude": 40.71525,
+                "longitude": -74.00355
+              },
+              "openingHours": {
+                "periods": [
+                  {
+                    "open": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 15,
+                      "minute": 30,
+                      "truncated": false
+                    },
+                    "close": {
+                      "date": {
+                        "year": 2025,
+                        "month": 7,
+                        "date": 1
+                      },
+                      "day": 2,
+                      "hour": 17,
+                      "minute": 30,
+                      "truncated": false
+                    }
+                  }
+                ],
+                "weekdayDescriptions": ["Tuesday: 3:30 PM - 5:30 PM"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": 200,
+    "expected": {}
+  }
+]

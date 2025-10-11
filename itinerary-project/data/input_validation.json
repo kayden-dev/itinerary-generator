@@ -28,8 +28,8 @@
     },
     "expectedStatus": 200,
     "expected": {
-      "name":"Test Trip",
-      "dates":{
+      "name": "Test Trip",
+      "dates": {
         "start": "2025-10-01",
         "end": "2025-10-03"
       }
