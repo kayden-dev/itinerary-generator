@@ -1,3 +1,14 @@
-openingStatus: always_open, open, closed
-gapSize: exact_fit,small_slack,large_slack
-distanceToNeighbours: far,near
+Scenario: solo, pair_conflict, pair_separate, set_mixed
+Gap: tight, roomy
+Proximity: near, far
+Hours: always_open, open_span, am_pm_split
+
+# Constraints
+
+# split only useful when we want separation
+IF [Scenario] = "solo" THEN ([Hours] = "open_span" OR [Hours] = "always_open");
+IF [Scenario] = "set_mixed" THEN ([Hours] = "open_span" OR [Hours] = "always_open");
+IF [Scenario] = "pair_conflict" THEN ([Hours] = "open_span" OR [Hours] = "always_open");   
+
+# use spans so they separate naturally
+IF [Scenario] = "pair_separate" THEN ([Hours] = "open_span" OR [Hours] = "am_pm_split");   
