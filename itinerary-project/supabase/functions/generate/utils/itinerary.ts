@@ -55,7 +55,7 @@ export const DaySchema = z.object({
 
 export const UnscheduledSchema = z.object({
   placeId: z.string(),
-  reason: z.enum(["closed", "transit_infeasible", "fixed_conflict"]),
+  reason: z.enum(["closed", "gap_too_small", "conflict"]),
 });
 
 export const ItinerarySchema = z
