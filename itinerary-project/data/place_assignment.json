@@ -95,9 +95,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -283,9 +281,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:30 AM - 12:30 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:30 AM - 12:30 PM"]
               }
             }
           ]
@@ -299,9 +295,7 @@
         "start": "2025-07-01",
         "end": "2025-07-01"
       },
-      "unscheduled": [
-        "gap_too_small"
-      ],
+      "unscheduled": ["gap_too_small"],
       "days": [
         {
           "date": "2025-07-01",
@@ -473,9 +467,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -676,9 +668,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -716,9 +706,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -928,9 +916,7 @@
         "start": "2025-07-01",
         "end": "2025-07-03"
       },
-      "unscheduled": [
-        "conflict"
-      ],
+      "unscheduled": ["conflict"],
       "days": [
         {
           "date": "2025-07-01",
@@ -1153,9 +1139,7 @@
         "start": "2025-07-01",
         "end": "2025-07-01"
       },
-      "unscheduled": [
-        "conflict"
-      ],
+      "unscheduled": ["conflict", "conflict", "conflict"],
       "days": [
         {
           "date": "2025-07-01",
@@ -1511,9 +1495,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -1787,9 +1769,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -2057,9 +2037,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 9:30 AM - 12:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 9:30 AM - 12:00 PM"]
               }
             },
             {
@@ -2097,9 +2075,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 2:00 PM - 6:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 2:00 PM - 6:00 PM"]
               }
             }
           ]
@@ -2361,9 +2337,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -2401,9 +2375,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -2417,9 +2389,7 @@
         "start": "2025-07-01",
         "end": "2025-07-01"
       },
-      "unscheduled": [
-        "conflict"
-      ],
+      "unscheduled": [],
       "days": [
         {
           "date": "2025-07-01",
@@ -2619,9 +2589,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -2659,9 +2627,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -2699,9 +2665,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -2739,9 +2703,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             },
             {
@@ -2779,9 +2741,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Wednesday: 10:00 AM - 5:00 PM"
-                ]
+                "weekdayDescriptions": ["Wednesday: 10:00 AM - 5:00 PM"]
               }
             }
           ]
@@ -2795,9 +2755,7 @@
         "start": "2025-07-01",
         "end": "2025-07-03"
       },
-      "unscheduled": [
-        "conflict"
-      ],
+      "unscheduled": ["conflict", "conflict", "conflict", "conflict"],
       "days": [
         {
           "date": "2025-07-01",
@@ -3027,9 +2985,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 9:30 AM - 11:30 AM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 9:30 AM - 11:30 AM"]
               }
             },
             {
@@ -3067,9 +3023,7 @@
                     }
                   }
                 ],
-                "weekdayDescriptions": [
-                  "Tuesday: 3:30 PM - 5:30 PM"
-                ]
+                "weekdayDescriptions": ["Tuesday: 3:30 PM - 5:30 PM"]
               }
             }
           ]
