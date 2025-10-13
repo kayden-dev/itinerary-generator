@@ -19,43 +19,50 @@ class TestBatUIMock(unittest.TestCase):
         self.assertEqual('MAIN MENU', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
+    def test_invalid_input(self, inp):
+        """Testing that the user is reprompted on invalid user input"""
+        inp.side_effect = ['banana', '1']
+        self.ui.run_current_screen()
+        self.assertEqual('LOAN ITEM', self.ui.get_current_screen())
+
+    @mock.patch('builtins.input')
     def test_loan_item(self, inp):
         """Navigate from the main menu to the loan item screen."""
-        inp.side_effect = ['0', '1']
+        inp.side_effect = [ '1']
         self.ui.run_current_screen()
         self.assertEqual('LOAN ITEM', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
     def test_return_item(self, inp):
         """Navigate from the main menu to the return item screen."""
-        inp.side_effect = ['0', '2']
+        inp.side_effect = [ '2']
         self.ui.run_current_screen()
         self.assertEqual('RETURN ITEM', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
     def test_search_for_patron(self, inp):
         """Navigate from the main menu to the search for patron screen."""
-        inp.side_effect = ['0', '3']
+        inp.side_effect = [ '3']
         self.ui.run_current_screen()
         self.assertEqual('SEARCH FOR PATRON', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
     def test_register_patron(self, inp):
         """Navigate from the main menu to the register patron screen."""
-        inp.side_effect = ['0', '4']
+        inp.side_effect = ['4']
         self.ui.run_current_screen()
         self.assertEqual('REGISTER PATRON', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
     def test_access_makerspace(self, inp):
         """Navigate from the main menu to the access makerspace screen."""
-        inp.side_effect = ['0', '5']
+        inp.side_effect = ['5']
         self.ui.run_current_screen()
         self.assertEqual('ACCESS MAKERSPACE', self.ui.get_current_screen())
 
     @mock.patch('builtins.input')
     def test_quit(self, inp):
         """Navigate from the main menu to the quit screen."""
-        inp.side_effect = ['0', '6']
+        inp.side_effect = ['6']
         self.ui.run_current_screen()
         self.assertEqual('QUIT', self.ui.get_current_screen())
