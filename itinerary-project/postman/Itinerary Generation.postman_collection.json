@@ -332,8 +332,8 @@
 							"            if (b.type !== \"visit\") {\r",
 							"                return;\r",
 							"            }\r",
-							"            pm.expect(b.start.split(\"T\")[1]).to.be.at.least(\"09:00:00\")\r",
-							"            pm.expect(b.end.split(\"T\")[1]).to.be.at.most(\"21:00:00\")\r",
+							"            pm.expect(b.start.split(\"T\")[1] >= \"09:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
+							"            pm.expect(b.end.split(\"T\")[1] <= \"21:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
 							"        }))\r",
 							"    })\r",
 							"\r",
@@ -351,6 +351,35 @@
 							"\r",
 							"        pm.expect(expectedReasons.length).to.be.eql(0, \"Expected more unscheduled items\")\r",
 							"    })\r",
+							"\r",
+							"    pm.test(\"All must visit places are either scheduled or unscheduled\", () => {\r",
+							"        // note: previous test already checks for duplicate unscheduled at this point\r",
+							"\r",
+							"        // for each destination in body\r",
+							"        (body.destinations || []).forEach(bodyDestination => {\r",
+							"            // get a list of all the expected must visit places\r",
+							"            let expectedMustVisit = (bodyDestination.places || []).filter(place => place.fixed === undefined);\r",
+							"\r",
+							"            // iterate through the itinerary on the dates for that destination (the current day placeID matches)\r",
+							"            const destinationDays = (res.days || []).filter(day => day.destinationId === bodyDestination.id);\r",
+							"\r",
+							"            for (const day in destinationDays) {\r",
+							"                const mustVisitBlocks = (day.blocks || []).filter(block => block.type === \"visit\" && block.source === \"scheduled\");\r",
+							"                (mustVisitBlocks || []).forEach(actualBlock => {\r",
+							"                    // check if the block is a place which has been provided\r",
+							"                    pm.expect(expectedMustVisit.find(place => place.id === actualBlock.placeRef.id),\r",
+							"                        \"Block contains a place which wasn't provided by the trip details or is a duplicated\").to.not.be.undefined\r",
+							"\r",
+							"                    // if it is a place, remove from the expected\r",
+							"                    expectedMustVisit = expectedMustVisit.filter(place => place.id !== actualBlock.placeRef.id)\r",
+							"                })\r",
+							"            }\r",
+							"\r",
+							"            (expectedMustVisit || []).forEach(place => {\r",
+							"                pm.expect(place.id, `Place (${place.id}) is not in the itinerary or unscheduled `).to.be.oneOf(res.unscheduled.map(({ placeId }) => placeId))\r",
+							"            })\r",
+							"        })\r",
+							"    })\r",
 							"}"
 						],
 						"type": "text/javascript",
@@ -362,6 +391,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": "{{baseUrl}}/generate"
 			},
 			"response": []
