@@ -35,12 +35,10 @@ export async function handleGenerate(req: Request): Promise<Response> {
     });
   }
 
-  const homeLocations: HomeLocation[] = trip.destinations.map(
-    (destination: Destination) => ({
-      destinationId: destination.id,
-      location: destination.accommodation?.location ?? destination.location,
-    }),
-  );
+  const homeLocations: HomeLocation[] = trip.destinations.map((destination: Destination) => ({
+    destinationId: destination.id,
+    location: destination.accommodation?.location ?? destination.location,
+  }));
 
   const daysWithAnchors = days_anchors.data as DayWithPlaceBlocks[];
   const gaps = findGaps(daysWithAnchors, homeLocations);
