@@ -43,6 +43,16 @@ export async function handleGenerate(req: Request): Promise<Response> {
   const daysWithAnchors = days_anchors.data as DayWithPlaceBlocks[];
   const gaps = findGaps(daysWithAnchors, homeLocations);
 
+  const mustVisitScoring = [];
+  for (const destination of trip.destinations) {
+    // get all the must visit places (places without a fixed)
+    const mustVisits = destination.places.filter((place) => place.fixed === undefined);
+    const candidateGaps = gaps.filter((gapDay) => gapDay.destinationId === destination.id);
+
+    const destinationMustVisitScoring = scoreCandidates(mustVisits, candidateGaps);
+    // TODO: create appropriate typescript here as well as creating the score candidates function
+  }
+
   const body = {
     id: crypto.randomUUID(),
     name: trip.name,
