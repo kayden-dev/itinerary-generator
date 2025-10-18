@@ -3,11 +3,11 @@ import { Place } from "../utils/trip.ts";
 
 export type GapDay = {
   destinationId: string;
-  date: Day["date"];
   gaps: Gap[];
 };
 
 export type Gap = {
+  date: Day["date"];
   start: BaseBlock["start"];
   end: BaseBlock["end"];
   fromPlace: Place["location"]; // location of the place before the gap. This can either be another place, an accomodation (if provided), or the location of the city
@@ -47,7 +47,6 @@ export function findGaps(days: DayWithPlaceBlocks[], homeLocations: HomeLocation
 
     const currentGapDay: GapDay = {
       destinationId: day.destinationId,
-      date: day.date,
       gaps: [],
     };
 
@@ -55,6 +54,7 @@ export function findGaps(days: DayWithPlaceBlocks[], homeLocations: HomeLocation
     if (blocksInWindow.length === 0) {
       if (homeLocation) {
         currentGapDay.gaps.push({
+          date: day.date,
           start: windowStartDateTime,
           end: windowEndDateTime,
           fromPlace: homeLocation,
@@ -72,6 +72,7 @@ export function findGaps(days: DayWithPlaceBlocks[], homeLocations: HomeLocation
     const firstBlock = blocksInWindow[0];
     if (homeLocation && firstBlock.start.localeCompare(windowStartDateTime) > 0) {
       currentGapDay.gaps.push({
+        date: day.date,
         start: windowStartDateTime,
         end: firstBlock.start,
         fromPlace: homeLocation,
@@ -89,6 +90,7 @@ export function findGaps(days: DayWithPlaceBlocks[], homeLocations: HomeLocation
 
       if (gapStart.localeCompare(gapEnd) < 0) {
         currentGapDay.gaps.push({
+          date: day.date,
           start: gapStart,
           end: gapEnd,
           fromPlace: previousBlock.placeRef.location,
@@ -103,6 +105,7 @@ export function findGaps(days: DayWithPlaceBlocks[], homeLocations: HomeLocation
       const gapStart = lastBlock.end.localeCompare(windowStartDateTime) > 0 ? lastBlock.end : windowStartDateTime;
       if (gapStart.localeCompare(windowEndDateTime) < 0) {
         currentGapDay.gaps.push({
+          date: day.date,
           start: gapStart,
           end: windowEndDateTime,
           fromPlace: lastBlock.placeRef.location,

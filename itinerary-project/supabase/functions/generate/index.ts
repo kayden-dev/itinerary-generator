@@ -1,8 +1,7 @@
 import { insertAnchors } from "./construction/anchors.ts";
 import { buildDays } from "./construction/days.ts";
-import { findGaps } from "./construction/gaps.ts";
-import type { DayWithPlaceBlocks, HomeLocation } from "./construction/gaps.ts";
-import { type Destination, Trip, TripSchema } from "./utils/trip.ts";
+import { insertMustVisits } from "./construction/must_visits.ts";
+import { Trip, TripSchema } from "./utils/trip.ts";
 import { parseJsonWith } from "./utils/validate.ts";
 
 export async function handleGenerate(req: Request): Promise<Response> {
@@ -35,23 +34,14 @@ export async function handleGenerate(req: Request): Promise<Response> {
     });
   }
 
-  const homeLocations: HomeLocation[] = trip.destinations.map((destination: Destination) => ({
-    destinationId: destination.id,
-    location: destination.accommodation?.location ?? destination.location,
-  }));
+  const days_must_visits = insertMustVisits(trip, days_anchors.data);
 
-  const daysWithAnchors = days_anchors.data as DayWithPlaceBlocks[];
-  const gaps = findGaps(daysWithAnchors, homeLocations);
-
-  const mustVisitScoring = [];
-  for (const destination of trip.destinations) {
-    // get all the must visit places (places without a fixed)
-    const mustVisits = destination.places.filter((place) => place.fixed === undefined);
-    const candidateGaps = gaps.filter((gapDay) => gapDay.destinationId === destination.id);
-
-    const destinationMustVisitScoring = scoreCandidates(mustVisits, candidateGaps);
-    // TODO: create appropriate typescript here as well as creating the score candidates function
-  }
+  // if (!days_must_visits.ok) {
+  //   return new Response(JSON.stringify({ errors: [days_must_visits.error] }), {
+  //     status: 400,
+  //     headers: { "content-type": "application/json" },
+  //   });
+  // }
 
   const body = {
     id: crypto.randomUUID(),
@@ -59,7 +49,8 @@ export async function handleGenerate(req: Request): Promise<Response> {
     timezone: trip.timezone ?? "Australia/Melbourne",
     dates: trip.dates,
     days: days_anchors.data,
-    unscheduled: [],
+    must_visit_gaps: days_must_visits,
+    unscheduled: [], //days_must_visits.data.unscheduled,
     meta: {
       generatedBy: "rule-engine",
       version: "1.0.0",

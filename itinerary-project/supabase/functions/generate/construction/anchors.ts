@@ -156,7 +156,7 @@ export function insertAnchors(trip: Trip, days: Day[]): { ok: true; data: Day[] 
 
       // check if the anchor has enough travel time with the previous anchor
       if (pointer !== undefined) {
-        const minTransitTime = calculateMinTransitTime(pointer.block.id, anchor.block.id);
+        const minTransitTime = calculateMinTransitTime(pointer.block.placeRef.location, anchor.block.placeRef.location);
         if (calculateTimeOffset(anchorStart, -minTransitTime) < pointer.block.end) {
           const at = resolveAt(pointer.index, anchor.index);
           return {
