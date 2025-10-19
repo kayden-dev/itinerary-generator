@@ -85,7 +85,7 @@ export function scoreCandidates(places: Place[], gaps: Gap[]): MustVisitGapScore
         if (windowMinutes < visitTime) continue;
 
         // if viable, score candidate
-        const gapScore = score(windowMinutes, visitTime, travelIn, travelOut);
+        const gapScore = score(calculateMinutesBetween(window.start, window.end), visitTime, travelIn, travelOut);
 
         // insert with the window (not gap, as the place might only be able to be visited within a subset of the gap)
         currentGapScores.push({
