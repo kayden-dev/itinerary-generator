@@ -12,6 +12,7 @@ import {
 // NOTE: gap may be modified subset of the original gaps, as the place might only be able to be inserted
 // into a subset of the available gap due to opening hours
 export type GapScore = Gap & {
+  gapID: string; // used to uniquely identify the original gap that this window is derived from
   score: number;
 };
 
@@ -20,23 +21,34 @@ export type MustVisitGapScores = {
   gapScores: GapScore[];
 };
 
+export type GapIDMap = Record<string, MustVisitGapScores[]>;
+
 /**
  * Calculate a score from 0 - 1 of how good the candidate gap is for the place
- * @param windowTime - Available time for the window
+ * @param windowMinutes - Available time for the window
  * @param visitTime - Expected duration of the visit
  * @param travelIn - Time taken to travel to place
  * @param travelOut - Time take to travel out of place
  * @returns Score from 0 - 1
  */
-const score = (windowMinutes: number, visitMinutes: number, travelIn: number, travelOut: number): number => {
+const score = (
+  windowMinutes: number,
+  visitMinutes: number,
+  travelIn: number,
+  travelOut: number
+): number => {
   const totalTravel = travelIn + travelOut;
   const travelScore = 1 - Math.min(totalTravel / windowMinutes, 1);
   const fitScore = Math.min(visitMinutes / windowMinutes, 1);
   return 0.6 * travelScore + 0.4 * fitScore;
 };
 
-export function scoreCandidates(places: Place[], gaps: Gap[]): MustVisitGapScores[] {
+export function scoreCandidates(
+  places: Place[],
+  gaps: Gap[]
+): { mustVisitGapScores: MustVisitGapScores[]; gapIDMap: GapIDMap } {
   const mustVisitGapScores: MustVisitGapScores[] = [];
+  const gapIDMap: GapIDMap = {};
 
   for (const place of places) {
     const currentGapScores: GapScore[] = [];
@@ -51,7 +63,12 @@ export function scoreCandidates(places: Place[], gaps: Gap[]): MustVisitGapScore
       if (place.openingHours) {
         for (const period of place.openingHours.periods) {
           const periodWindow = getOpeningPeriodWindow(period, gap.date);
-          const overlap = calculateWindowIntersection(gap.start, gap.end, periodWindow.start, periodWindow.end);
+          const overlap = calculateWindowIntersection(
+            gap.start,
+            gap.end,
+            periodWindow.start,
+            periodWindow.end
+          );
 
           if (overlap) {
             candidateWindows.push(overlap);
@@ -81,14 +98,24 @@ export function scoreCandidates(places: Place[], gaps: Gap[]): MustVisitGapScore
         if (arrivalTime.localeCompare(departureTime) >= 0) continue;
 
         // check candidate viability, ensuring the opening window can accommodate the visit time
-        const windowMinutes = calculateMinutesBetween(arrivalTime, departureTime);
+        const windowMinutes = calculateMinutesBetween(
+          arrivalTime,
+          departureTime
+        );
         if (windowMinutes < visitTime) continue;
 
         // if viable, score candidate
-        const gapScore = score(calculateMinutesBetween(window.start, window.end), visitTime, travelIn, travelOut);
+        const gapScore = score(
+          calculateMinutesBetween(window.start, window.end),
+          visitTime,
+          travelIn,
+          travelOut
+        );
 
+        const gapID = String(gap.start);
         // insert with the window (not gap, as the place might only be able to be visited within a subset of the gap)
         currentGapScores.push({
+          gapID,
           date: gap.date,
           start: arrivalTime,
           end: departureTime,
@@ -99,10 +126,20 @@ export function scoreCandidates(places: Place[], gaps: Gap[]): MustVisitGapScore
       }
     }
 
-    mustVisitGapScores.push({
+    const currentMustVisitGapScore = {
       place: place,
       gapScores: currentGapScores,
-    });
+    };
+
+    mustVisitGapScores.push(currentMustVisitGapScore);
+
+    // Now index this MVGS once per referenced gapID (deduped)
+    for (const gapID of new Set(currentGapScores.map((g) => g.gapID))) {
+      const bucket = (gapIDMap[gapID] ??= []);
+      if (!bucket.some((e) => e.place.id === place.id)) {
+        bucket.push(currentMustVisitGapScore);
+      }
+    }
   }
-  return mustVisitGapScores;
+  return { mustVisitGapScores, gapIDMap };
 }
