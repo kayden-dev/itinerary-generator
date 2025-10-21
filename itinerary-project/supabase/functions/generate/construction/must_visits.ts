@@ -77,6 +77,16 @@ export function insertMustVisits(
     }
   }
 
+  // once all the must visit places have been scored, we can start iterating and inserting into the the new days
+
+  const placesDays = JSON.parse(JSON.stringify(days)); // create a copy of the current iteration of days
+  const placesUnscheduled: Unscheduled[] = [];
+
+  while (mustVisitGapScores.length > 0) {
+    // continue here
+  }
+  }
+
   return [mustVisitGapScores, gaps, gapIDMap];
   // return {
   //   ok: true,
