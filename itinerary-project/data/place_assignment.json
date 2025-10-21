@@ -295,7 +295,7 @@
         "start": "2025-07-01",
         "end": "2025-07-01"
       },
-      "unscheduled": ["gap_too_small"],
+      "unscheduled": ["conflict"],
       "days": [
         {
           "date": "2025-07-01",

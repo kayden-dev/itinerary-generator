@@ -84,7 +84,13 @@ export function getOpeningPeriodWindow(period: OpeningPeriod, referenceDate: str
   const openDate = weekStart.add({ days: period.open.day });
   const closeDate = weekStart.add({ days: period.close.day });
   const openDateTime = openDate.toPlainDateTime({ hour: period.open.hour, minute: period.open.minute });
-  const closeDateTime = closeDate.toPlainDateTime({ hour: period.close.hour, minute: period.close.minute });
+  let closeDateTime = closeDate.toPlainDateTime({ hour: period.close.hour, minute: period.close.minute });
+
+  let safetyCounter = 0;
+  while (Temporal.PlainDateTime.compare(closeDateTime, openDateTime) <= 0 && safetyCounter < 7) {
+    closeDateTime = closeDateTime.add({ days: 1 });
+    safetyCounter++;
+  }
 
   return {
     start: openDateTime.toString(),

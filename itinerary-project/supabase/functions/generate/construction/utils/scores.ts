@@ -1,3 +1,4 @@
+import { BaseBlock } from "../../utils/itinerary.ts";
 import { Place } from "../../utils/trip.ts";
 import { Gap } from "../gaps.ts";
 import {
@@ -14,6 +15,9 @@ import {
 export type GapScore = Gap & {
   gapID: string; // used to uniquely identify the original gap that this window is derived from
   score: number;
+  // the window start and end is a subset of the full gap
+  windowStart: BaseBlock["start"];
+  windowEnd: BaseBlock["end"];
 };
 
 export type MustVisitGapScores = {
@@ -31,12 +35,7 @@ export type GapIDMap = Record<string, MustVisitGapScores[]>;
  * @param travelOut - Time take to travel out of place
  * @returns Score from 0 - 1
  */
-const score = (
-  windowMinutes: number,
-  visitMinutes: number,
-  travelIn: number,
-  travelOut: number
-): number => {
+const score = (windowMinutes: number, visitMinutes: number, travelIn: number, travelOut: number): number => {
   const totalTravel = travelIn + travelOut;
   const travelScore = 1 - Math.min(totalTravel / windowMinutes, 1);
   const fitScore = Math.min(visitMinutes / windowMinutes, 1);
@@ -63,12 +62,7 @@ export function scoreCandidates(
       if (place.openingHours) {
         for (const period of place.openingHours.periods) {
           const periodWindow = getOpeningPeriodWindow(period, gap.date);
-          const overlap = calculateWindowIntersection(
-            gap.start,
-            gap.end,
-            periodWindow.start,
-            periodWindow.end
-          );
+          const overlap = calculateWindowIntersection(gap.start, gap.end, periodWindow.start, periodWindow.end);
 
           if (overlap) {
             candidateWindows.push(overlap);
@@ -98,27 +92,21 @@ export function scoreCandidates(
         if (arrivalTime.localeCompare(departureTime) >= 0) continue;
 
         // check candidate viability, ensuring the opening window can accommodate the visit time
-        const windowMinutes = calculateMinutesBetween(
-          arrivalTime,
-          departureTime
-        );
+        const windowMinutes = calculateMinutesBetween(arrivalTime, departureTime);
         if (windowMinutes < visitTime) continue;
 
         // if viable, score candidate
-        const gapScore = score(
-          calculateMinutesBetween(window.start, window.end),
-          visitTime,
-          travelIn,
-          travelOut
-        );
+        const gapScore = score(calculateMinutesBetween(window.start, window.end), visitTime, travelIn, travelOut);
 
-        const gapID = String(gap.start);
+        const gapID = `${gap.start}-${gap.end}`;
         // insert with the window (not gap, as the place might only be able to be visited within a subset of the gap)
         currentGapScores.push({
           gapID,
           date: gap.date,
-          start: arrivalTime,
-          end: departureTime,
+          start: gap.start,
+          end: gap.end,
+          windowStart: arrivalTime,
+          windowEnd: departureTime,
           fromPlace: gap.fromPlace,
           endPlace: gap.endPlace,
           score: gapScore,
