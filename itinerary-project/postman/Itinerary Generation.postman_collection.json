@@ -363,7 +363,7 @@
 							"            // iterate through the itinerary on the dates for that destination (the current day placeID matches)\r",
 							"            const destinationDays = (res.days || []).filter(day => day.destinationId === bodyDestination.id);\r",
 							"\r",
-							"            for (const day in destinationDays) {\r",
+							"            for (const day of destinationDays) {\r",
 							"                const mustVisitBlocks = (day.blocks || []).filter(block => block.type === \"visit\" && block.source === \"scheduled\");\r",
 							"                (mustVisitBlocks || []).forEach(actualBlock => {\r",
 							"                    // check if the block is a place which has been provided\r",
