@@ -5,11 +5,13 @@ This repository includes a Supabase Edge Function (`supabase/functions/generate`
 ## Prerequisites
 
 - **Supabase CLI** v1.175+
+
   - macOS: `brew install supabase/tap/supabase`
   - Windows: `scoop install supabase` or `choco install supabase`
   - Linux: `curl -fsSL https://supabase.com/cli/install | sh`
+
 - **Postman** (desktop app) if you plan to run the bundled API tests.
-  **Docker** Desktop
+- **Docker** Desktop
 
   > The Supabase CLI bundles the correct Deno runtime, so you do not need Node, npm, or pnpm for this function.
 
@@ -23,7 +25,7 @@ This repository includes a Supabase Edge Function (`supabase/functions/generate`
 2. Serve the function in watch mode:
 
    ```bash
-   supabase start
+   supabase
    supabase functions serve generate --no-verify-jwt
    ```
 
