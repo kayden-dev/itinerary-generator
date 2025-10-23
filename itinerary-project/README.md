@@ -9,6 +9,7 @@ This repository includes a Supabase Edge Function (`supabase/functions/generate`
   - Windows: `scoop install supabase` or `choco install supabase`
   - Linux: `curl -fsSL https://supabase.com/cli/install | sh`
 - **Postman** (desktop app) if you plan to run the bundled API tests.
+  **Docker** Desktop
 
   > The Supabase CLI bundles the correct Deno runtime, so you do not need Node, npm, or pnpm for this function.
 
@@ -17,11 +18,12 @@ This repository includes a Supabase Edge Function (`supabase/functions/generate`
 1. Clone the repo and step into it:
    ```bash
    git clone <repo-url>
-   cd itinerary-project
+   cd itinerary-project/supabase
    ```
 2. Serve the function in watch mode:
 
    ```bash
+   supabase start
    supabase functions serve generate --no-verify-jwt
    ```
 
