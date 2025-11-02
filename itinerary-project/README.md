@@ -22,10 +22,12 @@ This repository includes a Supabase Edge Function (`supabase/functions/generate`
    git clone <repo-url>
    cd itinerary-project/supabase
    ```
-2. Serve the function in watch mode:
+2. Open Docker Desktop
+
+3. Serve the function in watch mode:
 
    ```bash
-   supabase
+   supabase start
    supabase functions serve generate --no-verify-jwt
    ```
 
@@ -38,10 +40,7 @@ Stop the server with `Ctrl+C` when you are done.
 ## Running the Postman Suites
 
 1. Import `postman/Itinerary Generation.postman_collection.json`.
-2. Import the updated local environment `postman/Itinerary Generation - Local.postman_environment.json`.
-   - `baseUrl` already points at `http://127.0.0.1:54321/functions/v1`.
-   - Update the `anonKey` variable if JWT verification is enabled. Otherwise leave it as `CHANGE_ME`.
-3. Open the **Collection Runner**, select the entire **Itinerary Generation** collection, and attach any of the JSON data files. Each run executes the same set of requests; the dataset you choose just determines which scenarios those requests evaluate. Re-run the collection with other files to exercise different angles.
+2. Open the **Collection Runner** `Ctrl+Shift+R`, select the entire **Itinerary Generation** collection, and attach any of the JSON data files. Each run executes the same set of requests; the dataset you choose just determines which scenarios those requests evaluate. Re-run the collection with other files to exercise different angles.
 
 | Data file                    | Primary focus area                              | Related request coverage                                          |
 | ---------------------------- | ----------------------------------------------- | ----------------------------------------------------------------- |

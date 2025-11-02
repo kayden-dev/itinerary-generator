@@ -1,445 +1,443 @@
 {
-	"info": {
-		"_postman_id": "c737d4ae-2c95-4ca8-a953-126024636936",
-		"name": "Itinerary Generation",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "36471677"
-	},
-	"item": [
-		{
-			"name": "HTTP Status, Required Fields and Errors",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"const body = pm.iterationData.get(\"body\");\r",
-							"if (body) {\r",
-							"    pm.request.body.raw = JSON.stringify(body);\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Check that the correct HTTP status has been sent\r",
-							"const expected = pm.iterationData.get(\"expected\")\r",
-							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
-							"pm.test(`HTTP ${expectedStatus}`, () => pm.response.to.have.status(expectedStatus));\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expectedStatus === 200) {\r",
-							"    pm.test(\"Response has required fields\", () => {\r",
-							"        // check that the errors array isn't present\r",
-							"        pm.expect(res).to.not.have.property(\"errors\");\r",
-							"\r",
-							"        // check that the top-level fields are present\r",
-							"        pm.expect(res).to.have.property(\"id\").that.is.a(\"string\");\r",
-							"        pm.expect(res).to.have.property(\"name\").that.is.a(\"string\");\r",
-							"        pm.expect(res).to.have.property(\"timezone\").that.is.a(\"string\");\r",
-							"    \r",
-							"        // check the dates object\r",
-							"        pm.expect(res).to.have.property(\"dates\").that.is.a(\"object\").that.has.all.keys(\"start\", \"end\");\r",
-							"        pm.expect(res.dates.start).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
-							"        pm.expect(res.dates.end).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
-							"\r",
-							"        // check the arrays\r",
-							"        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
-							"        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
-							"\r",
-							"        // check the meta object\r",
-							"        pm.expect(res).to.have.property(\"meta\").that.is.a(\"object\").that.has.all.keys(\"generatedBy\", \"version\", \"createdAt\");\r",
-							"\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"Response has expected values for required fields\", () => {\r",
-							"        pm.expect(res).to.deep.include({\r",
-							"            name: expected.name,\r",
-							"            dates: expected.dates\r",
-							"        });\r",
-							"    });\r",
-							"\r",
-							"} else {\r",
-							"    // check that the error array exists\r",
-							"    pm.test(\"Response contains the error array\", () => {\r",
-							"        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
-							"    });\r",
-							"\r",
-							"    // check that the correct errors are present\r",
-							"    pm.test(\"Contains expected errors\", () => {\r",
-							"        const expectedErrors = (expected.errors || []).map(({ field, code }) => ({ field, code }));\r",
-							"        const actualErrors = (res.errors || []).map(({ field, code }) => ({ field, code }));\r",
-							"\r",
-							"        pm.expect(actualErrors).to.have.length(expectedErrors.length)\r",
-							"        pm.expect(actualErrors).to.have.deep.members(expectedErrors);\r",
-							"    });\r",
-							"\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		},
-		{
-			"name": "Day Scaffold",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"const body = pm.iterationData.get(\"body\");\r",
-							"if (body) {\r",
-							"    pm.request.body.raw = JSON.stringify(body);\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// run checks if the status is 200 and there is an expected days\r",
-							"const expected = pm.iterationData.get(\"expected\")\r",
-							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expected.days && expectedStatus === 200) {\r",
-							"    pm.test(\"Contains expected day scaffold\", () => {\r",
-							"        const expectedDays = (expected.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
-							"        const actualDays = (res.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
-							"\r",
-							"        pm.expect(actualDays).to.have.length(expectedDays.length)\r",
-							"        pm.expect(actualDays).to.deep.have.members(expectedDays);\r",
-							"    });\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		},
-		{
-			"name": "Anchors",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"const body = pm.iterationData.get(\"body\");\r",
-							"if (body) {\r",
-							"    pm.request.body.raw = JSON.stringify(body);\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// run checks if the status is 200 and there is an expected anchors\r",
-							"const expected = pm.iterationData.get(\"expected\")\r",
-							"const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expected.days && expectedStatus === 200) {\r",
-							"    expected.days.forEach(expectedDay => {\r",
-							"        pm.test(`Contains expected anchors for ${expectedDay.date}`, () => {\r",
-							"            const resDay = res.days.find(day => day.date === expectedDay.date);\r",
-							"            pm.expect(resDay).to.exist;\r",
-							"            // omit the id out of the res blocks\r",
-							"            const resBlocksNormalised = resDay.blocks.filter(b => b.locked == true).map(b => ({\r",
-							"                type: b.type,\r",
-							"                start: b.start,\r",
-							"                end: b.end,\r",
-							"                locked: b.locked,\r",
-							"                placeRef: b.placeRef,\r",
-							"                ...(b.source ? { source: b.source } : {})\r",
-							"            }));\r",
-							"\r",
-							"            pm.expect(resBlocksNormalised).to.have.length(expectedDay.blocks.length)\r",
-							"            pm.expect(resBlocksNormalised).have.deep.members(expectedDay.blocks);\r",
-							"        });\r",
-							"    })\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		},
-		{
-			"name": "Must Visit Places",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"const body = pm.iterationData.get(\"body\");\r",
-							"if (body) {\r",
-							"    pm.request.body.raw = JSON.stringify(body);\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// helper functions\r",
-							"function overlaps(a, b) { return !(a.end <= b.start || b.end <= a.start); }\r",
-							"function removeString(arr, target) {\r",
-							"    const index = arr.indexOf(target);\r",
-							"    if (index !== -1) {\r",
-							"        arr.splice(index, 1); // remove the first occurrence\r",
-							"    }\r",
-							"    return arr;\r",
-							"}\r",
-							"// run checks if the status is 200\r",
-							"const body = pm.iterationData.get(\"body\");\r",
-							"const expected = pm.iterationData.get(\"expected\");\r",
-							"const expectedStatus = pm.iterationData.get(\"expectedStatus\");\r",
-							"\r",
-							"const res = pm.response.json();\r",
-							"\r",
-							"if (expectedStatus === 200) {\r",
-							"    pm.test(\"Visits respect opening hours if provided\", () => {\r",
-							"        (res.days || []).forEach(day => {\r",
-							"            const destination = (body.destinations || []).find(dest => dest.id === day.destinationId);\r",
-							"            pm.expect(destination, `destination ${day.destinationId} exists in request body`).to.exist;\r",
-							"            if (!destination) {\r",
-							"                return;\r",
-							"            }\r",
-							"\r",
-							"            (day.blocks || []).forEach(block => {\r",
-							"                if (block.type !== \"visit\") {\r",
-							"                    return;\r",
-							"                }\r",
-							"\r",
-							"                const expectedPlace = (destination.places || []).find(place => place.id === block.placeRef.id);\r",
-							"                pm.expect(expectedPlace, `place ${block.placeRef.id} exists in destination ${day.destinationId}`).to.exist;\r",
-							"                if (!expectedPlace) {\r",
-							"                    return;\r",
-							"                }\r",
-							"\r",
-							"                const openingPeriods = expectedPlace.openingHours && expectedPlace.openingHours.periods;\r",
-							"                if (!Array.isArray(openingPeriods) || openingPeriods.length === 0) {\r",
-							"                    return;\r",
-							"                }\r",
-							"\r",
-							"                const start = new Date(block.start);\r",
-							"                const end = new Date(block.end);\r",
-							"\r",
-							"                const matchedPeriod = openingPeriods.find(period =>\r",
-							"                    period.open.day === start.getDay() && period.close.day === end.getDay()\r",
-							"                );\r",
-							"                pm.expect(matchedPeriod, `opening period covers visit for ${block.placeRef.id}`).to.exist;\r",
-							"                if (!matchedPeriod) {\r",
-							"                    return;\r",
-							"                }\r",
-							"\r",
-							"                const visitStartMinutes = start.getHours() * 60 + start.getMinutes();\r",
-							"                const visitEndMinutes = end.getHours() * 60 + end.getMinutes();\r",
-							"\r",
-							"                const openingMinutes = matchedPeriod.open.hour * 60 + (matchedPeriod.open.minute || 0);\r",
-							"                const closingMinutes = matchedPeriod.close.hour * 60 + (matchedPeriod.close.minute || 0);\r",
-							"\r",
-							"                pm.expect(visitStartMinutes, `visit starts after opening for ${block.placeRef.id}`).to.be.at.least(openingMinutes);\r",
-							"                pm.expect(visitEndMinutes, `visit ends before closing for ${block.placeRef.id}`).to.be.at.most(closingMinutes);\r",
-							"            });\r",
-							"        });\r",
-							"    });\r",
-							"\r",
-							"    pm.test(\"Visits dont overlap\", () => {\r",
-							"        (res.days || []).forEach(day => {\r",
-							"            const blocks = day.blocks || []\r",
-							"            for (let i = 0; i < blocks.length - 1; i++) {\r",
-							"                pm.expect(overlaps(blocks[i], blocks[i + 1])).to.be.false;\r",
-							"            }\r",
-							"        });\r",
-							"    })\r",
-							"\r",
-							"    pm.test(\"Visits respect day windows (9am - 9pm)\", () => {\r",
-							"        (res.days || []).forEach(d => (d.blocks || []).forEach(b => {\r",
-							"            if (b.type !== \"visit\") {\r",
-							"                return;\r",
-							"            }\r",
-							"            if (b.source === \"fixed\") {\r",
-							"                return;\r",
-							"            }\r",
-							"            pm.expect(b.start.split(\"T\")[1] >= \"09:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
-							"            pm.expect(b.end.split(\"T\")[1] <= \"21:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
-							"        }))\r",
-							"    })\r",
-							"\r",
-							"    pm.test(\"Unscheduled visits have expected reason codes\", () => {\r",
-							"        const expectedReasons = [...(expected.unscheduled || [])]\r",
-							"        const placeIds = (res.unscheduled || []).map(u => u.placeId)\r",
-							"        const uniqueIds = new Set(placeIds);\r",
-							"        pm.expect(placeIds.length).to.equal(uniqueIds.size, \"Duplicated placeIds found in unscheduled\");\r",
-							"\r",
-							"        (res.unscheduled || []).forEach(u => {\r",
-							"            pm.expect(u.placeId).to.be.oneOf((body.destinations || []).flatMap(d => (d.places || []).map(p => p.id)), \"Unscheduled is not one of the places provided\")\r",
-							"            pm.expect(u.reason).to.be.oneOf([\"closed\", \"gap_too_small\", \"conflict\"])\r",
-							"            removeString(expectedReasons, u.reason)\r",
-							"        });\r",
-							"\r",
-							"        pm.expect(expectedReasons.length).to.be.eql(0, \"Expected more unscheduled items\")\r",
-							"    })\r",
-							"\r",
-							"    pm.test(\"All must visit places are either scheduled or unscheduled\", () => {\r",
-							"        // note: previous test already checks for duplicate unscheduled at this point\r",
-							"\r",
-							"        // for each destination in body\r",
-							"        (body.destinations || []).forEach(bodyDestination => {\r",
-							"            // get a list of all the expected must visit places\r",
-							"            let expectedMustVisit = (bodyDestination.places || []).filter(place => place.fixed === undefined);\r",
-							"\r",
-							"            // iterate through the itinerary on the dates for that destination (the current day placeID matches)\r",
-							"            const destinationDays = (res.days || []).filter(day => day.destinationId === bodyDestination.id);\r",
-							"\r",
-							"            for (const day of destinationDays) {\r",
-							"                const mustVisitBlocks = (day.blocks || []).filter(block => block.type === \"visit\" && block.source === \"scheduled\");\r",
-							"                (mustVisitBlocks || []).forEach(actualBlock => {\r",
-							"                    // check if the block is a place which has been provided\r",
-							"                    pm.expect(expectedMustVisit.find(place => place.id === actualBlock.placeRef.id),\r",
-							"                        \"Block contains a place which wasn't provided by the trip details or is a duplicated\").to.not.be.undefined\r",
-							"\r",
-							"                    // if it is a place, remove from the expected\r",
-							"                    expectedMustVisit = expectedMustVisit.filter(place => place.id !== actualBlock.placeRef.id)\r",
-							"                })\r",
-							"            }\r",
-							"\r",
-							"            (expectedMustVisit || []).forEach(place => {\r",
-							"                pm.expect(place.id, `Place (${place.id}) is not in the itinerary or unscheduled `).to.be.oneOf(res.unscheduled.map(({ placeId }) => placeId))\r",
-							"            })\r",
-							"        })\r",
-							"    })\r",
-							"}"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}/generate"
-			},
-			"response": []
-		}
-	],
-	"auth": {
-		"type": "bearer",
-		"bearer": {
-			"token": "{{anonKey}}"
-		}
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "itinerarySchema",
-			"value": ""
-		}
-	]
+  "info": {
+    "_postman_id": "de6be99d-0bfa-41c3-847f-f1dcc919e42c",
+    "name": "Itinerary Generation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "36471677"
+  },
+  "item": [
+    {
+      "name": "HTTP Status, Required Fields and Errors",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const body = pm.iterationData.get(\"body\");\r",
+              "if (body) {\r",
+              "    pm.request.body.raw = JSON.stringify(body);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Check that the correct HTTP status has been sent\r",
+              "const expected = pm.iterationData.get(\"expected\")\r",
+              "const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+              "pm.test(`HTTP ${expectedStatus}`, () => pm.response.to.have.status(expectedStatus));\r",
+              "\r",
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (expectedStatus === 200) {\r",
+              "    pm.test(\"Response has required fields\", () => {\r",
+              "        // check that the errors array isn't present\r",
+              "        pm.expect(res).to.not.have.property(\"errors\");\r",
+              "\r",
+              "        // check that the top-level fields are present\r",
+              "        pm.expect(res).to.have.property(\"id\").that.is.a(\"string\");\r",
+              "        pm.expect(res).to.have.property(\"name\").that.is.a(\"string\");\r",
+              "        pm.expect(res).to.have.property(\"timezone\").that.is.a(\"string\");\r",
+              "    \r",
+              "        // check the dates object\r",
+              "        pm.expect(res).to.have.property(\"dates\").that.is.a(\"object\").that.has.all.keys(\"start\", \"end\");\r",
+              "        pm.expect(res.dates.start).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+              "        pm.expect(res.dates.end).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+              "\r",
+              "        // check the arrays\r",
+              "        pm.expect(res).to.have.property(\"unscheduled\").that.is.an(\"array\");\r",
+              "        pm.expect(res).to.have.property(\"days\").that.is.an(\"array\");\r",
+              "\r",
+              "        // check the meta object\r",
+              "        pm.expect(res).to.have.property(\"meta\").that.is.a(\"object\").that.has.all.keys(\"generatedBy\", \"version\", \"createdAt\");\r",
+              "\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response has expected values for required fields\", () => {\r",
+              "        pm.expect(res).to.deep.include({\r",
+              "            name: expected.name,\r",
+              "            dates: expected.dates\r",
+              "        });\r",
+              "    });\r",
+              "\r",
+              "} else {\r",
+              "    // check that the error array exists\r",
+              "    pm.test(\"Response contains the error array\", () => {\r",
+              "        pm.expect(res.errors).to.be.an(\"array\").that.is.not.empty;\r",
+              "    });\r",
+              "\r",
+              "    // check that the correct errors are present\r",
+              "    pm.test(\"Contains expected errors\", () => {\r",
+              "        const expectedErrors = (expected.errors || []).map(({ field, code }) => ({ field, code }));\r",
+              "        const actualErrors = (res.errors || []).map(({ field, code }) => ({ field, code }));\r",
+              "\r",
+              "        pm.expect(actualErrors).to.have.length(expectedErrors.length)\r",
+              "        pm.expect(actualErrors).to.have.deep.members(expectedErrors);\r",
+              "    });\r",
+              "\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/generate"
+      },
+      "response": []
+    },
+    {
+      "name": "Day Scaffold",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const body = pm.iterationData.get(\"body\");\r",
+              "if (body) {\r",
+              "    pm.request.body.raw = JSON.stringify(body);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// run checks if the status is 200 and there is an expected days\r",
+              "const expected = pm.iterationData.get(\"expected\")\r",
+              "const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+              "\r",
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (expected.days && expectedStatus === 200) {\r",
+              "    pm.test(\"Contains expected day scaffold\", () => {\r",
+              "        const expectedDays = (expected.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
+              "        const actualDays = (res.days || []).map(({ date, destinationId }) => ({ date, destinationId }));\r",
+              "\r",
+              "        pm.expect(actualDays).to.have.length(expectedDays.length)\r",
+              "        pm.expect(actualDays).to.deep.have.members(expectedDays);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/generate"
+      },
+      "response": []
+    },
+    {
+      "name": "Anchors",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const body = pm.iterationData.get(\"body\");\r",
+              "if (body) {\r",
+              "    pm.request.body.raw = JSON.stringify(body);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// run checks if the status is 200 and there is an expected anchors\r",
+              "const expected = pm.iterationData.get(\"expected\")\r",
+              "const expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+              "\r",
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (expected.days && expectedStatus === 200) {\r",
+              "    expected.days.forEach(expectedDay => {\r",
+              "        pm.test(`Contains expected anchors for ${expectedDay.date}`, () => {\r",
+              "            const resDay = res.days.find(day => day.date === expectedDay.date);\r",
+              "            pm.expect(resDay).to.exist;\r",
+              "            // omit the id out of the res blocks\r",
+              "            const resBlocksNormalised = resDay.blocks.filter(b => b.locked == true).map(b => ({\r",
+              "                type: b.type,\r",
+              "                start: b.start,\r",
+              "                end: b.end,\r",
+              "                locked: b.locked,\r",
+              "                placeRef: b.placeRef,\r",
+              "                ...(b.source ? { source: b.source } : {})\r",
+              "            }));\r",
+              "\r",
+              "            pm.expect(resBlocksNormalised).to.have.length(expectedDay.blocks.length)\r",
+              "            pm.expect(resBlocksNormalised).have.deep.members(expectedDay.blocks);\r",
+              "        });\r",
+              "    })\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/generate"
+      },
+      "response": []
+    },
+    {
+      "name": "Must Visit Places",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const body = pm.iterationData.get(\"body\");\r",
+              "if (body) {\r",
+              "    pm.request.body.raw = JSON.stringify(body);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// helper functions\r",
+              "function overlaps(a, b) { return !(a.end <= b.start || b.end <= a.start); }\r",
+              "function removeString(arr, target) {\r",
+              "    const index = arr.indexOf(target);\r",
+              "    if (index !== -1) {\r",
+              "        arr.splice(index, 1); // remove the first occurrence\r",
+              "    }\r",
+              "    return arr;\r",
+              "}\r",
+              "// run checks if the status is 200\r",
+              "const body = pm.iterationData.get(\"body\");\r",
+              "const expected = pm.iterationData.get(\"expected\");\r",
+              "const expectedStatus = pm.iterationData.get(\"expectedStatus\");\r",
+              "\r",
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (expectedStatus === 200) {\r",
+              "    pm.test(\"Visits respect opening hours if provided\", () => {\r",
+              "        (res.days || []).forEach(day => {\r",
+              "            const destination = (body.destinations || []).find(dest => dest.id === day.destinationId);\r",
+              "            pm.expect(destination, `destination ${day.destinationId} exists in request body`).to.exist;\r",
+              "            if (!destination) {\r",
+              "                return;\r",
+              "            }\r",
+              "\r",
+              "            (day.blocks || []).forEach(block => {\r",
+              "                if (block.type !== \"visit\") {\r",
+              "                    return;\r",
+              "                }\r",
+              "\r",
+              "                const expectedPlace = (destination.places || []).find(place => place.id === block.placeRef.id);\r",
+              "                pm.expect(expectedPlace, `place ${block.placeRef.id} exists in destination ${day.destinationId}`).to.exist;\r",
+              "                if (!expectedPlace) {\r",
+              "                    return;\r",
+              "                }\r",
+              "\r",
+              "                const openingPeriods = expectedPlace.openingHours && expectedPlace.openingHours.periods;\r",
+              "                if (!Array.isArray(openingPeriods) || openingPeriods.length === 0) {\r",
+              "                    return;\r",
+              "                }\r",
+              "\r",
+              "                const start = new Date(block.start);\r",
+              "                const end = new Date(block.end);\r",
+              "\r",
+              "                const matchedPeriod = openingPeriods.find(period =>\r",
+              "                    period.open.day === start.getDay() && period.close.day === end.getDay()\r",
+              "                );\r",
+              "                pm.expect(matchedPeriod, `opening period covers visit for ${block.placeRef.id}`).to.exist;\r",
+              "                if (!matchedPeriod) {\r",
+              "                    return;\r",
+              "                }\r",
+              "\r",
+              "                const visitStartMinutes = start.getHours() * 60 + start.getMinutes();\r",
+              "                const visitEndMinutes = end.getHours() * 60 + end.getMinutes();\r",
+              "\r",
+              "                const openingMinutes = matchedPeriod.open.hour * 60 + (matchedPeriod.open.minute || 0);\r",
+              "                const closingMinutes = matchedPeriod.close.hour * 60 + (matchedPeriod.close.minute || 0);\r",
+              "\r",
+              "                pm.expect(visitStartMinutes, `visit starts after opening for ${block.placeRef.id}`).to.be.at.least(openingMinutes);\r",
+              "                pm.expect(visitEndMinutes, `visit ends before closing for ${block.placeRef.id}`).to.be.at.most(closingMinutes);\r",
+              "            });\r",
+              "        });\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Visits dont overlap\", () => {\r",
+              "        (res.days || []).forEach(day => {\r",
+              "            const blocks = day.blocks || []\r",
+              "            for (let i = 0; i < blocks.length - 1; i++) {\r",
+              "                pm.expect(overlaps(blocks[i], blocks[i + 1])).to.be.false;\r",
+              "            }\r",
+              "        });\r",
+              "    })\r",
+              "\r",
+              "    pm.test(\"Visits respect day windows (9am - 9pm)\", () => {\r",
+              "        (res.days || []).forEach(d => (d.blocks || []).forEach(b => {\r",
+              "            if (b.type !== \"visit\") {\r",
+              "                return;\r",
+              "            }\r",
+              "            if (b.source === \"fixed\") {\r",
+              "                return;\r",
+              "            }\r",
+              "            pm.expect(b.start.split(\"T\")[1] >= \"09:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
+              "            pm.expect(b.end.split(\"T\")[1] <= \"21:00:00\", `Visit with id(${b.id}) doesn't respect day windows`).to.be.true\r",
+              "        }))\r",
+              "    })\r",
+              "\r",
+              "    pm.test(\"Unscheduled visits have expected reason codes\", () => {\r",
+              "        const expectedReasons = [...(expected.unscheduled || [])]\r",
+              "        const placeIds = (res.unscheduled || []).map(u => u.placeId)\r",
+              "        const uniqueIds = new Set(placeIds);\r",
+              "        pm.expect(placeIds.length).to.equal(uniqueIds.size, \"Duplicated placeIds found in unscheduled\");\r",
+              "\r",
+              "        (res.unscheduled || []).forEach(u => {\r",
+              "            pm.expect(u.placeId).to.be.oneOf((body.destinations || []).flatMap(d => (d.places || []).map(p => p.id)), \"Unscheduled is not one of the places provided\")\r",
+              "            pm.expect(u.reason).to.be.oneOf([\"closed\", \"gap_too_small\", \"conflict\"])\r",
+              "            removeString(expectedReasons, u.reason)\r",
+              "        });\r",
+              "\r",
+              "        pm.expect(expectedReasons.length).to.be.eql(0, \"Expected more unscheduled items\")\r",
+              "    })\r",
+              "\r",
+              "    pm.test(\"All must visit places are either scheduled or unscheduled\", () => {\r",
+              "        // note: previous test already checks for duplicate unscheduled at this point\r",
+              "\r",
+              "        // for each destination in body\r",
+              "        (body.destinations || []).forEach(bodyDestination => {\r",
+              "            // get a list of all the expected must visit places\r",
+              "            let expectedMustVisit = (bodyDestination.places || []).filter(place => place.fixed === undefined);\r",
+              "\r",
+              "            // iterate through the itinerary on the dates for that destination (the current day placeID matches)\r",
+              "            const destinationDays = (res.days || []).filter(day => day.destinationId === bodyDestination.id);\r",
+              "\r",
+              "            for (const day of destinationDays) {\r",
+              "                const mustVisitBlocks = (day.blocks || []).filter(block => block.type === \"visit\" && block.source === \"scheduled\");\r",
+              "                (mustVisitBlocks || []).forEach(actualBlock => {\r",
+              "                    // check if the block is a place which has been provided\r",
+              "                    pm.expect(expectedMustVisit.find(place => place.id === actualBlock.placeRef.id),\r",
+              "                        \"Block contains a place which wasn't provided by the trip details or is a duplicated\").to.not.be.undefined\r",
+              "\r",
+              "                    // if it is a place, remove from the expected\r",
+              "                    expectedMustVisit = expectedMustVisit.filter(place => place.id !== actualBlock.placeRef.id)\r",
+              "                })\r",
+              "            }\r",
+              "\r",
+              "            (expectedMustVisit || []).forEach(place => {\r",
+              "                pm.expect(place.id, `Place (${place.id}) is not in the itinerary or unscheduled `).to.be.oneOf(res.unscheduled.map(({ placeId }) => placeId))\r",
+              "            })\r",
+              "        })\r",
+              "    })\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/generate"
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": {
+      "token": "{{anonKey}}"
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:54321/functions/v1"
+    }
+  ]
 }
