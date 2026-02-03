@@ -1,4 +1,4 @@
-# Itinerary Generator (Supabase Edge Function)
+# Itinerary Generator
 
 A Supabase Edge Function that generates travel itineraries and is designed to be run locally with the Supabase CLI. Includes a Postman collection plus data-driven test suites for validating inputs, dates, day scaffolding, anchors, and place assignment logic.
 
